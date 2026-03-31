@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GameStore Home</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="index,follow">
+  <meta name="generator" content="GrapesJS Studio">
+  <link rel="stylesheet" href="./style.css">
+  </head>
+  <body class="gjs-t-body cls-7aiwbl">
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="brand-link">
+        <div class="brand-mark">
+          <img alt="Logo Icon" width="22" height="22" src="https://api.iconify.design/lucide-gamepad-2.svg?color=%23ffffff"/>
+        </div>
+        <div class="brand-text">
+          <span class="cls-k1rp23">GameVault</span>
+          <span class="cls-aur6d5">Digital &amp; Physical</span>
+        </div>
+      </a>
+      <form method="get" class="global-search">
+      <div class="cls-fj21bo">
+        <input type="search" placeholder="Search games, tags, publishers..." aria-label="Search games" class="cls-c6n12b"/>
+        <img alt="" width="20" height="20" src="https://api.iconify.design/lucide-search.svg?color=%23a3a3a3" class="cls-u6gchj"/>
+        <button type="button" class="cls-hvkxc9">Filters</button>
+      </div>
+    </form>
+      <nav class="primary-navigation">
+      <ul class="nav-list">
+        <li>
+          <a href="#" class="gjs-t-link cls-e9zd9f">Store</a>
+        </li>
+        <li>
+          <a href="#" class="gjs-t-link cls-w3x9uh">Browse</a>
+        </li>
+        <li>
+          <a href="#" class="gjs-t-link cls-8y4let">New Releases</a>
+      </li>
+        <li>
+          <a href="#" class="gjs-t-link cls-hrqqnq">Physical</a>
+      </li>
+        <li>
+          <a href="#" class="cls-2g3ofz">Deals</a>
+        </li>
+      </ul>
+        <div class="user-actions">
+          <a href="#" class="gjs-t-link cls-et6vdv">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-user.svg?color=%23a3a3a3"/>
+            <span class="cls-15xysq">Sign in</span>
+          </a>
+          <button type="button" id="miniCartBtn" class="gjs-t-button cls-segihl">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-shopping-cart.svg?color=%23ffffff"/>
+            <span class="cls-8s09il">2</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero-carousel">
+      <div class="cls-acz2ja">
+        <div id="heroTrack" class="cls-ijdi40">
+          <article class="hero-slide">
+            <div class="cls-6s7qdd">
+              <div class="cls-366f0y">
+                <h1 class="gjs-t-h1 cls-v4iup4">Build Your Library</h1>
+                <p class="cls-mt84ah">Discover new releases, all‑time classics, and collector’s editions. Instant digital keys or fast shipping for physical copies.</p>
+                <div class="cls-4ayw76">
+                  <a href="#" class="gjs-t-button cta-button">Shop Digital</a>
+                  <a href="#" class="cta-button">Shop Physical</a>
+                </div>
+                <div class="cls-qjy9qq">
+                  <span class="cls-lwbvrp">Top Deal:</span>
+                  <a href="#" class="cls-gpw5gu">Cyber Siege -40%</a>
+                </div>
+              </div>
+              <div class="cls-98euty">
+                <img alt="Featured Game" src="https://app.grapesjs.com/api/assets/random-image?query=video%20game&amp;w=1200&amp;h=600" class="cls-8cc7f8"/>
+              </div>
+            </div>
+          </article>
+          <article class="hero-slide">
+            <div class="cls-ufpj5m">
+              <div class="cls-un2u1p">
+                <h2 class="gjs-t-h2 cls-hoe24k">Official Merchandise</h2>
+                <p class="cls-knu2xf">Premium packaging, artbooks, and exclusive items for fans and collectors. Limited stock updated daily.</p>
+                <div class="cls-e1amp2">
+                  <a href="#" class="gjs-t-button cls-0tt0wk">Browse Physical</a>
+                  <a href="#" class="cls-jt212t">View Deals</a>
+                </div>
+              </div>
+              <div class="cls-u82vjv">
+                <img alt="Collector's Editions" src="https://app.grapesjs.com/api/assets/random-image?query=collector%20edition&amp;w=1200&amp;h=600" class="cls-kkpho5"/>
+              </div>
+            </div>
+          </article>
+          <article class="hero-slide">
+            <div class="cls-7xslun">
+              <div class="cls-jz0omz">
+                <h2 class="gjs-t-h2 cls-by831q">Play Anywhere</h2>
+                <p class="cls-lxhp2m">PC, PlayStation, Xbox, Nintendo Switch, and more. Filter by your platform and start playing today.</p>
+                <div class="cls-zskt6u"><a href="#" class="gjs-t-button cls-bnebhl">Browse Platforms</a>
+                </div>
+              </div>
+              <div class="cls-wh4be6">
+                <img alt="Multi-platform gaming" src="https://app.grapesjs.com/api/assets/random-image?query=gaming%20setup&amp;w=1200&amp;h=600" class="cls-k0r5lc"/>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-controls">
+          <button type="button" aria-label="Previous" id="heroPrev" class="cls-xfci2j">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-chevron-left.svg?color=%23e5e7eb"/>
+          </button>
+          <div class="cls-8ex395">
+            <span data-dot="0" class="cls-gkvvm1">
+            </span>
+            <span data-dot="1" class="cls-audy1j">
+            </span>
+            <span data-dot="2" class="cls-yiy3et">
+            </span>
+          </div>
+          <button type="button" aria-label="Next" id="heroNext" class="cls-a8lylf">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-chevron-right.svg?color=%23e5e7eb"/>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="collections-strip">
+      <div class="cls-huml3l">
+        <h3 class="gjs-t-h2 cls-skr1yb">Browse by Genre</h3>
+        <a href="#" class="gjs-t-link cls-hu13tz">View all</a>
+      </div>
+      <div class="cls-ggqudt">
+        <a href="#" class="genre-chip">Action</a>
+        <a href="#" class="genre-chip">RPG</a>
+        <a href="#" class="genre-chip">Adventure</a>
+        <a href="#" class="genre-chip">Strategy</a>
+        <a href="#" class="genre-chip">Indie</a>
+        <a href="#" class="genre-chip">Racing</a>
+        <a href="#" class="genre-chip">Sports</a>
+        <a href="#" class="genre-chip">Simulation</a>
+      </div>
+    </section>
+    <section class="featured-sections">
+      <div class="cls-pu4bj2">
+        <aside class="sidebar-filters">
+          <div class="cls-ul7ypg">
+            <h4 class="cls-72o9qi">Filters</h4>
+            <button type="button" class="cls-a1jht6">Reset</button>
+          </div>
+          <div class="cls-olb6nl">
+          </div>
+          <div class="cls-at5okl">
+            <div class="filter-group">
+              <span class="cls-olvg5z">Fulfillment</span>
+              <label class="cls-z173cj">
+                <input type="checkbox" checked/>
+                <span class="cls-nds81q">Digital</span>
+              </label>
+              <label class="cls-9h87sz">
+                <input type="checkbox"/>
+                <span class="cls-e5lhe5">Physical</span>
+              </label>
+            </div>
+            <div class="filter-group">
+              <span class="cls-53rzfo">Platform</span>
+              <div class="cls-kbjna8">
+                <label class="cls-blqbl7">
+                  <input type="checkbox"/>
+                  <span class="cls-ppslju">PC</span>
+                </label>
+                <label class="cls-uuojrj">
+                  <input type="checkbox"/>
+                  <span class="cls-1l9m6t">PlayStation</span>
+                </label>
+                <label class="cls-wcqfkf">
+                  <input type="checkbox"/>
+                  <span class="cls-pcegcp">Xbox</span>
+                </label>
+                <label class="cls-ukpng9">
+                  <input type="checkbox"/>
+                  <span class="cls-g65ssa">Switch</span>
+                </label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="cls-0r7wxa">Price</span>
+              <div class="cls-tvlnyr">
+                <input type="number" placeholder="Min" class="cls-yxjntn"/>
+                <input type="number" placeholder="Max" class="cls-sljlht"/>
+              </div>
+            </div>
+            <div class="filter-group">
+              <span class="cls-0ura78">Sort by</span>
+              <select type="text" class="cls-kwahik">
+                <option>Relevance</option>
+                <option>Newest</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+        </aside>
+        <div class="content-area">
+          <div class="section-head">
+            <div>
+              <h3 class="gjs-t-h2 cls-5ma6mh">New Releases</h3>
+              <p class="cls-qbmtzn">Fresh titles across platforms — ready to play or ship now.</p>
+            </div>
+            <div class="cls-fnlcer">
+              <button type="button" data-scroll-left="nr" class="cls-hin6d1">
+                <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-chevron-left.svg?color=%23e5e7eb"/>
+              </button>
+              <button type="button" data-scroll-right="nr" class="cls-xmy92v">
+                <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-chevron-right.svg?color=%23e5e7eb"/>
+              </button>
+            </div>
+          </div>
+          <div id="nrTrack" class="cls-4d98z5">
+            <ul class="cards-row">
+              <li class="game-card">
+                <a href="#" class="cls-c5g7ka">
+                  <div class="cls-bfgggg">
+                    <img alt="Game cover" src="https://app.grapesjs.com/api/assets/random-image?query=pc%20game&amp;w=520&amp;h=300" class="cls-bdo0w2"/>
+                    <span class="cls-z7j2kw">Digital</span>
+                  </div>
+                  <div class="cls-a4tnum">
+                    <h4 class="cls-3ayx8c">Neon Drift</h4>
+                    <div class="cls-bp5ott">
+                      <span class="cls-tghf21">PC</span>
+                      <span class="cls-mwvtus">Action</span>
+                    </div>
+                    <div class="cls-9sx7co">
+                      <div class="cls-2x1bxc">
+                        <span class="cls-688o9z">$39.99</span>
+                        <span class="cls-u9wjj3">$49.99</span>
+                      </div>
+                      <div class="cls-6okmtg">
+                        <img alt="" width="16" height="16" src="https://api.iconify.design/lucide-star.svg?color=%23f59e0b"/>
+                        <span class="cls-1c106x">4.5</span>
+                      </div>
+                    </div>
+                    <button type="button" class="gjs-t-button cls-zblfp7">Buy Digital</button>
+                  </div>
+                </a>
+              </li>
+              <li class="game-card">
+                <a href="#" class="cls-nfeqwh">
+                  <div class="cls-f27ymf">
+                    <img alt="Game cover" src="https://app.grapesjs.com/api/assets/random-image?query=console%20game&amp;w=520&amp;h=300" class="cls-t352fr"/>
+                    <span class="cls-jciqrb">Physical</span>
+                  </div>
+                  <div class="cls-3z5y51">
+                    <h4 class="cls-adkifg">Starbound Echoes</h4>
+                    <div class="cls-p1qevc">
+                      <span class="cls-qa6bi3">PS5</span>
+                      <span class="cls-6kbq9v">RPG</span>
+                    </div>
+                    <div class="cls-xy665t">
+                      <div class="cls-kj0opf">
+                        <span class="cls-j6aret">$69.99</span>
+                      </div>
+                      <span class="cls-c7ybr5">In Stock</span>
+                    </div>
+                    <div class="cls-c17bqg">
+                      <button type="button" class="gjs-t-button cls-ylctyr">Buy Digital</button>
+                      <button type="button" class="cls-cqe3fu">Buy Physical</button>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="game-card">
+                <a href="#" class="cls-saczna">
+                  <div class="cls-gbpnuv">
+                    <img alt="Game cover" src="https://app.grapesjs.com/api/assets/random-image?query=indie%20game&amp;w=520&amp;h=300" class="cls-3twm3z"/>
+                    <span class="cls-s0vlmx">Digital</span>
+                  </div>
+                  <div class="cls-7bpmnn">
+                    <h4 class="cls-9h31ws">Pixel Foundry</h4>
+                    <div class="cls-o0lnl3">
+                      <span class="cls-k23czg">Switch</span>
+                      <span class="cls-8v8i9a">Indie</span>
+                    </div>
+                    <div class="cls-i6qu3j">
+                      <div class="cls-gteh3a">
+                        <span class="cls-kzd00e">$19.99</span>
+                      </div>
+                      <div class="cls-xsurix">
+                        <img alt="" width="16" height="16" src="https://api.iconify.design/lucide-star.svg?color=%23f59e0b"/>
+                        <span class="cls-qbzkvi">4.2</span>
+                      </div>
+                    </div>
+                    <button type="button" class="gjs-t-button cls-wp8dq0">Buy Digital</button>
+                  </div>
+                </a>
+              </li>
+              <li class="game-card">
+                <a href="#" class="cls-3c7okm">
+                  <div class="cls-px4qfv">
+                    <img alt="Game cover" src="https://app.grapesjs.com/api/assets/random-image?query=racing%20game&amp;w=520&amp;h=300" class="cls-7hteip"/>
+                    <span class="cls-6ljqrc">Physical</span>
+                  </div>
+                  <div class="cls-l830ld">
+                    <h4 class="cls-1ivgcl">Turbo Apex</h4>
+                    <div class="cls-u2jafi">
+                      <span class="cls-bnzoto">Xbox</span>
+                      <span class="cls-nnrow4">Racing</span>
+                    </div>
+                    <div class="cls-0jtxkz">
+                      <div class="cls-7y167t">
+                        <span class="cls-5e06el">$59.99</span>
+                        <span class="cls-grbdd7">Low Stock</span>
+                      </div>
+                    </div>
+                    <button type="button" class="cls-b1vm0i">Buy Physical</button>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="cls-sw4ide">
+          </div>
+          <div class="section-head">
+            <div>
+              <h3 class="gjs-t-h2 cls-zhqmt3">Top Sellers</h3>
+              <p class="cls-noa049">Community favorites and trending bestsellers.</p>
+            </div>
+            <a href="#" class="gjs-t-link cls-rijdte">See charts</a>
+          </div>
+          <div class="cls-6wyue7">
+            <article class="grid-card">
+              <div class="cls-dgxr6k">
+                <img alt="Top seller" src="https://app.grapesjs.com/api/assets/random-image?query=space%20game&amp;w=800&amp;h=400" class="cls-a7qxdl"/>
+                <span class="cls-fpo75i">-35%</span>
+              </div>
+              <div class="cls-1a0ahj">
+                <div class="cls-v5oq5b">
+                  <h4 class="cls-soffjz">Galaxy Runners</h4>
+                  <span class="cls-ff36re">$22.74</span>
+                </div><p class="cls-i12hfi">A fast-paced rogue‑lite shooter through procedurally generated galaxies.</p>
+                <div class="cls-q5cmgq">
+                  <button type="button" class="gjs-t-button cls-4sfb9d">Buy Digital</button>
+                  <button type="button" class="cls-u9mp04">Add to Wishlist</button>
+                </div>
+              </div>
+            </article>
+            <article class="grid-card">
+              <div class="cls-2gq39q">
+                <img alt="Top seller" src="https://app.grapesjs.com/api/assets/random-image?query=fantasy%20game&amp;w=800&amp;h=400" class="cls-3hr1dy"/>
+                <span class="cls-c52mct">-20%</span>
+              </div>
+              <div class="cls-zqqut7">
+                <div class="cls-us2ozs">
+                  <h4 class="cls-1t64w5">Kingdom of Ash</h4>
+                  <span class="cls-y7g8vj">$47.99</span>
+                </div>
+                <p class="cls-hw7iyj">Story‑rich RPG with tactical combat and branching narratives.</p>
+                <div class="cls-4gsp5n">
+                  <button type="button" class="gjs-t-button cls-rfvmjd">Buy Digital</button>
+                  <button type="button" class="cls-eord8t">Buy Physical</button>
+                </div>
+              </div>
+            </article>
+            <article class="grid-card">
+              <div class="cls-e89bce">
+                <img alt="Top seller" src="https://app.grapesjs.com/api/assets/random-image?query=shooter%20game&amp;w=800&amp;h=400" class="cls-cp3506"/>
+                <span class="cls-w087f0">-50%</span>
+              </div>
+              <div class="cls-nkxwy2">
+                <div class="cls-dpbzci">
+                  <h4 class="cls-d4voqs">Urban Strike</h4>
+                  <span class="cls-f1vz5t">$14.99</span>
+                </div>
+                <p class="cls-mm79gj">Competitive online FPS with seasonal content and maps.</p>
+                <div class="cls-v0hu8b">
+                  <button type="button" class="gjs-t-button cls-3xzhf3">Buy Digital</button>
+                  <button type="button" class="cls-tzql3n">Add to Wishlist</button>
+                </div>
+              </div>
+            </article>
+            <article class="grid-card">
+              <div class="cls-fb56ya">
+                <img alt="Top seller" src="https://app.grapesjs.com/api/assets/random-image?query=platformer%20game&amp;w=800&amp;h=400" class="cls-z98eiy"/>
+              </div>
+              <div class="cls-iwji6h">
+                <div class="cls-ikv33a">
+                  <h4 class="cls-zsdduh">Skybound Isles</h4>
+                  <span class="cls-5bwx79">$29.99</span>
+                </div>
+                <p class="cls-2g5bt1">Colorful adventure across floating islands with co‑op mode.</p>
+                <div class="cls-9prnr6">
+                  <button type="button" class="gjs-t-button cls-fm4yc7">Buy Digital</button>
+                  <button type="button" class="cls-apozgj">Buy Physical</button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="cls-5r0hem">
+          </div>
+          <div class="deals-header">
+            <div>
+              <h3 class="gjs-t-h2 cls-b615p1">Weekly Deals</h3>
+              <p class="cls-72g501">Limited‑time offers on top titles. Ends Monday.</p>
+            </div>
+            <a href="#" class="cls-owsw1h">All deals</a>
+          </div>
+          <div class="cls-j692yx">
+            <div class="deal-banner">
+              <div class="cls-idconw">
+                <span class="cls-uw6lo8">Flash Sale</span>
+                <h4 class="cls-okujsv">Cyber Siege</h4>
+                <div class="cls-pxkbdl">
+                  <span class="cls-oyznlz">-40%</span>
+                  <span class="cls-qxldfb">$17.99</span>
+                  <span class="cls-j1baul">$29.99</span>
+                </div>
+              </div>
+              <img alt="Deal" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=sci-fi%20game&amp;w=360&amp;h=200" class="cls-tre2nz"/>
+            </div>
+            <div class="deal-banner">
+              <div class="cls-tx95yc">
+                <span class="cls-anoa35">Editor’s Pick</span>
+                <h4 class="cls-8kxhp5">Mystic Valley</h4>
+                <div class="cls-qgc70o">
+                  <span class="cls-ioes33">-25%</span>
+                  <span class="cls-521cws">$29.99</span>
+                  <span class="cls-5opabx">$39.99</span>
+                </div>
+              </div>
+              <img alt="Deal" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=adventure%20game&amp;w=360&amp;h=200" class="cls-ui0e5q"/>
+            </div>
+            <div class="deal-banner">
+              <div class="cls-olugxv">
+                <span class="cls-hovpk0">Physical Bundle</span>
+                <h4 class="cls-5ho2bt">Racer Pack</h4>
+                <div class="cls-3lipz4">
+                  <span class="cls-cwdn2p">-30%</span>
+                  <span class="cls-j07yp6">$49.00</span>
+                  <span class="cls-ioy9cs">$70.00</span>
+                </div>
+              </div>
+              <img alt="Deal" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=racing%20bundle&amp;w=360&amp;h=200" class="cls-xjg1fo"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="info-strip">
+      <div class="cls-9ad2kv">
+        <div class="cls-x838eq">
+          <img alt="" width="24" height="24" src="https://api.iconify.design/lucide-bolt.svg?color=%23a3e635"/>
+          <div>
+            <h5 class="cls-gudqxo">Instant Digital Delivery</h5>
+            <p class="cls-21y4lw">Play minutes after purchase with secure key delivery.</p>
+          </div>
+        </div>
+        <div class="cls-ht41xs">
+          <img alt="" width="24" height="24" src="https://api.iconify.design/lucide-package.svg?color=%230ea5e9"/>
+          <div>
+            <h5 class="cls-db7ib4">Tracked Shipping</h5>
+            <p class="cls-lgitk9">Fast, reliable shipping for all physical orders.</p>
+          </div>
+        </div>
+        <div class="cls-3wi2jr">
+          <img alt="" width="24" height="24" src="https://api.iconify.design/lucide-credit-card.svg?color=%23f59e0b"/>
+          <div>
+            <h5 class="cls-9swcea">Secure Payments</h5>
+            <p class="cls-ljazua">Multiple payment methods and buyer protection.</p>
+          </div>
+        </div>
+        <div class="cls-dpl4mz">
+          <img alt="" width="24" height="24" src="https://api.iconify.design/lucide-shield-check.svg?color=%2310b981"/>
+          <div>
+            <h5 class="cls-6fds6p">Verified Keys</h5>
+            <p class="cls-aiq0sl">DRM-compliant keys from trusted publishers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="account-shortcuts">
+      <div class="cls-3w6n7j">
+        <a href="#" class="shortcut">
+          <img alt="" width="20" height="20" src="https://api.iconify.design/lucide-library.svg?color=%23e5e7eb"/>
+          <div class="cls-o45i76">
+            <span class="cls-4jk4zq">Library</span>
+            <span class="cls-yli939">Your digital downloads &amp; keys</span>
+          </div>
+        </a>
+        <a href="#" class="shortcut">
+          <img alt="" width="20" height="20" src="https://api.iconify.design/lucide-truck.svg?color=%23e5e7eb"/>
+          <div class="cls-so5q5q">
+            <span class="cls-b40qt7">Orders</span>
+            <span class="cls-caql4m">Track physical shipments</span>
+          </div>
+        </a>
+        <a href="#" class="shortcut">
+          <img alt="" width="20" height="20" src="https://api.iconify.design/lucide-heart.svg?color=%23e5e7eb"/>
+          <div class="cls-1fn1wc">
+            <span class="cls-6s6wts">Wishlist</span>
+            <span class="cls-am17x2">Save games for later</span>
+          </div>
+        </a>
+        <a href="#" class="shortcut">
+          <img alt="" width="20" height="20" src="https://api.iconify.design/lucide-cog.svg?color=%23e5e7eb"/>
+          <div class="cls-bs090j">
+            <span class="cls-v4vul0">Settings</span>
+            <span class="cls-88w2bb">Preferences &amp; security</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="cls-hz0jh8">
+      <div class="cls-kwaxml">
+        <div class="cls-xumcbb">
+          <div class="cls-6u5go8">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-gamepad-2.svg?color=%23ffffff"/>
+          </div>
+          <span class="cls-9vprnx">GameVault</span>
+        </div>
+        <p class="cls-s8zjwp">Your hub for digital keys and physical editions across every platform.</p>
+        <form method="get" class="newsletter">
+          <input type="email" placeholder="Email for deals" class="cls-ibzi4p"/>
+          <button type="button" class="gjs-t-button cls-mg9r8l">Subscribe</button>
+        </form>
+      </div>
+      <div>
+        <h5 class="cls-0b5hq5">Store</h5>
+        <ul class="cls-7jnceo">
+          <li>
+            <a href="#" class="gjs-t-link cls-8gk1se">New Releases</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-g2vcuk">Top Sellers</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-dwwl0s">Deals</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-slno91">Gift Cards</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="cls-2m51yc">Platforms</h5>
+        <ul class="cls-yjufec">
+          <li>
+            <a href="#" class="gjs-t-link cls-7uve1m">PC</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-e8p1ya">PlayStation</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-1vlz3p">Xbox</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-uterzv">Nintendo Switch</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="cls-i30828">Support</h5>
+        <ul class="cls-r664qn">
+          <li>
+            <a href="#" class="gjs-t-link cls-0h7s7u">Help Center</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-hzgnk9">Shipping &amp; Returns</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-k9zi85">DRM &amp; Activation</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-zty8kk">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="cls-5unk6b">Legal</h5>
+        <ul class="cls-plafco">
+          <li>
+            <a href="#" class="gjs-t-link cls-0jjiw1">Terms of Service</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-s0yj42">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#" class="gjs-t-link cls-1qah7j">Refund Policy</a>
+          </li>
+        </ul>
+        <div class="cls-fccapb">
+          <a href="#" aria-label="Twitter" class="cls-6mtwyt">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-twitter.svg?color=%23e5e7eb"/>
+          </a>
+          <a href="#" aria-label="YouTube" class="cls-fv01ad">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-youtube.svg?color=%23e5e7eb"/>
+          </a>
+          <a href="#" aria-label="Discord" class="cls-1ff488">
+            <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-message-circle.svg?color=%23e5e7eb"/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="cls-q8hxjs">
+
+    </div>
+    <div class="cls-w7j5wr">
+      <span class="cls-vbiqz5">© 2026 GameVault. All rights reserved.</span>
+      <div class="cls-wh0nyk">
+        <img alt="Visa" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=visa%20logo&amp;w=90&amp;h=36" class="cls-r68mpr"/>
+        <img alt="Mastercard" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=mastercard%20logo&amp;w=90&amp;h=36" class="cls-gryswc"/>
+        <img alt="PayPal" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=paypal%20logo&amp;w=90&amp;h=36" class="cls-vonczj"/>
+      </div>
+    </div>
+  </footer>
+  <div id="miniCartOverlay" class="cls-9ganzj">
+  </div>
+  <aside id="miniCart" class="mini-cart-drawer">
+    <div class="cls-kld3b5">
+      <div class="cls-2rt7ul">
+        <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-shopping-cart.svg?color=%23e5e7eb"/>
+        <h4 class="cls-7w7j6j">Your Cart</h4>
+      </div>
+      <button type="button" id="miniCartClose" class="cls-gkvrr5">
+        <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-x.svg?color=%23e5e7eb"/>
+      </button>
+    </div>
+    <div class="cls-n8gov4">
+      <div class="cls-y01wux">
+        <img alt="Item" src="https://app.grapesjs.com/api/assets/random-image?query=pc%20game&amp;w=120&amp;h=80" class="cls-go8wmi"/>
+        <div class="cls-r1v56j">
+          <div class="cls-jewxvd">
+            <span class="cls-thvoi2">Neon Drift</span>
+            <span class="cls-krh3rf">$39.99</span>
+          </div>
+          <span class="cls-km11lw">Digital key</span>
+        </div>
+      </div>
+      <div class="cls-onvysc">
+        <img alt="Item" src="https://app.grapesjs.com/api/assets/random-image?query=ps5%20game&amp;w=120&amp;h=80" class="cls-1o77fs"/>
+        <div class="cls-th4mdf">
+          <div class="cls-rq1m3f">
+            <span class="cls-iwoo3a">Starbound Echoes (PS5)</span>
+            <span class="cls-eculbm">$69.99</span>
+          </div>
+          <span class="cls-v53isd">Physical — Ships in 1–2 days</span>
+        </div>
+      </div>
+      <div class="cls-u3jmc0">
+      </div>
+      <div class="cls-53e941">
+        <span class="cls-o1fl3i">Subtotal</span>
+        <span class="cls-dti1e9">$109.98</span>
+      </div>
+      <div class="cls-rb33m2">
+        <input type="text" placeholder="Coupon code" class="cls-j3mtrj"/>
+        <button type="button" class="cls-09imrj">Apply</button>
+      </div>
+      <a href="#" class="gjs-t-button cls-kiewku">Checkout</a>
+    </div>
+  </aside>
+  <div id="productModal" aria-hidden="true" class="cls-92mrlz">
+    <div class="cls-p4mhe5">
+      <div class="cls-sfnw5u">
+        <h4 class="cls-h52cze">Neon Drift</h4>
+        <button type="button" id="productModalClose" class="cls-if56z3">
+          <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-x.svg?color=%23e5e7eb"/>
+        </button>
+      </div>
+      <div class="cls-fqbb43">
+        <div class="cls-l0un06">
+          <div class="cls-yf8efm">
+            <img alt="Game screenshot" src="https://app.grapesjs.com/api/assets/random-image?query=neon%20city%20game&amp;w=900&amp;h=480" class="cls-zsgrwu"/>
+          </div>
+          <div class="cls-iepk0b">
+            <img alt="" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=neon%20screenshot&amp;w=200&amp;h=120" class="cls-9ap2hf"/>
+            <img alt="" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=cyberpunk%20screenshot&amp;w=200&amp;h=120" class="cls-n1w55l"/>
+            <img alt="" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=arcade%20screenshot&amp;w=200&amp;h=120" class="cls-abwjyd"/>
+            <img alt="" loading="lazy" src="https://app.grapesjs.com/api/assets/random-image?query=retrowave%20screenshot&amp;w=200&amp;h=120" class="cls-bv7370"/>
+          </div>
+        </div>
+        <div class="cls-acevfl">
+          <p class="cls-safquf">Race through neon‑lit streets in this synthwave‑soaked arcade experience. Compete online and master drift mechanics.</p>
+          <div class="cls-6tdnm6">
+            <span class="cls-bhec0a">PC</span>
+            <span class="cls-rko7jp">Action</span>
+            <span class="cls-tlthzs">Single‑player</span>
+          </div>
+          <div class="cls-9y07ki">
+          </div>
+          <div class="cls-3a89bl">
+            <div class="cls-1pknod">
+              <span class="cls-1yiche">$39.99</span>
+              <span class="cls-9897in">$49.99</span>
+            </div>
+            <div class="cls-q14p7z">
+              <img alt="" width="18" height="18" src="https://api.iconify.design/lucide-star.svg?color=%23f59e0b"/>
+              <span class="cls-gltxz8">4.5</span>
+            </div>
+          </div>
+          <div class="cls-midifo">
+            <label class="cls-vlzs2w">
+              <input type="radio" name="edition" checked/>
+              <span class="cls-1zf6uz">Digital key</span>
+            </label>
+            <label class="cls-4iatrx">
+              <input type="radio" name="edition"/>
+              <span class="cls-3cq511">Physical disc</span>
+            </label>
+          </div>
+          <div class="cls-bsaqab">
+            <button type="button" class="gjs-t-button cls-wf9xyu">Add to Cart</button>
+            <button type="button" class="cls-uezn9h">Add to Wishlist</button>
+          </div>
+          <div class="cls-ogu4ux">
+          </div>
+          <div class="cls-0kon4g">
+            <span class="cls-ih36t8">System Requirements (min):</span>
+            <ul class="cls-z1tzr7">
+              <li>CPU: Intel i5 or AMD FX</li>
+              <li>GPU: GTX 960 / RX 470</li>
+              <li>RAM: 8 GB</li>
+              <li>Storage: 20 GB</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+(function(){
+  const track = document.getElementById('heroTrack');
+  const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+  const prev = document.getElementById('heroPrev');
+  const next = document.getElementById('heroNext');
+  let index = 0, total = dots.length;
+  function update(i){
+    index = (i + total) % total;
+    track.style.transform = 'translateX(' + (-100 * index) + '%)';
+    dots.forEach((d,di)=>d.classList.toggle('active', di===index));
+  }
+  prev && prev.addEventListener('click', ()=>update(index-1));
+  next && next.addEventListener('click', ()=>update(index+1));
+  dots.forEach(d=>d.addEventListener('click', ()=>update(parseInt(d.dataset.dot,10))));
+  let auto = setInterval(()=>update(index+1), 6000);
+  ['mouseenter','touchstart'].forEach(ev=>track.addEventListener(ev, ()=>clearInterval(auto)));
+})();
+(function(){
+  const btn = document.getElementById('miniCartBtn');
+  const drawer = document.getElementById('miniCart');
+  const overlay = document.getElementById('miniCartOverlay');
+  const close = document.getElementById('miniCartClose');
+  function open(){drawer.classList.add('open'); overlay.classList.add('show');}
+  function shut(){drawer.classList.remove('open'); overlay.classList.remove('show');}
+  btn && btn.addEventListener('click', open);
+  close && close.addEventListener('click', shut);
+  overlay && overlay.addEventListener('click', shut);
+})();
+(function(){
+  // Horizontal scroll controls
+  const left = document.querySelector('[data-scroll-left="nr"]');
+  const right = document.querySelector('[data-scroll-right="nr"]');
+  const row = document.getElementById('nrTrack');
+  left && left.addEventListener('click', ()=>row.scrollBy({left:-320, behavior:'smooth'}));
+  right && right.addEventListener('click', ()=>row.scrollBy({left:320, behavior:'smooth'}));
+})();
+(function(){
+  // open product modal when clicking the first New Release???
+  const card = document.querySelector('[data-gjs-name="Game Card"] a');
+  const modal = document.getElementById('productModal');
+  const close = document.getElementById('productModalClose');
+  if(card && modal){
+    card.addEventListener('click', (e)=>{ e.preventDefault(); modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); });
+  }
+  close && close.addEventListener('click', ()=>{ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); });
+  modal && modal.addEventListener('click', (e)=>{ if(e.target===modal){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }});
+})();
+</script>
+  </body>
+</html>
