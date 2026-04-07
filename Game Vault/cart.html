@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Vault</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/14a3e67508.js" crossorigin="anonymous"></script>
 </head>
@@ -34,11 +34,6 @@
         <ul class="mainbar">
             <li><a href="index.html">Home</a></li>
             <!--<li class="hideOnMobile"><a href="#">Search</a></li>-->
-            <div class="search-container">
-                <form role="search" id="form">
-                    <input type="search" id="query" name="q" placeholder="Search...">
-                </form>
-            </div>
             <li class="hideOnMobile">
                 <div class="dropdown">
                     <a href="#" class="nav-link">
@@ -77,10 +72,85 @@
         }
     </script>
 
-    <main>
-        <h3>This is the Cart page</h3>
-        <p>This is the test paragraph</p>
-    </main>
+    
+
+    <section id="cart-page-header">
+        
+        <h2>Cart</h2>
+        
+        <p>All your Items here</p>
+    
+    </section>
+
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Subtotal</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#"><i class="fa-solid fa-xmark"></i></a></td>
+                    <td><img src="img/featured.png" alt="" ></td>
+                    <td>Product name</td>
+                    <td>$Price$</td>
+                    <td><input type="number" value="1"></td>
+                    <td>$Subtotal$</td>
+                </tr>
+                <tr>
+                    <td><a href="#"><i class="fa-solid fa-xmark"></i></a></td>
+                    <td><img src="img/featured.png" alt="" ></td>
+                    <td>Product name</td>
+                    <td>$Price$</td>
+                    <td><input type="number" value="1"></td>
+                    <td>$Subtotal$</td>
+                </tr>
+                <tr>
+                    <td><a href="#"><i class="fa-solid fa-xmark"></i></a></td>
+                    <td><img src="img/featured.png" alt="" ></td>
+                    <td>Product name</td>
+                    <td>$Price$</td>
+                    <td><input type="number" value="1"></td>
+                    <td>$Subtotal$</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+        <div id="dis-code">
+            <h3>Apply Discount Code</h3>
+            <div>
+                <input type="text" placeholder="Enter your Discount code">
+                <button class="normal">Apply</button>
+            </div>
+        </div>
+
+        <div id="subtotal">
+            <h3>Cart Total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td>$Total Amount$</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong> $Cart Total$</strong></td>
+                </tr>
+            </table>
+            <button class="normal">Proceed to checkout</button>
+        </div>
+    </section>
 
 
    

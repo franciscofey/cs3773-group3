@@ -60,7 +60,7 @@ nav a:hover{
     width: 250px;
     background-color: hsl(0, 0%, 25%);
     backdrop-filter: blur(10px);
-    box-shadow: -10px 0 -10px rgba(0, 0, 0, 0.1);
+    box-shadow: -10px 0 -10px rgba(0, 0, 0, 0.37);
     display: none;
     flex-direction: column;
     align-items: flex-start;
@@ -76,7 +76,7 @@ nav a:hover{
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
+    /*background: rgba(0, 0, 0, 0.4);*/
     z-index: -1;
 }
 
@@ -191,7 +191,7 @@ form{
     color: azure;
 }
 
-input {
+.search-container input {
     all:unset;
     font: 15px system-ui;
     color: white;
@@ -311,7 +311,8 @@ input {
     color: #088178;
 }
 
-#product1 .pro .cart{
+/*
+#product1 .pro a.cart{
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -324,7 +325,25 @@ input {
     bottom: 20px;
     right: 10px;
 }
+*/
+#product1 .pro a.cart{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e8f6ea;
+    border: 1px solid #cce7d0;
 
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #088178;
+    text-decoration: none;
+}
 
 
 
@@ -378,6 +397,23 @@ input {
 #physical-page-header h2,
 #physical-page-header p{
     color: aqua;
+}
+
+#cart-page-header{
+    background-image: url("img/hero2.png");
+    width: inherit;
+    height: 30vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 14px;
+}
+
+#cart-page-header h2,
+#cart-page-header p{
+    color: white;
 }
 
 /*Physical/Digital/Merch Products page--------------------------------------*/
@@ -472,16 +508,125 @@ input {
 }
 
 
+/*Cart page--------------------------------------*/
 
+#cart{
+    overflow-x: auto;
+}
 
+#cart table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    white-space: nowrap;
+}
 
+#cart table img{
+    width: 70px;
+}
 
+#cart table td:nth-child(1){
+    width: 100px;
+    text-align: center;
+}
+#cart table td:nth-child(2){
+    width: 150px;
+    text-align: center;
+}
+#cart table td:nth-child(3){
+    width: 250px;
+    text-align: center;
+}
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6){
+    width: 150px;
+    text-align: center;
+}
 
+#cart table td:nth-child(5) input{
+    width: 60px;
+    padding: 10px 5px 10px 15px;
+}
 
+#cart table thead{
+    border: 1px solid #e2e9e1;
+    border-left: none;
+    border-right: none;
+}
 
+#cart table thead td{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px 0;
+}
 
+#cart table tbody tr td{
+    padding-top: 15px;
+}
 
+#cart table tbody td{
+    font-size: 13px;
+}
 
+#cart-add {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#dis-code{
+    width: 50%;
+    margin-bottom: 30px;
+    color: aqua;
+}
+
+#dis-code h3,
+#subtotal h3 {
+    padding-bottom: 15px;
+    color: #1a1a1a;
+}
+
+#dis-code input{
+    padding: 10px 20px;
+    outline: none;
+    width: 60%;
+    margin-right: 10px;
+    border: 1px solid #e2e9e1;
+    color: #1a1a1a;
+}
+
+#dis-code button,
+#subtotal button{
+    background-color: hsl(0, 0%, 25%);
+    color: #fff;
+    border: 20px;
+    border-radius: 10px;
+    padding: 12px 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#subtotal{
+    width: 50%;
+    margin-bottom: 30px;
+    border: 1px solid #e2e9e1;
+    padding: 30px;
+}
+
+#subtotal table{
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px;
+}
+
+#subtotal table td{
+    width: 50%;
+    border: 1px solid #e2e9e1;
+    padding: 10px;
+    font-size: 13px;
+}
 
 
 
