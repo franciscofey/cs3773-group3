@@ -1,0 +1,23 @@
+[
+  { "merchandise": true, "id": 1, "title": "Elden Ring Hoodie", "game": "Elden Ring", "type": "Hoodie", "price": 49.99, "image": "img/merch/eldenring_hoodie.png", "rating": 5 },
+  { "merchandise": true, "id": 2, "title": "Elden Ring Poster", "game": "Elden Ring", "type": "Poster", "price": 14.99, "image": "img/merch/eldenring_poster.png", "rating": 5 },
+  { "merchandise": true, "id": 3, "title": "Cyberpunk 2077 Jacket", "game": "Cyberpunk 2077", "type": "Jacket", "price": 89.99, "image": "img/merch/cyberpunk_jacket.png", "rating": 4 },
+  { "merchandise": true, "id": 4, "title": "Cyberpunk 2077 Figure", "game": "Cyberpunk 2077", "type": "Figure", "price": 39.99, "image": "img/merch/cyberpunk_figure.png", "rating": 4 },
+  { "merchandise": true, "id": 5, "title": "The Witcher 3 Wolf Medallion", "game": "The Witcher 3", "type": "Accessory", "price": 24.99, "image": "img/merch/witcher_medallion.png", "rating": 5 },
+  { "merchandise": true, "id": 6, "title": "The Witcher 3 T-Shirt", "game": "The Witcher 3", "type": "T-Shirt", "price": 19.99, "image": "img/merch/witcher_shirt.png", "rating": 5 },
+  { "merchandise": true, "id": 7, "title": "Red Dead Redemption 2 Cowboy Hat", "game": "Red Dead Redemption 2", "type": "Hat", "price": 29.99, "image": "img/merch/rdr2_hat.png", "rating": 5 },
+  { "merchandise": true, "id": 8, "title": "Red Dead Redemption 2 Poster", "game": "Red Dead Redemption 2", "type": "Poster", "price": 15.99, "image": "img/merch/rdr2_poster.png", "rating": 5 },
+  { "merchandise": true, "id": 9, "title": "GTA V Logo T-Shirt", "game": "GTA V", "type": "T-Shirt", "price": 19.99, "image": "img/merch/gtav_shirt.png", "rating": 5 },
+  { "merchandise": true, "id": 10, "title": "GTA V Snapback", "game": "GTA V", "type": "Hat", "price": 24.99, "image": "img/merch/gtav_hat.png", "rating": 4 },
+
+  { "merchandise": true, "id": 11, "title": "God of War Leviathan Axe Replica", "game": "God of War", "type": "Replica", "price": 99.99, "image": "img/merch/gow_axe.png", "rating": 5 },
+  { "merchandise": true, "id": 12, "title": "God of War T-Shirt", "game": "God of War", "type": "T-Shirt", "price": 21.99, "image": "img/merch/gow_shirt.png", "rating": 5 },
+  { "merchandise": true, "id": 13, "title": "Horizon Forbidden West Aloy Figure", "game": "Horizon Forbidden West", "type": "Figure", "price": 44.99, "image": "img/merch/horizon_aloy.png", "rating": 5 },
+  { "merchandise": true, "id": 14, "title": "Horizon Zero Dawn Poster Set", "game": "Horizon Zero Dawn", "type": "Poster", "price": 18.99, "image": "img/merch/horizon_posters.png", "rating": 4 },
+  { "merchandise": true, "id": 15, "title": "Minecraft Creeper Plush", "game": "Minecraft", "type": "Plush", "price": 19.99, "image": "img/merch/minecraft_creeper.png", "rating": 5 },
+  { "merchandise": true, "id": 16, "title": "Minecraft Pickaxe Replica", "game": "Minecraft", "type": "Replica", "price": 29.99, "image": "img/merch/minecraft_pickaxe.png", "rating": 5 },
+  { "merchandise": true, "id": 17, "title": "Fortnite Victory Royale Hoodie", "game": "Fortnite", "type": "Hoodie", "price": 39.99, "image": "img/merch/fortnite_hoodie.png", "rating": 4 },
+  { "merchandise": true, "id": 18, "title": "Fortnite Llama Plush", "game": "Fortnite", "type": "Plush", "price": 24.99, "image": "img/merch/fortnite_llama.png", "rating": 5 },
+  { "merchandise": true, "id": 19, "title": "The Last of Us Firefly Pendant", "game": "The Last of Us Part I", "type": "Accessory", "price": 19.99, "image": "img/merch/tlou_pendant.png", "rating": 5 },
+  { "merchandise": true, "id": 20, "title": "Spider-Man Suit Hoodie", "game": "Spider-Man Remastered", "type": "Hoodie", "price": 44.99, "image": "img/merch/spiderman_hoodie.png", "rating": 5 }
+]
