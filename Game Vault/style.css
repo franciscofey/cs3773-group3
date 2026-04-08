@@ -628,11 +628,31 @@ form{
     font-size: 13px;
 }
 
+/*sort by sections--------------------------------------*/
 
+#digital-page-header .single-pro-details select{
+    color: #088178;
+    background: transparent;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
 
+#merch-page-header .single-pro-details select{
+    color: black;
+    background: transparent;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
 
-
-
+#physical-page-header .single-pro-details select{
+    color: aqua;
+    background: transparent;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
 
 
 
