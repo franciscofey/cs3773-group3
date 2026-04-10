@@ -8,7 +8,7 @@ const accessToken = await getTwitchToken();
 loadGameData();
 getGameData();
 
-// 1. Create your "Maps" for the numbers
+// 1. Category Translation
 const categoryMap = {
     0: "Main Game",
     1: "DLC / Add-on",
@@ -27,7 +27,7 @@ const categoryMap = {
     14: "Update"
 };
 
-
+// 2. Status Translation
 const statusMap = {
     0: "Released",
     2: "Alpha",
@@ -37,7 +37,7 @@ const statusMap = {
     6: "Cancelled"
 };
 
-//Twitch token to start website API
+//Twitch token to access website
 async function getTwitchToken() {
     try {
         const response = await fetch(url, {
@@ -58,6 +58,7 @@ async function getTwitchToken() {
     }
 }
 
+//Gets Data from API
 async function loadGameData() {
     console.log("1. Starting fetch...");
     try {
@@ -102,10 +103,8 @@ async function loadGameData() {
 
 async function getGameData() {
     try {
-        // 1. Read the file synchronously (reads as a string)
         const rawData = readFileSync('games.json', 'utf8');
 
-        // 2. Parse the JSON string into a JavaScript array/object
         return JSON.parse(rawData);
 
     } catch (error) {
@@ -149,14 +148,10 @@ async function renameGame(oldName, newName) {
 
 //Tests
 async function testMaps() {
-    // 1. Wait for the data to actually load
     const games = await getGameData();
 
-    // 2. Check if games exists and has items
     if (games && games.length > 0) {
         const myGame = games[0];
-
-        // 3. Optional chaining (?.) handles games with missing genre arrays
         const genres = myGame.genres?.map(g => g.name).join(', ') || "N/A";
 
         console.log(`Game: ${myGame.name}`);
