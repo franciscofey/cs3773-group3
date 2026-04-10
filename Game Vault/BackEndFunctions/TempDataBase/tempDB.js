@@ -28,6 +28,42 @@ console.log("TempDB running!!!")
  * 
  */
 
+/**
+ * Actual database resources
+ * 
+ */
+
+// 1. Category Translation
+const categoryMap = {
+    0: "Main Game",
+    1: "DLC / Add-on",
+    2: "Expansion",
+    3: "Bundle",
+    4: "Standalone Expansion",
+    5: "Mod",
+    6: "Episode",
+    7: "Season",
+    8: "Remake",
+    9: "Remaster",
+    10: "Expanded Game",
+    11: "Port",
+    12: "Fork",
+    13: "Pack",
+    14: "Update"
+};
+
+// 2. Status Translation
+const statusMap = {
+    0: "Released",
+    2: "Alpha",
+    3: "Beta",
+    4: "Early Access",
+    5: "Offline",
+    6: "Cancelled"
+};
+
+/** from Lauren's branch */
+
 //Arrays containing database data
 
 let featuredProducts = []
