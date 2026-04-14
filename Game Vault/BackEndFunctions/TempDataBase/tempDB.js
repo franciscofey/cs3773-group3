@@ -41,6 +41,56 @@ let physicalProducts = []
 let tempProducts = [] // All games database
 let cart = []
 
+let currentSearchTerm = "";
+let currentSortValue = "default";
+
+function sortProducts(products, sortValue){
+  const sorted = [...products];
+
+  switch (sortValue){
+    case "price-low":
+      sorted.sort((a,b) => a.price - b.price);
+      break;
+    case "price-high":
+      sorted.sort((a,b) => b.price - a.price);
+      break;
+    case "rating-high":
+      sorted.sort((a,b) => b.rating - a.rating);
+      break;
+    case "title-az":
+      sorted.sort((a,b) => a.title.localeCompare(b.title));
+      break;
+    case "title-za":
+      sorted.sort((a,b) => b.title.localeCompare(a.title));
+      break; 
+    default:
+      break;
+  }
+
+  return sorted;
+}
+
+function filterProducts(products, searchTerm){
+  const term = searchTerm.trim().toLowerCase();
+
+  if (!term) return [...products];
+
+  return products.filter(product => {
+      const titleMatch = product.title?.toLowerCase().includes(term);
+      const companyMatch = product.company?.toLowerCase().includes(term);
+      const gameMatch = product.game?.toLowerCase().includes(term);
+      const typeMatch = product.type?.toLowerCase().includes(term);
+
+      return titleMatch || companyMatch || gameMatch || typeMatch;
+  });
+}
+
+function processProducts(products) {
+  const filtered = filterProducts(products, currentSearchTerm);
+  return sortProducts(filtered, currentSortValue);
+}
+
+
 
 //Id references to inject HTML - dynamically modify HTML
 const containerFeatured = document.getElementById("featured-productContainer")
@@ -81,6 +131,7 @@ async function fillProducts(){
     ShowMerchandiseProducts();
     ShowPhysicalProducts();
     ShowDigitalProducts();
+    setupSortAndSearch();
 }
 
 function ShowFeaturedProducts(){
@@ -127,8 +178,10 @@ function ShowMerchandiseProducts(){
     
     containerMerchandise.innerHTML = "";
 
-    merchandiseProducts.slice(0, 20).forEach(product => {
-    const card = document.createElement('div')
+    const processedProducts = proccesProducts(merchandiseProducts);
+
+    processedProducts.slice(0, 20).forEach(product => {
+    const card = document.createElement('div');
 
     card.classList.add("pro");
 
@@ -164,7 +217,9 @@ function ShowDigitalProducts(){
 
    containerDigitalG.innerHTML = "";
 
-    digitalProducts.slice(0, 20).forEach(product => {
+    const processedProducts = processProducts(digitalProducts);
+
+    processedProducts.slice(0, 20).forEach(product => {
     const card = document.createElement('div')
 
     card.classList.add("pro");
@@ -203,7 +258,9 @@ if (!containerPhysicalG) return;
 
    containerPhysicalG.innerHTML = "";
 
-    physicalProducts.slice(0, 20).forEach(product => {
+   const processedProducts = processProducts(physicalProducts);
+
+    processedProducts.slice(0, 20).forEach(product => {
     const card = document.createElement('div')
 
     card.classList.add("pro");
@@ -236,6 +293,48 @@ if (!containerPhysicalG) return;
     })
 }
 
+function setupSortAndSearch(){
+  const sortSelect = document.getElementById("sort-by");
+  const searchInput = document.getElementById("query");
+  const searchForm = document.getElementById("form");
+
+  if (searchForm) {
+    searchForm.addEventListener("submit", e => e.preventDefault());
+  }
+  if(sortSelect){
+    sortSelect.addEventListener("change", e =>{
+      currentSortValue = e.target.value;
+      rerenderCurrentPage();
+    });
+  }
+
+  if(searchInput){
+    searchInput.addEventListener("input", e=>{
+      currentSearchTerm = e.target.value;
+      rerenderCurrentPage();
+    }
+    );
+  }
+  
+}
+
+function rerenderCurrentPage() {
+  if (containerPhysicalG) {
+    ShowPhysicalProducts();
+  }
+
+  if (containerDigitalG) {
+    ShowDigitalProducts();
+  }
+
+  if (containerMerchandise) {
+    ShowMerchandiseProducts();
+  }
+
+  if (containerFeatured) {
+    ShowFeaturedProducts();
+  }
+}
 
 // calls main function to run methods
 fillProducts();
