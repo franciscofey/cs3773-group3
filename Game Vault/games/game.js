@@ -3,7 +3,7 @@ export async function loadAndDisplayGames() {
     const container = document.getElementById('game-container');
 
     try {
-        // Fetch both the games and prices in parallel
+        // Fetches both the games and prices in parallel
         const [gamesRes, pricesRes] = await Promise.all([
             fetch('games.json'),
             fetch('gamePrices.json')
