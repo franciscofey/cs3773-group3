@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/14a3e67508.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+            <li><a href="../aboutus.html">AboutUs</a></li>
+            <li><a href="../signin.html">Sign In</a></li>
+            <li><a href="../cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li>
+                <a href="#" onclick="toggleSidebarDropdown(event)">
+                    Categories
+                </a>
+                <ul class="sidebar-dropdown-content">
+                    <li class="#"><a href="physical.html">Physical</a></li>
+                    <li class="#"><a href="digital.html">Digital</a></li>
+                    <li class="#"><a href="../merchandise.html">Merchandise</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="mainbar">
+            <li><a href="../index.html">Home</a></li>
+            <div class="search-container">
+                <form role="search" id="form">
+                    <input type="search" id="query" name="q" placeholder="Search...">
+                </form>
+            </div>
+            <li class="hideOnMobile">
+                <div class="dropdown">
+                    <a href="#" class="nav-link">
+                        <span>Categories</span> 
+                    </a>
+                    <ul class="dropdown-content">
+                        <li class="#"><a href="physical.html">Physical</a></li>
+                        <li class="#"><a href="digital.html">Digital</a></li>
+                        <li class="#"><a href="../merchandise.html">Merchandise</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="hideOnMobile"><a href="../aboutus.html">AboutUs</a></li>
+            <li class="hideOnMobile"><a href="../signin.html">Sign in</a></li>
+            <li class="hideOnMobile"><a href="../cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+        </ul>
+    </nav>
+
+    <script>
+        function showSidebar(){
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
+        }
+
+        function hideSidebar(){
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
+        }
+
+        function toggleSidebarDropdown(event){
+            event.preventDefault(); //prevents page jump
+            const dropdown = event.target.nextElementSibling;
+            dropdown.classList.toggle("active");
+        }
+    </script>
+
+    <!-- This script calls the load/display function in the game.js file -->
+    <script type="module">
+        import { loadAndDisplayGames } from './game.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAndDisplayGames();
+        });
+    </script>
+    <!-- End of game.js script (Let me know if you have questions -Lauren) -->
+
+    <section id="physical-page-header">
+        <h2>Physical Games</h2>
+        <p>Save more with discount codes up to ?% off!</p>
+        <div class="single-pro-details">
+            <select>
+                <option>sort by</option>
+                <option>Availability</option>
+                <option>Price</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- This section loads in the games -->
+    <section id="product1" class="section-p1">
+        <div id="game-container" class="pro-container">
+            <!-- Continues section/script in game.js -->
+        </div>
+    </section>
+    <!-- End of game section (Let me know if you have questions -Lauren) -->
+
+    <section id="pagination" class="section-p1">
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+    </section>
+
+</body>
+
+</html>
