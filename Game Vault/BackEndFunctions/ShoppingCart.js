@@ -108,7 +108,7 @@ function FillUICartProducts() {
     cart.forEach(item =>{
         cartT += item.price;
     })
-    cartSubT = cartT;
+    cartSubT = Number(cartT.toFixed(2));
     cartT = calculateSubTotal(cartT);
 
 
