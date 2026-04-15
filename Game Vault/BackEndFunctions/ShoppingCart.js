@@ -68,7 +68,7 @@ document.addEventListener("click", e => {
     console.log("current cart:", cart);
     // remove from UI
     row.remove();
-
+    FillUICartProducts();
     // update storage
     localStorage.setItem("cart", JSON.stringify(cart));
 });
@@ -76,9 +76,12 @@ document.addEventListener("click", e => {
 
 function FillUICartProducts() {
      const UICartProducts = document.getElementById("cart-products");
-    if (!UICartProducts) return;
+     const UICartTotal = document.getElementById("subtotal");
+    if (!UICartProducts && !UICartTotal) return;
+
 
     UICartProducts.innerHTML = ""; // 🔥 clear old rows
+
 
     cart.forEach(item => {
 
@@ -99,6 +102,38 @@ function FillUICartProducts() {
 
         UICartProducts.append(rowContainer);
     });
+
+    let cartT = 0
+    let cartSubT = 0;
+    cart.forEach(item =>{
+        cartT += item.price;
+    })
+    cartSubT = cartT;
+    cartT = calculateSubTotal(cartT);
+
+
+    UICartTotal.innerHTML = "";
+    UICartTotal.innerHTML = `
+        
+     <h3>Cart Total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td>$${cartSubT}</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>$${cartT}</strong></td>
+                </tr>
+            </table>
+            <button class="normal">Proceed to checkout</button>
+
+    `;
+
 }
 
 
