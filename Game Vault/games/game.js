@@ -3,7 +3,7 @@ export async function loadAndDisplayGames() {
     const container = document.getElementById('game-container');
 
     try {
-        // Fetch both the games and your custom prices in parallel
+        // Fetch both the games and prices in parallel
         const [gamesRes, pricesRes] = await Promise.all([
             fetch('games.json'),
             fetch('gamePrices.json')
@@ -12,12 +12,12 @@ export async function loadAndDisplayGames() {
         if (!gamesRes.ok || !pricesRes.ok) throw new Error("Check your JSON files!");
 
         const games = await gamesRes.json();
-        const priceMap = await pricesRes.json(); // Our lookup table
+        const priceMap = await pricesRes.json(); // table
 
         let gameCards = '';
 
         games.forEach(game => {
-            // Find price using the game's ID; default to 'N/A' if missing
+            // Finds price using the game's ID; default to 'N/A' if missing
             const price = priceMap[game.id] ? `$${priceMap[game.id]}` : 'TBD';
 
             const imageUrl = game.cover?.url
