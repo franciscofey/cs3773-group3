@@ -232,6 +232,26 @@ form{
 
 /*Featured page*/
 
+.pro-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+}
+
+.pro {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.pro img {
+    width: 100%;
+    height: auto;
+}
+
 .product1{
     text-align: center;
 }
@@ -313,7 +333,6 @@ form{
 }
 
 /*Header control-------------------------------------------*/
-
 #merch-page-header{
     background-image: url("img/merch-header.png");
     width: inherit;
