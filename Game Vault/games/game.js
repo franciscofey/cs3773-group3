@@ -9,7 +9,7 @@ export async function loadAndDisplayGames() {
             fetch('gamePrices.json')
         ]);
 
-        if (!gamesRes.ok || !pricesRes.ok) throw new Error("Check your JSON files!");
+        if (!gamesRes.ok || !pricesRes.ok) throw new Error("Check JSON files!");
 
         const games = await gamesRes.json();
         const priceMap = await pricesRes.json(); // table
