@@ -8,6 +8,8 @@
  * If the user clicks the product card, they are redirected to the product details page (sproduct.html).
  */
 
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 console.log("ShoppingCart.js is running");
 
 document.addEventListener("click", e => {
@@ -31,7 +33,11 @@ document.addEventListener("click", e => {
         }
 
         if (product) {
+            
             cart.push(product);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            FillUICartProducts();
+            console.log("Supposedly the item is now visible")
             console.log("Cart:", cart);
         }
         
@@ -45,3 +51,61 @@ document.addEventListener("click", e => {
 
     window.location.href = "sproduct.html";
 });
+
+
+document.addEventListener("click", e => {
+
+    const removeButton = e.target.closest(".deleteBtt");
+
+    if (!removeButton) return;
+
+    const row = removeButton.closest("tr");
+    const id = Number(row.dataset.id);
+
+    // remove from array
+    cart = cart.filter(item => item.id !== id);
+    console.log("item was removed");
+    console.log("current cart:", cart);
+    // remove from UI
+    row.remove();
+
+    // update storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+});
+
+
+function FillUICartProducts() {
+     const UICartProducts = document.getElementById("cart-products");
+    if (!UICartProducts) return;
+
+    UICartProducts.innerHTML = ""; // 🔥 clear old rows
+
+    cart.forEach(item => {
+
+        const rowContainer = document.createElement('tr');
+
+        rowContainer.dataset.id = item.id;
+
+        const subtotal = calculateSubTotal(item.price);
+
+        rowContainer.innerHTML = `
+            <td><button class="deleteBtt fa-solid fa-xmark"></button></td>
+            <td><img src="img/featured.png" alt=""></td>
+            <td>${item.title}</td>
+            <td>$${item.price}</td>
+            <td><input type="number" value="1"></td>
+            <td>$${subtotal}</td>
+        `;
+
+        UICartProducts.append(rowContainer);
+    });
+}
+
+
+function calculateSubTotal(price){
+   return Number(((price*0.0825) + price).toFixed(2));
+}
+
+if (window.location.pathname.includes("cart.html")) {
+    FillUICartProducts();
+}
