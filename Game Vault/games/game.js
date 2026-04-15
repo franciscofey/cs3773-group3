@@ -26,8 +26,8 @@ export async function loadAndDisplayGames() {
                         <h5>${game.name}</h5>
                         <p>${game.total_rating ? Math.round(game.total_rating) + '%' : 'N/A'}</p>
                         <h4>$PRICE</h4> 
-                        <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                     </div>
+                    <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             `;
         });
