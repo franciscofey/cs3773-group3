@@ -5,6 +5,7 @@ main{
 *{
     margin: 0;
     padding: 0;
+    /*font-family: 'Poppins', sans-serif;*/
 }
 
 body{
@@ -68,6 +69,7 @@ nav a:hover{
     left: 0;
     width: 100vw;
     height: 100vh;
+    /*background: rgba(0, 0, 0, 0.4);*/
     z-index: -1;
 }
 
@@ -121,6 +123,8 @@ nav a:hover{
     position: absolute;
     top: 100%;
 }
+
+
 
 .dropdown-content a{
     text-decoration: none;
@@ -185,6 +189,7 @@ form{
 
 ::placeholder {
     color: white;
+
 }
 
 /*Home page--------------------------------------*/
@@ -228,26 +233,6 @@ form{
 }
 
 /*Featured page*/
-
-.pro-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px;
-}
-
-.pro {
-    width: 200px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.pro img {
-    width: 100%;
-    height: auto;
-}
 
 .product1{
     text-align: center;
@@ -312,23 +297,21 @@ form{
     color: #088178;
 }
 
-#product1 .pro a.cart{
+.product1 .pro .cartbutton-bottom-row .cart{
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: #e8f6ea;
     border: 1px solid #cce7d0;
-
     position: absolute;
     bottom: 20px;
     right: 10px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: #088178;
     text-decoration: none;
+    cursor: pointer;
 }
 
 /*Header control-------------------------------------------*/
@@ -430,6 +413,7 @@ form{
 #prodetails .single-pro-image{
     width: 40%;
     margin-right: 50px;
+
 }
 
 .small-img-group{
@@ -511,17 +495,14 @@ form{
     width: 100px;
     text-align: center;
 }
-
 #cart table td:nth-child(2){
     width: 150px;
     text-align: center;
 }
-
 #cart table td:nth-child(3){
     width: 250px;
     text-align: center;
 }
-
 #cart table td:nth-child(4),
 #cart table td:nth-child(5),
 #cart table td:nth-child(6){
