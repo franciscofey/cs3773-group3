@@ -3,34 +3,44 @@ export async function loadAndDisplayGames() {
     const container = document.getElementById('game-container');
 
     try {
-        //Fetches the API scraper json
-        const response = await fetch('games.json');
-        if (!response.ok) throw new Error("games.json not found. Run scraper.js first!");
+        // Fetch both the games and your custom prices in parallel
+        const [gamesRes, pricesRes] = await Promise.all([
+            fetch('games.json'),
+            fetch('gamePrices.json')
+        ]);
 
-        const games = await response.json();
-        container.innerHTML = '';
+        if (!gamesRes.ok || !pricesRes.ok) throw new Error("Check your JSON files!");
 
-        //Pulls the info needed (Like a for loop, it adjusts to the amount of info)
+        const games = await gamesRes.json();
+        const priceMap = await pricesRes.json(); // Our lookup table
+
+        let gameCards = '';
+
         games.forEach(game => {
+            // Find price using the game's ID; default to 'N/A' if missing
+            const price = priceMap[game.id] ? `$${priceMap[game.id]}` : 'TBD';
+
             const imageUrl = game.cover?.url
                 ? 'https:' + game.cover.url.replace('t_thumb', 't_cover_big')
                 : 'img/placeholder.png';
 
             const devName = game.involved_companies?.[0]?.company?.name || 'Unknown Developer';
 
-            container.innerHTML += `
+            gameCards += `
                 <div class="pro">
                     <img src="${imageUrl}" alt="${game.name}">
                     <div class="des">
                         <h6>${devName}</h6>
                         <h5>${game.name}</h5>
                         <p>${game.total_rating ? Math.round(game.total_rating) + '%' : 'N/A'}</p>
-                        <h4>$PRICE</h4> 
+                        <h4>${price}</h4> 
                     </div>
                     <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
             `;
         });
+
+        container.innerHTML = gameCards;
     } catch (error) {
         console.error('Display Error:', error);
         container.innerHTML = `<p>Error: ${error.message}</p>`;
