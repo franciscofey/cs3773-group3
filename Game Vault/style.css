@@ -637,3 +637,30 @@ form{
     margin-bottom: 10px;
     border-radius: 10px;
 }
+
+
+/*admin page sections--------------------------------------*/
+
+#user-table .card {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#user-table .search-container{
+    width: 30%;
+}
+
+#sales-item-table .card{
+    max-height: 600px; /*controls how large each table can be*/
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#sales-item-table .search-container{
+    width: 30%;
+}
+
+
