@@ -816,3 +816,13 @@ form{
     color: white;
 }
 
+.checkout-button.disabled {
+    background: gray;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.checkout-button.active {
+    background: green;
+    cursor: pointer;
+}
