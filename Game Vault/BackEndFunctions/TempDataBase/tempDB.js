@@ -39,7 +39,6 @@ let digitalProducts = []
 let physicalProducts = []
 
 let tempProducts = [] // All games database
-let cart = []
 
 
 //Id references to inject HTML - dynamically modify HTML

@@ -662,5 +662,27 @@ form{
 #sales-item-table .search-container{
     width: 30%;
 }
+/*Shopping Cart page*/
 
+.deleteBtt{
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
+.deleteBtt:hover {
+    background: black;
+    color: white;
+}
+
+.checkout-button.disabled {
+    background: gray;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.checkout-button.active {
+    background: green;
+    cursor: pointer;
+}
