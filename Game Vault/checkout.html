@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="checkout-style.css">
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <div class="payment-box">
+
+        <h2>Complete Purchase</h2>
+        <p class="subtitle">Choose your payment method</p>
+
+        <label>Payment Method</label>
+        <select id="method">
+            <option>Credit Card</option>
+            <option>PayPal</option>
+            <option>Debit Card</option>
+        </select>
+
+        <div class="form-row">
+            <label>Card Number</label>
+            <input id="card-number" type="text" placeholder="1234 5678 9012 3456">
+        </div>
+
+        <div class="form-row">
+            <label>Expiration</label>
+            <div class="row-inline">
+                <select id="month">
+                    <option>01</option>
+                    <option>02</option>
+                    <option>03</option>
+                    
+                </select>
+
+                <select id="year">
+                    <option>2026</option>
+                    <option>2027</option>
+                    <option>2028</option>
+                </select>
+            </div>
+
+        <div class="form-row">
+            <label>Security Code</label>
+            <input id="security-code" type="text" placeholder="123">
+        </div>
+
+        </div>
+
+        <!-- BILLING SECTION -->
+        <div class="section-title">
+        <br>
+            Billing Information
+        </div>
+
+        <div class="form-row">
+            <label>Full Name</label>
+            <input id="billing-name" type="text" placeholder="John Doe">
+        </div>
+
+        <div class="form-row">
+            <label>Address</label>
+            <input id="billing-address" type="text" placeholder="Street address">
+        </div>
+
+        <div class="form-row">
+            <label>City</label>
+            <input id="city" type="text" placeholder="City">
+        </div>
+
+        <button id="pay-button">Pay Now</button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

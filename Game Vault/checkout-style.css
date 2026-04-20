@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1b2838; /* Steam-like dark blue */
+}
+
+/* Dark overlay */
+.overlay {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main window */
+.payment-box {
+    background: #2a475e;
+    width: 350px;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: white;
+}
+
+/* Title */
+.payment-box h2 {
+    margin: 0 0 5px 0;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 12px;
+    color: #c7d5e0;
+    margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #c7d5e0;
+}
+
+/* Inputs + selects */
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: #1b2838;
+    color: white;
+}
+
+/* grouped row */
+.form-row {
+    margin-top: 10px;
+}
+
+/* inline expiration */
+.row-inline {
+    display: flex;
+    gap: 10px;
+}
+
+/* button */
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background: #66c0f4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #4fa8d1;
+}
