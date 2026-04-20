@@ -2,65 +2,187 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in and sign up form</title>
+    <title>Sign In — Game Vault</title>
     <link rel="stylesheet" href="styleSignin.css">
     <script src="https://kit.fontawesome.com/14a3e67508.js" crossorigin="anonymous"></script>
+    <style>
+        /* Error / success banners */
+        .auth-msg {
+            display: none;
+            margin: 10px 0 0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            text-align: left;
+        }
+        .auth-msg.error   { background: #ffe0e0; color: #a00; }
+        .auth-msg.success { background: #e0ffe4; color: #060; }
 
+        /* Redirect note shown when already logged in */
+        #already-in {
+            display: none;
+            color: #cce7d0;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        #already-in a { color: aqua; }
+
+        /* Logout link style */
+        #logout-btn {
+            margin-top: 20px;
+            background: #a00;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 30px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        #logout-btn:hover { background: #c00; }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <div class="form-box">
-        <h1 id="title">Sign up</h1>
-        <form>
-            <div class="input-group">
-                <div class="input-field" id="nameField">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Name">
+
+        <!-- ── Already logged in view ── -->
+        <div id="logged-in-view" style="display:none; text-align:center;">
+            <h1 id="welcome-heading">Welcome!</h1>
+            <p id="already-in">
+                You are signed in. <a href="index.html">Go to Home</a>
+            </p>
+            <button id="logout-btn">Sign Out</button>
+        </div>
+
+        <!-- ── Auth form view ── -->
+        <div id="auth-view">
+            <h1 id="title">Sign Up</h1>
+
+            <form id="auth-form" onsubmit="return false;">
+                <div class="input-group">
+
+                    <!-- Name (sign-up only) -->
+                    <div class="input-field" id="nameField">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="input-name" placeholder="Username" autocomplete="username">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="input-email" placeholder="Email" autocomplete="email">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="input-password" placeholder="Password" autocomplete="current-password">
+                    </div>
+
+                    <!-- Feedback -->
+                    <div id="auth-error"   class="auth-msg error"></div>
+                    <div id="auth-success" class="auth-msg success"></div>
+
+                    <p>Forgot password? <a href="#">Click Here!</a></p>
                 </div>
 
-                <div class="input-field">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" placeholder="Email">
+                <div class="btn-field">
+                    <button type="button" id="signupBtn"  onclick="handleSignup()">Sign Up</button>
+                    <button type="button" id="signinBtn"  onclick="handleSignin()" class="disable">Sign In</button>
                 </div>
+            </form>
+        </div>
 
-                <div class="input-field">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Password">
-                </div>
-                <p>Forgot password? <a href="#">Click Here!</a></p>
-            </div>
-            <div class="btn-field">
-                <button type="button" id="signupBtn">Sign up</button>
-                <button type="button" id="signinBtn" class="disable">Sign in</button>
-                <!--<button type="button">Enter in</button>-->
-            </div>
-        </form>
     </div>
 </div>
 
+<script src="BackEndFunctions/auth.js"></script>
 <script>
+    const nameField    = document.getElementById("nameField");
+    const titleEl      = document.getElementById("title");
+    const signupBtn    = document.getElementById("signupBtn");
+    const signinBtn    = document.getElementById("signinBtn");
+    const authView     = document.getElementById("auth-view");
+    const loggedInView = document.getElementById("logged-in-view");
+    const alreadyIn    = document.getElementById("already-in");
+    const welcomeH     = document.getElementById("welcome-heading");
+    const logoutBtn    = document.getElementById("logout-btn");
 
-let signupBtn = document.getElementById("signupBtn");
-let signinBtn = document.getElementById("signinBtn");
-let nameField = document.getElementById("nameField");
-let title = document.getElementById("title");
+    const user = currentUser();
+    if (user) {
+        authView.style.display     = "none";
+        loggedInView.style.display = "block";
+        alreadyIn.style.display    = "block";
+        welcomeH.textContent       = `Hey, ${user.username} 👾`;
+    }
 
+    logoutBtn.addEventListener("click", () => logout());
 
-signinBtn.onclick = function(){
-    nameField.style.maxHeight = "0";
-    title.innerHTML = "Sign In";
-    signupBtn.classList.add("disable");
-    signinBtn.classList.remove("disable");
-}
+    let mode = "signup"; // "signup" | "signin"
 
-signupBtn.onclick = function(){
-    nameField.style.maxHeight = "60px";
-    title.innerHTML = "Sign Up";
-    signupBtn.classList.remove("disable");
-    signinBtn.classList.add("disable");
-}
+    signinBtn.addEventListener("click", () => {
+        mode = "signin";
+        nameField.style.maxHeight = "0";
+        titleEl.textContent       = "Sign In";
+        signupBtn.classList.add("disable");
+        signinBtn.classList.remove("disable");
+        clearMessages();
+    });
 
+    signupBtn.addEventListener("click", () => {
+        mode = "signup";
+        nameField.style.maxHeight = "60px";
+        titleEl.textContent       = "Sign Up";
+        signupBtn.classList.remove("disable");
+        signinBtn.classList.add("disable");
+        clearMessages();
+    });
+
+    function handleSignup() {
+        clearMessages();
+        const username = document.getElementById("input-name").value;
+        const email    = document.getElementById("input-email").value;
+        const password = document.getElementById("input-password").value;
+
+        const result = register(username, email, password);
+
+        if (result.success) {
+            showSuccess(result.message);
+            // Redirect to home after short delay
+            setTimeout(() => window.location.href = "index.html", 1200);
+        } else {
+            showError("auth-error", result.message);
+        }
+    }
+
+    function handleSignin() {
+        clearMessages();
+        const identifier = document.getElementById("input-email").value;
+        const password   = document.getElementById("input-password").value;
+
+        const result = login(identifier, password);
+
+        if (result.success) {
+            showSuccess(result.message);
+            setTimeout(() => window.location.href = "index.html", 1200);
+        } else {
+            showError("auth-error", result.message);
+        }
+    }
+
+    function showSuccess(msg) {
+        const el = document.getElementById("auth-success");
+        el.textContent  = msg;
+        el.style.display = "block";
+    }
+
+    function clearMessages() {
+        hideError("auth-error");
+        const s = document.getElementById("auth-success");
+        s.textContent   = "";
+        s.style.display = "none";
+    }
 </script>
 
 </body>
