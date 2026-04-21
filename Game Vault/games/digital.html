@@ -78,12 +78,21 @@
   import { loadAndDisplayGames } from './game.js';
 
   document.addEventListener('DOMContentLoaded', () => {
+    // Initial load of games
     loadAndDisplayGames();
+
+    // Listen for changes on the sort dropdown
+    const sortSelect = document.getElementById('sort-by');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => {
+        loadAndDisplayGames();
+      });
+    }
   });
 </script>
 <!-- End of game.js script (Let me know if you have questions -Lauren) -->
 
-<section id="digital-page-header">
+<section id="digital-page-header" style="background-image: url('../img/digital-header.png') !important;">
   <h2>Digital Games</h2>
   <p>Save more with discount codes up to ?% off!</p>
   <div class="single-pro-details">
@@ -111,6 +120,39 @@
   <a href="#">2</a>
   <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
 </section>
+
+<!-- This is what makes it pretty -->
+<style>
+  body {
+    background: radial-gradient(circle at center, #ff00ff 0%, #2e0249 30%, #000000 80%);
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+  }
+
+  #product1, .section-p1 {
+    background: transparent !important;
+  }
+
+  .pro {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border: 1px solid rgba(255, 0, 255, 0.4) !important;
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    /* The magenta glow circle thing */
+    box-shadow: 0 0 45px 5px rgba(255, 0, 255, 0.2);
+    transition: 0.3s ease;
+  }
+
+  .pro:hover {
+    /* Make the game cards glow when hovered on */
+    box-shadow: 0 0 60px 10px rgba(255, 0, 255, 0.4);
+    background: rgba(255, 255, 255, 0.3) !important;
+  }
+</style>
+<!-- This is what makes it pretty -->
 
 </body>
 
