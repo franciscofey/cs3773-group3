@@ -1,0 +1,218 @@
+[
+  {
+    "id": "1",
+    "name": "World of Warcraft Eternal Judgment Armor Replica",
+    "companyName": "Blizzard Entertainment",
+    "associatedGame": "World of Warcraft",
+    "imageUrl": "https://gear.blizzard.com/cdn/shop/files/WOWCST0021_A1_1_1.jpg?v=1762189885.jpg",
+    "rating": 4.5,
+    "price": 120.00
+  },
+  {
+    "id": "2",
+    "name": "World of Warcraft Alliance Varsity Jacket",
+    "companyName": "Blizzard Entertainment",
+    "associatedGame": "World of Warcraft",
+    "imageUrl": "https://gear.blizzard.com/cdn/shop/files/WOWCMJ0013_B.jpg?v=1761845662.jpg",
+    "rating": 4.5,
+    "price": 175.00
+  },
+  {
+    "id": "3",
+    "name": "Funko POP! Games: World of Warcraft Thrall Figure",
+    "companyName": "Blizzard Entertainment",
+    "associatedGame": "World of Warcraft",
+    "imageUrl": "https://media.gamestop.com/i/gamestop/20013334/Funko-POP-Games-World-of-Warcraft-Thrall-4.85-in-Vinyl-Figure?w=1256&h=664&fmt=auto.jpg",
+    "rating": 4.6,
+    "price": 14.99
+  },
+  {
+    "id": "4",
+    "name": "MINECRAFT CREEPER ADULT HOODIE",
+    "companyName": "Mojang Studios",
+    "associatedGame": "Minecraft",
+    "imageUrl": "https://minecraftshop.com/cdn/shop/files/MCICON-CRPR_100861_MF.jpg",
+    "rating": 1.0,
+    "price": 49.95
+  },
+  {
+    "id": "5",
+    "name": "MINECRAFT CREEPER HEAT CHANGE MUG",
+    "companyName": "Mojang Studios",
+    "associatedGame": "Minecraft",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpAKYtuGQ53WK762nwlF-RoIpiR1QWvRqi-Q&s.jpg",
+    "rating": 4.7,
+    "price": 24.95
+  },
+  {
+    "id": "6",
+    "name": "MINECRAFT CREEPER BIG FACE STAINLESS STEEL WATER BOTTLE WITH A STRAW LID",
+    "companyName": "Mojang Studios",
+    "associatedGame": "Minecraft",
+    "imageUrl": "https://minecraftshop.com/cdn/shop/files/stainless-steel-water-bottle-with-a-straw-lid-white-32-oz-right-68558cb187970.jpg",
+    "rating": 4.9,
+    "price": 39.95
+  },
+  {
+    "id": "7",
+    "name": "Baldur's Gate 3 Art Book – A4 Hardcover, 191 Pages, Game Art & Design, Gift for RPG Fans",
+    "companyName": "Larian Studios",
+    "associatedGame": "Baldur's Gate",
+    "imageUrl": "https://i.ebayimg.com/00/s/MTQ3M1gxNjAw/z/VVQAAeSwYc1pzCnK/$_57.JPG?set_id=880000500F.jpg",
+    "rating": 4.5,
+    "price": 49.99
+  },
+  {
+    "id": "8",
+    "name": "Dungeons & Dragons Baldur's Gate 3 Logo T-Shirt",
+    "companyName": "Larian Studios",
+    "associatedGame": "Baldur's Gate",
+    "imageUrl": "https://cdn.media.amplience.net/s/hottopic/34847513_hi?$productMainDesktopRetina$&fmt=auto.jpg",
+    "rating": 4.8,
+    "price": 28.50
+  },
+  {
+    "id": "9",
+    "name": "Funko Pop! Games Baldur's Gate Shadowheart with Artifact",
+    "companyName": "Larian Studios",
+    "associatedGame": "Baldur's Gate 3",
+    "imageUrl": "https://m.media-amazon.com/images/I/71WWkKg08ZL._AC_SL1300_.jpg",
+    "rating": 4.9,
+    "price": 14.99
+  },
+  {
+    "id": "10",
+    "name": "The Wand Company Fallout 3 and Fallout: Vegas Pip-Boy 3000 Replica",
+    "companyName": "The Wand Company",
+    "associatedGame": "Fallout 3",
+    "imageUrl": "https://media.gamestop.com/i/gamestop/20031641_ALT11/Fallout-3-and-Fallout-New-Vegas-Pip-Boy-3000-Replica?$pdp$?w=1256&h=664&fmt=auto.jpg",
+    "rating": 4.3,
+    "price": 299.99
+  },
+  {
+    "id": "11",
+    "name": "Fallout Vault Boy 101 Bobble Head Series 3: Big Guns",
+    "companyName": "The Wand Company",
+    "associatedGame": "Fallout 3",
+    "imageUrl": "https://www.nicepng.com/png/detail/135-1356998_fallout-fallout-vault-boy-101-bobble-head-series.png",
+    "rating": 5.0,
+    "price": 39.99
+  },
+  {
+    "id": "12",
+    "name": "Fallout Brotherhood of Steel BoS OPA Unisex T-Shirt",
+    "companyName": "The Wand Company",
+    "associatedGame": "Fallout 3",
+    "imageUrl": "https://cdn.media.amplience.net/s/hottopic/32883732_hi?$productMainDesktop$&fmt=auto.jpg",
+    "rating": "N/A",
+    "price": 69.99
+  },
+  {
+    "id": "13",
+    "name": "The Elder Scrolls Arena Floppy Disk Limited Edition Replica",
+    "companyName": "Bethesda Softworks",
+    "associatedGame": "The Elder Scrolls: Arena",
+    "imageUrl": "https://m.media-amazon.com/images/I/81N8b0BdtcL._AC_UF894,1000_QL80_.jpg",
+    "rating": 4.6,
+    "price": 39.99
+  },
+  {
+    "id": "14",
+    "name": "The Arena Elder Scrolls Classic T-Shirt",
+    "companyName": "Bethesda Softworks",
+    "associatedGame": "The Elder Scrolls: Arena",
+    "imageUrl": "https://game-legends.de/media/93/94/05/1654074993/THE_ELDER_SCROLLS_T-SHIRT_ELDER_SCROLLS_ARENA_0013.webp?ts=1654074993.jpg",
+    "rating": "N/A",
+    "price": 24.00
+  },
+  {
+    "id": "15",
+    "name": "Displate Metal Poster \"Arena Anthology Game Map\" by The Elder Scrolls - Skyrim Maps - Magnetic Poster - Gift Idea - Official The Elder Scrolls Merch",
+    "companyName": "Bethesda Softworks",
+    "associatedGame": "The Elder Scrolls: Arena",
+    "imageUrl": "https://i5.walmartimages.com/seo/The-Elder-Scrolls-V-Skyrim-Map-Wall-Poster-14-725-x-22-375-Framed_2e324273-f3d7-49d6-a84c-aa1cfc55ad08.1a22d92d9eb8bd23cfb163c347c46d40.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF.jpg",
+    "rating": 4.6,
+    "price": 50.00
+  },
+  {
+    "id": "16",
+    "name": "Dark Horse Comics The Witcher 3 Wild Hunt Deluxe Heart of Stone Figure",
+    "companyName": "Atari, Inc.",
+    "associatedGame": "The Witcher",
+    "imageUrl": "https://www.darkhorsedirect.com/cdn/shop/files/WITCHER_FIGURE_GERALT_HOS_DHD_PHOTO_DSP_10.png?v=1692142551&width=480.jpg",
+    "rating": 4.9,
+    "price": 49.99
+  },
+  {
+    "id": "17",
+    "name": "The Witcher 3 Wild Hunt The Witcher Wolf School Medallion",
+    "companyName": "Atari, Inc.",
+    "associatedGame": "The Witcher",
+    "imageUrl": "https://store.starforged.com/cdn/shop/files/2_f02fa8a7-5894-4c82-a3aa-6ed1603e4050.jpg",
+    "rating": "N/A",
+    "price": 118.00
+  },
+  {
+    "id": "18",
+    "name": "Gwent: The Legendary Card Game",
+    "companyName": "Atari, Inc.",
+    "associatedGame": "The Witcher",
+    "imageUrl": "https://cf.geekdo-images.com/bLintO18LwPlMoA0DiC05Q__itemrep/img/moRuInR8F4ujzIcYtBQUjqKk2ZU=/fit-in/246x300/filters:strip_icc()/pic8954964.png",
+    "rating": 4.9,
+    "price": 49.99
+  },
+  {
+    "id": "19",
+    "name": "Diamond Select Toys Star Wars: The Old Republic Gallery Darth Malgus PVC Statue",
+    "companyName": "LucasArts",
+    "associatedGame": "Star Wars: The Old Republic",
+    "imageUrl": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQji8GBXYzI50FoHJ5_tuv_J5YnoVGC72leWV2dAQ3iC67vg-g.jpg",
+    "rating": 4.3,
+    "price": 79.99
+  },
+  {
+    "id": "20",
+    "name": "Star Wars Black Series Darth Nihilus & Darth Traya KOTOR II 2-Pk “Ships Jul.”",
+    "companyName": "LucasArts",
+    "associatedGame": "Star Wars: The Old Republic",
+    "imageUrl": "https://i.ebayimg.com/images/g/RSgAAeSwWi9p2nBP/s-l650.jpg",
+    "rating": 4.6,
+    "price": 89.99
+  },
+  {
+    "id": "21",
+    "name": "Star Wars The Black Series Darth Malak Action Figure",
+    "companyName": "LucasArts",
+    "associatedGame": "Star Wars: The Old Republic",
+    "imageUrl": "https://www.actionfigure411.com/star-wars/images/darth-malak-5504.jpg",
+    "rating": 4.7,
+    "price": 29.99
+  },
+  {
+    "id": "22",
+    "name": "[LoL] 2026 T1 Uniform Jersey - DORAN / XL",
+    "companyName": "Riot Games",
+    "associatedGame": "League of Legends",
+    "imageUrl": "https://shop-t1-eu.gg/cdn/shop/files/Flat_F.png?v=1774430101&width=1920.jpg",
+    "rating": "N/A",
+    "price": 129.48
+  },
+  {
+    "id": "23",
+    "name": "League Of Legends Lol Ahri Statue Figure Sexy Fox Riot Games Authentic",
+    "companyName": "Riot Games",
+    "associatedGame": "League of Legends",
+    "imageUrl": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRilmb2DiRTV9HNjUbFjwL6b78HrLQ9-c5_zvp0ugdFqGPiBWs.jpg",
+    "rating": 4.8,
+    "price": 164.33
+  },
+  {
+    "id": "24",
+    "name": "Logitech G Pro Gaming Mechanical Keyboard",
+    "companyName": "Riot Games",
+    "associatedGame": "League of Legends",
+    "imageUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT2GDlVIYmrAepyVubb7nK5XJ29gesuxyrvWmFVN05-HvjMM7kv2K591qI0qyKiVHTIbjbMVpwP.jpg",
+    "rating": 4.7,
+    "price": 139.99
+  }
+]
