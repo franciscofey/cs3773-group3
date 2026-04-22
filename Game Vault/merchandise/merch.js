@@ -38,8 +38,11 @@ export async function loadAndDisplayMerchandise() {
                         <p>${merch.rating ? merch.rating + '/ 5' : 'N/A'}</p>
                         <h4>$${merch.price.toFixed(2)}</h4> 
                         <h4>${merch.associatedGame}</h4> 
+                    <!-- Adds the game data attributes to button here -->
                     </div>
-                    <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <button type="button" class="cart" data-game='${merch.id}'>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
                 </div>
             `;
         });
