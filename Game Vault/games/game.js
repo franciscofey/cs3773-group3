@@ -56,8 +56,7 @@ export async function loadAndDisplayGames() {
                     starsHtml += '<i class="far fa-star"></i>'; // Empty star
                 }
             }
-            // --------------------------
-
+ 
             gameCards += `
                 <div class="pro">
                     <img src="${imageUrl}" alt="${game.name}">
@@ -70,7 +69,10 @@ export async function loadAndDisplayGames() {
                         </div>
                         <h4>${price}</h4> 
                     </div>
-                    <a href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <!-- Adds the game data attributes to button here -->
+                    <button type="button" class="cart" data-game='${game.id}'>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
                 </div>
             `;
         });
