@@ -641,6 +641,8 @@ form{
 
 /*admin page sections--------------------------------------*/
 
+
+/*users*/
 #user-table .card {
     max-height: 600px;
     overflow-y: auto;
@@ -650,6 +652,28 @@ form{
 
 #user-table .search-container{
     width: 30%;
+}
+
+
+/*discount codes*/
+#discountCode-table h3{
+    padding-top: 50px;
+}
+
+#discountCode-table .card {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#discountCode-table .search-container{
+    width: 30%;
+}
+
+/*physical/digital games*/
+#sales-item-table h3{
+    padding-top: 50px;
 }
 
 #sales-item-table .card{
@@ -662,7 +686,24 @@ form{
 #sales-item-table .search-container{
     width: 30%;
 }
-/*Shopping Cart page*/
+
+
+/*Merch*/
+
+#sales-merch-table h3{
+    padding-top: 50px;
+}
+#sales-merch-table .card{
+    max-height: 600px; /*controls how large each table can be*/
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#sales-merch-table .search-container{
+    width: 30%;
+}
+/*Shopping Cart page----------------------------*/
 
 .deleteBtt{
     font-size: 30px;
