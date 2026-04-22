@@ -315,7 +315,7 @@ form{
     color: #088178;
 }
 
-.product1 .pro a.cart{
+.product1 .pro button.cart{
     width: 40px;
     height: 40px;
     border-radius: 50%;
