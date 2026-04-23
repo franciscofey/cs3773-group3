@@ -81,15 +81,27 @@
   document.addEventListener('DOMContentLoaded', () => {
     // Initial load of games
     loadAndDisplayGames();
-
+    
     document.addEventListener('click', (event) => {
       const btn = event.target.closest('.cart');
+      const card = event.target.closest('.pro');
+
       if (btn) {
-        // Call the cartButton.js file
+        // IMPORTANT: Stops the browser from going to product page
+        event.preventDefault();
+        event.stopPropagation();
+
+        console.log("Cart button detected!"); //Test
         cartButton(event);
+        return; // Keeps it from switching pages
+      }
+
+      if (card) {
+        console.log("Card detected, redirecting..."); // Debugging line
+        window.location.href = '../products/sproduct.html';
       }
     });
-
+    
     // Listen for changes on the sort dropdown
     const sortSelect = document.getElementById('sort-by');
     if (sortSelect) {
