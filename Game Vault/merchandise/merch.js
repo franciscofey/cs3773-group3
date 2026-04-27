@@ -29,18 +29,35 @@ export async function loadAndDisplayMerchandise() {
                 ? merch.imageUrl.replace('.jpg', '_800x.jpg')
                 : 'img/placeholder.png';
 
+            const starValue = merch.rating ? Math.round(merch.rating * 2) / 2 : 0;
+
+            // 2. Generate stars based on that rounded value
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= starValue) {
+                    starsHtml += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 === starValue) {
+                    starsHtml += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>';
+                }
+            }
+
             merchCards += `
-                <div class="pro">
+                <div class="pro" data-id="${merch.id}"> 
                     <img src="${imageUrl}" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 20px;">
                     <div class="des">
                         <h6>${merch.companyName}</h6>
                         <h5>${merch.name}</h5>
-                        <p>${merch.rating ? merch.rating + '/ 5' : 'N/A'}</p>
+                        <div class="star">
+                    ${starsHtml}
+                    <span>(${starValue})</span> <!-- Using the rounded value here -->
+                </div>
                         <h4>$${merch.price.toFixed(2)}</h4> 
                         <h4>${merch.associatedGame}</h4> 
                     <!-- Adds the game data attributes to button here -->
-                    </div>
-                    <button type="button" class="cart" data-game='${merch.id}'>
+                </div>
+                    <button type="button" class="cart" data-merch='${merch.id}'>
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                 </div>
