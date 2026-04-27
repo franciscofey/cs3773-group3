@@ -23,8 +23,8 @@
                     Categories
                 </a>
                 <ul class="sidebar-dropdown-content">
-                    <li class="#"><a href="../Games/physical.html">Physical</a></li>
-                    <li class="#"><a href="../Games/digital.html">Digital</a></li>
+                    <li class="#"><a href="../games/physical.html">Physical</a></li>
+                    <li class="#"><a href="../games/digital.html">Digital</a></li>
                     <li class="#"><a href="merchandise.html">Merchandise</a></li>
                 </ul>
             </li>
@@ -42,8 +42,8 @@
                         <span>Categories</span> 
                     </a>
                     <ul class="dropdown-content">
-                        <li class="#"><a href="../Games/physical.html">Physical</a></li>
-                        <li class="#"><a href="../Games/digital.html">Digital</a></li>
+                        <li class="#"><a href="../games/physical.html">Physical</a></li>
+                        <li class="#"><a href="../games/digital.html">Digital</a></li>
                         <li class="#"><a href="merchandise.html">Merchandise</a></li>
                     </ul>
                 </div>
@@ -76,7 +76,7 @@
     <!-- This script calls the load/display function in the merch.js file -->
     <script type="module">
         import { loadAndDisplayMerchandise } from './merch.js';
-        import { cartButton } from '../cart/cartButton.js';
+        import { cartButtonMerchCircle } from '../cart/cartButton.js';
 
         document.addEventListener('DOMContentLoaded', () => {
             // Initial load of merchandise
@@ -92,13 +92,17 @@
                     event.stopPropagation();
 
                     console.log("Cart button detected!"); //Test
-                    cartButton(event);
+                    cartButtonMerchCircle(event);
                     return; // Keeps it from switching pages
                 }
 
                 if (card) {
-                    console.log("Card detected, redirecting..."); // Debugging line
-                    window.location.href = '../products/sproduct.html';
+                    // Grab the ID we just added to the .pro div
+                    const merchId = card.getAttribute('data-id');
+
+                    if (merchId) {
+                        window.location.href = `../products/merchProduct.html?id=${merchId}`;
+                    }
                 }
 
                 // Listen for changes on the sort dropdown
