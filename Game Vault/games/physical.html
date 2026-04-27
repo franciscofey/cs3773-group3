@@ -75,42 +75,46 @@
 
     <!-- This script calls the load/display function in the game.js file -->
     <script type="module">
-  import { loadAndDisplayGames } from './game.js';
-  import { cartButton } from '../cart/cartButton.js';
+        import { loadAndDisplayGames } from './game.js';
+        import { cartButtonGameCircle } from '../cart/cartButton.js';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // Initial load of games
-    loadAndDisplayGames();
-    
-    document.addEventListener('click', (event) => {
-      const btn = event.target.closest('.cart');
-      const card = event.target.closest('.pro');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial load of games
+            loadAndDisplayGames();
 
-      if (btn) {
-        // IMPORTANT: Stops the browser from going to product page
-        event.preventDefault();
-        event.stopPropagation();
+            document.addEventListener('click', (event) => {
+                const btn = event.target.closest('.cart');
+                const card = event.target.closest('.pro');
 
-        console.log("Cart button detected!"); //Test
-        cartButton(event);
-        return; // Keeps it from switching pages
-      }
+                if (btn) {
+                    // IMPORTANT: Stops the browser from going to product page
+                    event.preventDefault();
+                    event.stopPropagation();
 
-      if (card) {
-        console.log("Card detected, redirecting..."); // Debugging line
-        window.location.href = '../products/sproduct.html';
-      }
-    });
-    
-    // Listen for changes on the sort dropdown
-    const sortSelect = document.getElementById('sort-by');
-    if (sortSelect) {
-      sortSelect.addEventListener('change', () => {
-        loadAndDisplayGames();
-      });
-    }
-  });
-</script>
+                    console.log("Cart button detected!"); //Test
+                    cartButtonGameCircle(event);
+                    return; // Keeps it from switching pages
+                }
+
+                if (card) {
+                    // Grab the ID we just added to the .pro div
+                    const gameId = card.getAttribute('data-id');
+
+                    if (gameId) {
+                        window.location.href = `../products/gameProduct.html?id=${gameId}`;
+                    }
+                }
+            });
+
+            // Listen for changes on the sort dropdown
+            const sortSelect = document.getElementById('sort-by');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', () => {
+                    loadAndDisplayGames();
+                });
+            }
+        });
+    </script>
     <!-- End of game.js script (Let me know if you have questions -Lauren) -->
 
     <section id="physical-page-header">
