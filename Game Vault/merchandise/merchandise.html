@@ -30,7 +30,7 @@
             </li>
         </ul>
         <ul class="mainbar">
-            <li><a href="../index.html">Home</a></li>
+            <li><a href="../homePage/index.html">Home</a></li>
             <div class="search-container">
                 <form role="search" id="form">
                     <input type="search" id="query" name="q" placeholder="Search...">
@@ -118,8 +118,11 @@
     <!-- End of merch.js script (Let me know if you have questions -Lauren) -->
 
     <section id="merch-page-header">
+        <div class="header-content">
         <h2>Merchandise</h2>
-        <p>Save more with discount codes up to ?% off!</p>
+            <div class="discount-badge">
+        <p>Save more with discount codes up to <span>?%</span> off!</p>
+            </div>
         <div class="single-pro-details">
             <select id="sort-by">
                 <option value="default">Sort By</option>
@@ -130,6 +133,7 @@
                 <option value="rating-high">Rating</option>
             </select>
         </div>
+            </div>
     </section>
 
     <!-- This section loads in the Merchandise -->
@@ -147,37 +151,127 @@
     </section>
 
     <style>
+        #merch-page-header {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(30, 58, 138, 0.9)),
+            url("../img/merch-header.png");
+            width: 100%;
+            height: 35vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            padding: 14px;
+            border-bottom: 6px solid #60a5fa;
+            box-shadow: inset 0 -10px 0 rgba(0,0,0,0.3);
+        }
+
+        #merch-page-header .single-pro-details select {
+            color: lightgrey !important;
+        }
+
+        .product1 .pro .des h5 {
+            padding-top: 7px;
+            color: #60a5fa;
+            font-size: 14px;
+        }
+
+        #merch-page-header h2 {
+            font-family: 'Press Start 2P', cursive;
+            color: #60a5fa;
+            text-shadow: 4px 4px 0px #0f172a, 6px 6px 0px rgba(59, 130, 246, 0.4);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .discount-badge p span {
+            color: #fff !important;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-decoration: underline;
+        }
+
+        .discount-badge span {
+            color: #fff;
+            text-decoration: line-through;
+        }
+
+        /* Retro Select Menu - Deep Blue Metal */
+        #sort-by {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            padding: 10px;
+            background: #1e3a8a;
+            color: #60a5fa;
+            border: 3px solid #60a5fa;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .pro {
+            background: rgba(15, 23, 42, 0.4) !important;
+            border: 2px solid #60a5fa !important;
+            backdrop-filter: blur(12px);
+            border-radius: 8px;
+            box-shadow: 0 0 45px 5px rgba(59, 130, 246, 0.3);
+            transition: 0.3s ease;
+            padding: 15px;
+        }
+
+        .discount-badge span {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .pro:hover {
+            box-shadow: 0 0 60px 12px rgba(96, 165, 250, 0.4);
+            background: rgba(255, 255, 255, 0.18) !important;
+            border: 1px solid rgba(147, 197, 253, 0.6) !important;
+            transform: translateY(-5px);
+        }
+
+        .pro .des h5 {
+            padding-top: 7px;
+            color: #60a5fa;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #60a5fa;
+            color: #0f172a;
+        }
+
+        #sort-by option {
+            background-color: #0f172a;
+            color: #60a5fa;
+        }
+
         body {
-            /* Kept exactly as requested */
             background: radial-gradient(circle at center, #2b50c0 0%, #1e3a8a 40%, #0f172a 90%);
             background-attachment: fixed;
             background-size: cover;
             margin: 0;
             min-height: 100vh;
-            color: white;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
         }
-
-        #product1, .section-p1 {
-            background: transparent !important;
+        .discount-badge p {
+            background: #60a5fa;
+            color: #0f172a !important;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            display: inline-block;
+            padding: 12px 20px;
+            transform: rotate(-2deg);
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.4);
+            margin: 10px 0;
         }
-
-        .pro {
-            /* Increased opacity from 0.08 to 0.22 for a less transparent feel */
-            background: rgba(255, 255, 255, 0.13) !important;
-            border: 1px solid rgba(96, 165, 250, 0.3) !important;
-            backdrop-filter: blur(12px);
-            border-radius: 15px;
-            box-shadow: 0 0 45px 5px rgba(59, 130, 246, 0.3);
-            transition: 0.3s ease;
-        }
-
-        .pro:hover {
-            /* Hover state also made more opaque (0.30) */
-            box-shadow: 0 0 60px 12px rgba(96, 165, 250, 0.4);
-            background: rgba(255, 255, 255, 0.18) !important;
-            border: 1px solid rgba(147, 197, 253, 0.6) !important;
-        }
-
+        
     </style>
 
 </body>
