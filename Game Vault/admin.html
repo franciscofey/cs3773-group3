@@ -595,13 +595,13 @@
                     <button class="btn btn-sm btn-primary" id="show-merch-form">Add Merch</button>
 
                     <div class="merch-form-wrapper hidden">
+                        <input class="form-control mb-2" type="text" id="merchId" placeholder="Merch ID">
                         <input class="form-control mb-2" type="text" id="merchName" placeholder="Merch name">
-                        <input class="form-control mb-2" type="text" id="merchPrice" placeholder="Price">
-                        <input class="form-control mb-2" type="text" id="merchQuantity" placeholder="Quantity">
                         <input class="form-control mb-2" type="text" id="merchCompany" placeholder="Company">
-                        <input class="form-control mb-2" type="text" id="merchRating" placeholder="Rating">
-                        <input class="form-control mb-2" type="text" id="merchImageurl" placeholder="Image URL">
                         <input class="form-control mb-2" type="text" id="merchGameA" placeholder="Associated Game">
+                        <input class="form-control mb-2" type="text" id="merchImageurl" placeholder="Image URL">                        
+                        <input class="form-control mb-2" type="text" id="merchRating" placeholder="Rating">
+                        <input class="form-control mb-2" type="text" id="merchPrice" placeholder="Price">
                         <button class="btn btn-sm btn-info" id="add-merch">Add</button>
                     </div>
 
@@ -609,15 +609,15 @@
                     <table class="table table-dark mt-3">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
+                                <th>Company</th>
+                                <th>Game Associated</th>
+                                <th>Imageurl</th>
+                                <th>Rating</th>
                                 <th> Price
 
                                 </th>
-                                <th>Quantity</th>
-                                <th>Company</th>
-                                <th>Rating</th>
-                                <th>Imageurl</th>
-                                <th>Game Associated</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -629,113 +629,151 @@
         </div>
 
         <script>
-            var merchs = [
-                {id: 1, merchName: "Sanabi", merchPrice: "15$", merchQuantity: "543", merchCompany: "WonderPotion", merchRating: "5.0", merchImageurl: "exampleURL", merchGameA: "sanabi"},
-                {id: 2, merchName: "Outlast", merchPrice: "30$", merchQuantity: "400", merchCompany: "Red barrels", merchRating: "4.0", merchImageurl: "exampleURL", merchGameA: "outlast"},
-            ];
 
-            // Load initial merchs
-            for (var i in merchs){
-                addmerchRow(merchs[i]);
-            }
+            $(document).ready(function () {
 
-            function addmerchRow(merch){
-                var row = `
-                    <tr class="merch-row-${merch.id}">
-                        <td class="editable" data-field="merchName" data-id="${merch.id}">${merch.merchName}</td>
-                        <td class="editable" data-field="merchPrice" data-id="${merch.id}">${merch.merchPrice}</td>
-                        <td class="editable" data-field="merchQuantity" data-id="${merch.id}">${merch.merchQuantity}</td>
-                        <td class="editable" data-field="merchCompany" data-id="${merch.id}">${merch.merchCompany}</td>
-                        <td class="editable" data-field="merchRating" data-id="${merch.id}">${merch.merchRating}</td>
-                        <td class="editable" data-field="merchImageurl" data-id="${merch.id}">${merch.merchImageurl}</td>
-                        <td class="editable" data-field="merchGameA" data-id="${merch.id}">${merch.merchGameA}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger merch-delete-btn" data-id="${merch.id}">Delete</button>
-                            <button class="btn btn-sm btn-info save-btn" data-id="${merch.id}" disabled>Save</button>
-                        </td>
-                    </tr>
-                `;
-                $('#merchs-table').append(row);
-            }
+                // Load data
+                fetch('http://localhost:3000/merchandise')
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(item => addRow(item));
+                    });
 
-            // Show form
-            $('#show-merch-form').on('click', function(){
-                $('.merch-form-wrapper').toggleClass('hidden');
-            });
-
-            // Add new merch
-            $('#add-merch').on('click', function(){
-                var newmerch = {
-                    id: Date.now(),
-                    merchName: $('#merchName').val(),
-                    merchPrice: $('#merchPrice').val(),
-                    merchQuantity: $('#merchQuantity').val(),
-                    merchCompany: $('#merchCompany').val(),
-                    merchRating: $('#merchRating').val(),
-                    merchImageurl: $('#merchImageurl').val(),
-                    merchGameA: $('#merchGameA').val()
-                };
-
-                if(!newmerch.merchName || !newmerch.merchPrice || !newmerch.merchQuantity || !newmerch.merchCompany || !newmerch.merchRating || !newmerch.merchImageurl || !newmerch.merchGameA){
-                    alert("All fields required");
-                    return;
+                function addRow(item) {
+                    const row = `
+                        <tr class="merch-row-${item.id}">
+                            <td class="editable" data-field="id" data-id="${item.id}">${item.id}</td>
+                            <td class="editable" data-field="name" data-id="${item.id}">${item.name}</td>
+                            <td class="editable" data-field="companyName" data-id="${item.id}">${item.companyName}</td>
+                            <td class="editable" data-field="associatedGame" data-id="${item.id}">${item.associatedGame}</td>
+                            <td class="editable" data-field="imageUrl" data-id="${item.id}">${item.imageUrl}</td>
+                            <td class="editable" data-field="rating" data-id="${item.id}">${item.rating}</td>
+                            <td class="editable" data-field="price" data-id="${item.id}">${item.price}</td>
+                            
+                            
+                            <td>
+                                <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">Delete</button>
+                                <button class="btn btn-sm btn-info save-btn" data-id="${item.id}" disabled>Save</button>
+                            </td>
+                        </tr>
+                    `;
+                    $('#merchs-table').append(row);
                 }
 
-                addmerchRow(newmerch);
-
-                // Clear inputs
-                $('#merchName').val('');
-                $('#pri').val('');
-                $('#merchQuantity').val('');
-                $('#merchCompany').val('');
-                $('#merchRating').val('');
-                $('#merchImageurl').val('');
-                $('#merchGameA').val('');
-                $('.merch-form-wrapper').addClass('hidden');
-            });
-
-            // Make cells editable
-            $(document).on('click', '.editable', function(){
-                // Prevent replacing if already editing
-                if ($(this).find('input').length > 0) return;
-
-                var value = $(this).text();
-                var id = $(this).data('id');
-                var field = $(this).data('field');
-
-                $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
-            });
-
-            // Enable save button on edit
-            $(document).on('keyup', '.edit-input', function(){
-                var id = $(this).data('id');
-                $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
-            });
-
-            // Save updates
-            $(document).on('click', '.save-btn', function(){
-                var id = $(this).data('id');
-                var row = $(`.merch-row-${id}`);
-
-                row.find('.edit-input').each(function(){
-                    var newValue = $(this).val();
-                    $(this).parent().text(newValue);
+                // Show form
+                $('#show-merch-form').click(function () {
+                    $('.merch-form-wrapper').toggleClass('hidden');
                 });
 
-                $(this).prop('disabled', true);
+                // ADD
+                $('#add-merch').click(function () {
 
-                // visual feedback
-                row.css('opacity', '0.5');
-                setTimeout(() => row.css('opacity', '1'), 1000);
+                    const newItem = {
+                        //id: Date.now().toString(),
+                        id: $('#merchId').val(),
+                        name: $('#merchName').val(),
+                        companyName: $('#merchCompany').val(),
+                        associatedGame: $('#merchGameA').val(),
+                        imageUrl: $('#merchImageurl').val(),
+                        rating: $('#merchRating').val(),
+                        price: Number($('#merchPrice').val())
+                    };
+
+                    // Validation
+                    if (!newItem.name || !newItem.price || !newItem.companyName) {
+                        alert("Required fields missing");
+                        return;
+                    }
+
+                    fetch('http://localhost:3000/merchandise', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newItem)
+                    }).then(() => location.reload());
+                });
+
+                // Make editable
+                $(document).on('click', '.editable', function () {
+                    if ($(this).find('input').length > 0) return;
+
+                    const value = $(this).text();
+                    const id = $(this).data('id');
+                    const field = $(this).data('field');
+
+                    $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
+                });
+
+                // Enable save
+                $(document).on('keyup', '.edit-input', function () {
+                    const id = $(this).data('id');
+                    $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
+                });
+
+                // SAVE (edit)
+                $(document).on('click', '.save-btn', function () {
+                    const id = $(this).data('id');
+                    const row = $(`.merch-row-${id}`);
+
+                    let updated = {
+                        id: id
+                    };
+
+                    row.find('td.editable').each(function () {
+                        const field = $(this).data('field');
+                        //const value = $(this).val();
+
+                        let value;
+
+                        if ($(this).find('input').length > 0) {
+                            //const value = $(this).find('input').val();
+                            //updated[field] = value;
+
+                            value = $(this).find('input').val();
+                            $(this).text(value);
+                        } else {
+                            // otherwise use existing text
+                            //updated[field] = $(this).text();
+                            value = $(this).text();
+                        }
+
+                        if (field === "price"){
+                            updated[field] = Number(value);
+                        } else if (field === "rating" && value !== "N/A"){
+                            updated[field] = Number(value);
+                        } else {
+                            updated[field] = value;
+                        }
+
+                        //updated[field] = value;
+                        //$(this).parent().text(value);
+                    });
+
+                    fetch(`http://localhost:3000/merchandise/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updated)
+                    });
+
+                    $(this).prop('disabled', true);
+
+                    row.css('opacity', '0.5');
+                    setTimeout(() => row.css('opacity', '1'), 500);
+                });
+
+                // DELETE
+                $(document).on('click', '.delete-btn', function () {
+                    const id = $(this).data('id');
+
+                    fetch(`http://localhost:3000/merchandise/${id}`, {
+                        method: 'DELETE'
+                    }).then(() => {
+                        $(`.merch-row-${id}`).remove();
+                    });
+                });
+
             });
 
-            // Delete merch
-            $(document).on('click', '.merch-delete-btn', function(){
-                var id = $(this).data('id');
-                $(`.merch-row-${id}`).remove();
-            });
-
-        </script>
+            </script>
 
         
 
