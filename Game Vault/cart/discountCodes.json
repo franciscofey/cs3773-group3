@@ -1,0 +1,27 @@
+[
+  {
+    "id": 10,
+    "code": "save_10",
+    "percent": 10
+  },
+  {
+    "id": 20,
+    "code": "save_20",
+    "percent": 20
+  },
+  {
+    "id": 30,
+    "code": "save_30",
+    "percent": 30
+  },
+  {
+    "id": 40,
+    "code": "save_40",
+    "percent": 40
+  },
+  {
+    "id": 50,
+    "code": "save_50",
+    "percent": 50
+  }
+]
