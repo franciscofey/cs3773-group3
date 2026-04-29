@@ -1,100 +1,27 @@
-// gameProduct.js
-/*export async function loadAndDisplayProduct() {
-    console.log("1. Script started");
-    const params = new URLSearchParams(window.location.search);
-    const gameId = params.get('id');
-    console.log("2. Detected ID from URL:", gameId);
-
-    if (!gameId || gameId === "undefined") {
-        console.error("Error: No valid ID found in URL");
-        return;
-    }
-
-    try {
-        console.log("3. Attempting to fetch JSON files...");
-        // Use absolute paths from the root to avoid folder confusion
-        const [gamesRes, pricesRes] = await Promise.all([
-            fetch('../games/games.json'),
-            fetch('../games/gamePrices.json')
-        ]);
-
-        const games = await gamesRes.json();
-        const priceMap = await pricesRes.json();
-        console.log("4. JSON data loaded. Total games:", games.length);
-
-        // Find the game - convert string ID to Number
-        const game = games.find(g => g.id == gameId);
-        console.log("5. Found game object:", game);
-
-        if (!game) {
-            document.getElementById('product-container').innerHTML = "<h2>Game not found in database</h2>";
-            return;
-        }
-        const starValue = game.total_rating ? Math.round((game.total_rating / 20) * 2) / 2 : 0;
-
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-            if (i <= starValue) {
-                starsHtml += '<i class="fas fa-star"></i>'; // Full star
-            } else if (i - 0.5 === starValue) {
-                starsHtml += '<i class="fas fa-star-half-alt"></i>'; // Half star
-            } else {
-                starsHtml += '<i class="far fa-star"></i>'; // Empty star
-            }
-        }
-
-        const price = priceMap[game.id] ? `$${priceMap[game.id]}` : 'Free';
-        const imageUrl = game.cover?.url ? 'https:' + game.cover.url.replace('t_thumb', 't_cover_big') : '../img/placeholder.png';
-
-        console.log("6. Injecting HTML...");
-        document.getElementById('product-container').innerHTML = `
-            <section id="prodetails" class="section-p1">
-                <div class="single-pro-image">
-                    <img src="${imageUrl}" width="100%" id="MainImg">
-                </div>
-                <div class="single-pro-details">
-                    <h4>${game.name}</h4>
-                    <h2>${price}</h2>
-                    <input type="number" value="1">
-                    <button class="normal cart" data-id="${game.id}">Add to Cart</button>
-                    <h4>${game.summary}</h4>
-                    <div class="star">
-                        ${starsHtml}
-                        <span>(${starValue})</span>
-                    </div>
-                </div>
-            </section>
-        `;
-        console.log("7. Injection complete!");
-
-    } catch (error) {
-        console.error("CRITICAL ERROR:", error);
-        document.getElementById('product-container').innerHTML = "<h2>Error loading data. Check console (F12).</h2>";
-    }
-}*/
-
 export async function loadAndDisplayProduct() {
     const container = document.getElementById('product-container');
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get('id');
 
-    // 1. Validate ID
+    // Make sure an ID exists in the URL
     if (!gameId) {
         container.innerHTML = `<div class="error-msg">Error: No valid Game ID found.</div>`;
         return;
     }
 
     try {
-        // 2. Fetch Data
-        const [gamesRes, pricesRes] = await Promise.all([
+        // Pull all necessary data from the JSON files
+        const [gamesRes, pricesRes, quantityRes] = await Promise.all([
             fetch('../games/games.json'),
-            fetch('../games/gamePrices.json')
+            fetch('../games/gamePrices.json'),
+            fetch('../games/gameQuantity.json')
         ]);
 
         const games = await gamesRes.json();
         const priceMap = await pricesRes.json();
+        const quantityMap = await quantityRes.json();
 
-        // 3. Find Game
+        // Match the ID from the URL to a specific game object
         const game = games.find(g => g.id == gameId);
 
         if (!game) {
@@ -102,7 +29,11 @@ export async function loadAndDisplayProduct() {
             return;
         }
 
-        // 4. Prepare Logic (Stars, Price, Image)
+        // Set up the stock display text
+        const stockValue = quantityMap[game.id] || 0;
+        const stockDisplay = (stockValue == 0) ? "OUT OF STOCK" : stockValue;
+
+        // Convert the 0-100 rating to a 5-star scale
         const starValue = game.total_rating ? Math.round((game.total_rating / 20) * 2) / 2 : 0;
         let starsHtml = '';
         for (let i = 1; i <= 5; i++) {
@@ -120,22 +51,18 @@ export async function loadAndDisplayProduct() {
             ? `https:${game.cover.url.replace('t_thumb', 't_cover_big')}`
             : '../img/placeholder.png';
 
-        // 5. Inject Modern HTML Structure
+        // Inject the full product detail layout
         container.innerHTML = `
             <section class="product-page-container">
-                <!-- Left Side: Visuals -->
                 <div class="product-media">
                     <div class="image-wrapper">
                         <img src="${imageUrl}" id="MainImg" alt="${game.name}">
                     </div>
                 </div>
 
-                <!-- Right Side: Product Details -->
                 <div class="product-details">
                     <nav class="breadcrumb">Store / Games / Catalog</nav>
-                    
                     <h1 class="game-title">${game.name}</h1>
-                    
                     <div class="rating-bar">
                         <span class="stars">${starsHtml}</span>
                         <span class="score-label">${starValue} / 5.0</span>
@@ -143,13 +70,19 @@ export async function loadAndDisplayProduct() {
 
                     <div class="price-tag">${price}</div>
 
+                    <div class="stock-container">
+                        <span class="stock-label">STOCK:</span>
+                        <span class="stock-value">${stockDisplay}</span>
+                    </div>
+
                     <div class="purchase-zone">
                         <div class="qty-wrapper">
                             <label for="qty">Quantity</label>
-                            <input type="number" id="qty" value="1" min="1">
+                            <input type="number" id="qty" value="1" min="1" ${stockValue == 0 ? 'disabled' : ''}>
                         </div>
-                        <button type="button" class="cart add-to-cart-btn" data-id="${game.id}">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        <!-- Disable button and change text if stock is empty -->
+                        <button type="button" class="cart add-to-cart-btn" data-id="${game.id}" ${stockValue == 0 ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                            <i class="fas fa-shopping-cart"></i> ${stockValue == 0 ? 'Out of Stock' : 'Add to Cart'}
                         </button>
                     </div>
 
@@ -165,12 +98,9 @@ export async function loadAndDisplayProduct() {
                 </div>
             </section>
         `;
-
+        
     } catch (error) {
         console.error("CRITICAL ERROR:", error);
         container.innerHTML = `<div class="error-msg"><h2>Error loading data. Check console (F12).</h2></div>`;
     }
 }
-
-
-
