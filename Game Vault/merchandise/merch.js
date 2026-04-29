@@ -1,7 +1,7 @@
-//File to display the merch info to the website (Let me know if you have questions -Lauren)
+// File to display the merch info to the website (Let me know if you have questions -Lauren)
 export async function loadAndDisplayMerchandise() {
     const container = document.getElementById('merch-container');
-    const sortSelect = document.getElementById('sort-by'); // Make sure this ID exists in your HTML
+    const sortSelect = document.getElementById('sort-by');
 
     try {
         const merchandiseRes = await fetch('merchandise.json');
@@ -9,7 +9,7 @@ export async function loadAndDisplayMerchandise() {
 
         let merchandise = await merchandiseRes.json();
 
-        // --- Sorting Logic ---
+        // Handle alphabetical and price-based sorting
         const sortValue = sortSelect ? sortSelect.value : 'default';
 
         if (sortValue === 'price-low') {
@@ -25,13 +25,16 @@ export async function loadAndDisplayMerchandise() {
         let merchCards = '';
 
         merchandise.forEach(merch => {
+            const stockDisplay = (merch.quantity == 0) ? "OUT OF STOCK" : merch.quantity;
+
+            // Use a higher resolution version of the image if available
             const imageUrl = merch.imageUrl
                 ? merch.imageUrl.replace('.jpg', '_800x.jpg')
                 : 'img/placeholder.png';
 
             const starValue = merch.rating ? Math.round(merch.rating * 2) / 2 : 0;
 
-            // 2. Generate stars based on that rounded value
+            // Map the rating value to FontAwesome star icons
             let starsHtml = '';
             for (let i = 1; i <= 5; i++) {
                 if (i <= starValue) {
@@ -43,27 +46,35 @@ export async function loadAndDisplayMerchandise() {
                 }
             }
 
+            // Build the card with search-friendly data attributes
             merchCards += `
-                <div class="pro" data-id="${merch.id}"> 
-                    <img src="${imageUrl}" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 20px;">
-                    <div class="des">
-                        <h6>${merch.companyName}</h6>
-                        <h5>${merch.name}</h5>
-                        <div class="star">
-                    ${starsHtml}
-                    <span>(${starValue})</span> <!-- Using the rounded value here -->
-                </div>
-                        <h4>$${merch.price.toFixed(2)}</h4> 
-                        <h4>${merch.associatedGame}</h4> 
-                    <!-- Adds the game data attributes to button here -->
-                </div>
-                    <button type="button" class="cart" data-merch='${merch.id}'>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </button>
-                </div>
-            `;
+    <div class="pro" 
+         data-id="${merch.id}" 
+         data-description="${(merch.description || "").toLowerCase()}" 
+         data-game="${(merch.associatedGame || "").toLowerCase()}"> 
+        <img src="${imageUrl}" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 20px;">
+        <div class="des">
+            <h6>${merch.companyName}</h6>
+            <h5>${merch.name}</h5>
+            <div class="star">
+                ${starsHtml}
+                <span>(${starValue})</span>
+            </div>
+            <h4>$${merch.price.toFixed(2)}</h4> 
+            <h4>${merch.associatedGame}</h4> 
+            <div class="stock-container">
+                <span class="stock-label">STOCK:</span>
+                <span class="stock-value">${stockDisplay}</span>
+            </div>
+        </div>
+        <button type="button" class="cart" data-merch='${merch.id}'>
+            <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+    </div>
+`;
         });
 
+        // Push everything to the DOM at once
         container.innerHTML = merchCards;
     } catch (error) {
         console.error('Display Error:', error);
