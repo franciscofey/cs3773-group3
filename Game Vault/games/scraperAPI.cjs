@@ -34,7 +34,7 @@ async function saveGameData() {
                 'Connection': 'keep-alive',
                 'Origin': 'https://api.igdb.com'
             },
-            body: "fields name, cover.url, total_rating, involved_companies.company.name; " +
+            body: "fields name, cover.url, total_rating, involved_companies.company.name, summary; " +
                 "where name != null & " +
                 "cover.url != null & " +
                 "involved_companies.company.name != null & " +
@@ -60,6 +60,5 @@ async function saveGameData() {
         console.error("Critical Error:", error);
     }
 }
-
 
 saveGameData();
