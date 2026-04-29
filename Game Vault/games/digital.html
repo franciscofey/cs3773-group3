@@ -77,7 +77,7 @@
 <!-- This script calls the load/display function in the game.js file -->
 <script type="module">
   import { loadAndDisplayGames } from './game.js';
-  import { cartButtonGameCircle } from '../cart/cartButton.js';
+  import { cartButtonDigitalCircle } from '../cart/cartButton.js';
 
   async function init() {
     // Get games on the screen first
@@ -117,7 +117,7 @@
       if (btn) {
         event.preventDefault();
         event.stopPropagation();
-        cartButtonGameCircle(event);
+        cartButtonDigitalCircle(event);
         return;
       }
 
@@ -313,20 +313,6 @@
     box-shadow: 0 0 20px var(--neon-blue);
   }
 
-  /* Stock status indicators */
-  .stock-container {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.8rem;
-    margin: 8px 0;
-    font-weight: bold;
-  }
-
-  .stock-label { color: #007c85 !important; }
-
-  .stock-value {
-    color: #00e1ff !important;
-    text-shadow: 0 0 5px rgba(0, 225, 255, 0.75) !important;
-  }
 </style>
 
 </body>

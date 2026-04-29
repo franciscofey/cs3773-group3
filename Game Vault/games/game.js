@@ -71,10 +71,6 @@ export async function loadAndDisplayGames() {
                             <span>(${starValue})</span>
                         </div>
                         <h4>${price}</h4>
-                        <div class="stock-container">
-                            <span class="stock-label">STOCK:</span>
-                            <span class="stock-value">${stockDisplay}</span>
-                        </div>
                     </div>
                     <button type="button" class="cart" data-game='${game.id}'>
                         <i class="fa-solid fa-cart-shopping"></i>

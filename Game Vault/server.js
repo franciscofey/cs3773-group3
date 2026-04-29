@@ -202,8 +202,8 @@ app.post('/games', (req, res) => {
             digital.push({
                 id: Number(gId),
                 name: name,
-                summary: summary, // New field
-                cover: { url: imageurl }, // Matches your GET structure
+                summary: summary,
+                cover: { url: imageurl },
                 total_rating: Number(rating),
                 involved_companies: [{ company: { name: company } }]
             });
@@ -216,7 +216,6 @@ app.post('/games', (req, res) => {
             fs.writeFileSync(PHYSICAL_GAMES_FILE, JSON.stringify(physical, null, 2));
         }
 
-        // Save Price and Quantity as before...
         let prices = JSON.parse(fs.readFileSync(GAME_PRICES_FILE));
         let quantities = JSON.parse(fs.readFileSync(GAME_QUANTITY_FILE));
         prices[gId] = Number(price);
@@ -250,7 +249,6 @@ app.put('/games/:id', (req, res) => {
             involved_companies: [
                 { company: { name: company || "Unknown" } }
             ]
-            // Note: platforms can be added here if you want to support them later
         };
 
         // 2. DIGITAL FILE (games.json)
@@ -262,7 +260,6 @@ app.put('/games/:id', (req, res) => {
         }
 
         // 3. PHYSICAL FILE (physicalGames.json)
-        // Now using fullEntry instead of a simplified {id, name}
         if (source === 'Physical' || source === 'Both') {
             if (pIdx !== -1) physicalGames[pIdx] = fullEntry;
             else physicalGames.push(fullEntry);

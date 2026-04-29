@@ -14,12 +14,10 @@ export async function loadAndDisplayProduct() {
         const [gamesRes, pricesRes, quantityRes] = await Promise.all([
             fetch('../games/games.json'),
             fetch('../games/gamePrices.json'),
-            fetch('../games/gameQuantity.json')
         ]);
 
         const games = await gamesRes.json();
         const priceMap = await pricesRes.json();
-        const quantityMap = await quantityRes.json();
 
         // Match the ID from the URL to a specific game object
         const game = games.find(g => g.id == gameId);
@@ -28,10 +26,6 @@ export async function loadAndDisplayProduct() {
             container.innerHTML = `<div class="error-msg"><h2>Game not found in database</h2></div>`;
             return;
         }
-
-        // Set up the stock display text
-        const stockValue = quantityMap[game.id] || 0;
-        const stockDisplay = (stockValue == 0) ? "OUT OF STOCK" : stockValue;
 
         // Convert the 0-100 rating to a 5-star scale
         const starValue = game.total_rating ? Math.round((game.total_rating / 20) * 2) / 2 : 0;
@@ -67,22 +61,14 @@ export async function loadAndDisplayProduct() {
                         <span class="stars">${starsHtml}</span>
                         <span class="score-label">${starValue} / 5.0</span>
                     </div>
-
                     <div class="price-tag">${price}</div>
-
-                    <div class="stock-container">
-                        <span class="stock-label">STOCK:</span>
-                        <span class="stock-value">${stockDisplay}</span>
-                    </div>
-
                     <div class="purchase-zone">
                         <div class="qty-wrapper">
                             <label for="qty">Quantity</label>
-                            <input type="number" id="qty" value="1" min="1" ${stockValue == 0 ? 'disabled' : ''}>
+                            <input type="number" id="qty" value="1" min="1">
                         </div>
-                        <!-- Disable button and change text if stock is empty -->
-                        <button type="button" class="cart add-to-cart-btn" data-id="${game.id}" ${stockValue == 0 ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
-                            <i class="fas fa-shopping-cart"></i> ${stockValue == 0 ? 'Out of Stock' : 'Add to Cart'}
+                        <button type="button" class="cart add-to-cart-btn" data-id="${game.id}">
+                            <i class="fas fa-shopping-cart"></i> 
                         </button>
                     </div>
 

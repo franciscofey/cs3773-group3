@@ -428,15 +428,14 @@
                         <button class="btn btn-sm btn-info" id="add-game">Save to Inventory</button>
                     </div>
 
-
-                    <!-- Games Table (Updated to 8 Columns) -->
+                    <!-- Games Table -->
                     <table class="table table-dark mt-3">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Image</th> <!-- New -->
+                            <th>Image</th>
                             <th>Title</th>
-                            <th>Summary</th> <!-- New -->
+                            <th>Summary</th>
                             <th>Developer</th>
                             <th>Rating</th>
                             <th>Price</th>
@@ -474,7 +473,7 @@
                         });
                 }
 
-                // 2. RENDER: Build the row with logic for Stock and Source
+                // 2. RENDER: Built the row with logic for Stock and Source
                 function addGameRow(game) {
                     const stockClass = game.isDigitalOnly ? "non-editable text-muted" : "editable";
 
@@ -552,7 +551,6 @@
                     let val;
 
                     if (field === 'imageurl') {
-                        // Pull the URL from the hidden div or the img src
                         val = $(this).find('img').attr('src');
                         if (val.includes('placeholder.com')) val = ""; // Don't edit the placeholder URL
                     } else {
@@ -563,7 +561,7 @@
                     $(this).find('input').focus();
                 });
 
-                // 3. EDIT: Turn cell into input (only for cells with .editable class)
+                // 3. EDIT: Turn cell into input
                 $(document).on('click', '.source-editable', function () {
                     if ($(this).find('select').length > 0) return;
                     const currentVal = $(this).data('val');
@@ -614,7 +612,6 @@
                     let updated = { id: id };
 
                     // Collect data from all cells
-                    // Inside the save-btn loop where you collect data:
                     row.find('td[data-field]').each(function () {
                         const field = $(this).data('field');
                         let val;

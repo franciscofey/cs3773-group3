@@ -68,10 +68,9 @@
     </script>
 
     <!-- This script calls the load/display function in the gameProduct.js file -->
-    <!-- This script calls the load/display function in the gameProduct.js file -->
     <script type="module">
         import { loadAndDisplayProduct } from './gameProduct.js';
-        import { cartButtonGame } from '../cart/cartButton.js';
+        import { cartButtonDigitalGame } from '../cart/cartButton.js';
 
         document.addEventListener('DOMContentLoaded', () => {
             // Fetch and inject the specific game details
@@ -83,7 +82,7 @@
                 if (btn) {
                     // Stop form submission or page jumps
                     event.preventDefault();
-                    cartButtonGame(event);
+                    cartButtonDigitalGame(event);
                 }
             });
         });
