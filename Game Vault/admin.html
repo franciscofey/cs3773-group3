@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,14 +8,12 @@
     <title>Admin Page</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/14a3e67508.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
-        <nav class="navbar">
+    <nav class="navbar">
         <ul class="sidebar">
             <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
             <li><a href="aboutus.html">AboutUs</a></li>
@@ -27,30 +23,26 @@
                 <a href="#" onclick="toggleSidebarDropdown(event)">
                     Categories
                 </a>
-
                 <ul class="sidebar-dropdown-content">
-                    <li class="#"><a href="games/physical.html">Physical</a></li>
+                    <li class="#"><a href="physical/physical.html">Physical</a></li>
                     <li class="#"><a href="games/digital.html">Digital</a></li>
                     <li class="#"><a href="merchandise/merchandise.html">Merchandise</a></li>
                 </ul>
             </li>
         </ul>
         <ul class="mainbar">
-            <li><a href="index.html">Home</a></li>
-            <!--<li class="hideOnMobile"><a href="#">Search</a></li>-->
-            
+            <li><a href="homePage/index.html">Home</a></li>
             <li class="hideOnMobile">
                 <div class="dropdown">
                     <a href="#" class="nav-link">
                         <span>Categories</span> 
                     </a>
                 <ul class="dropdown-content">
-                    <li class="#"><a href="games/physical.html">Physical</a></li>
+                    <li class="#"><a href="physical/physical.html">Physical</a></li>
                     <li class="#"><a href="games/digital.html">Digital</a></li>
                     <li class="#"><a href="merchandise/merchandise.html">Merchandise</a></li>
                 </ul>
                 </div>
-                
             </li>
             <li class="hideOnMobile"><a href="aboutus.html">AboutUs</a></li>
             <li class="hideOnMobile"><a href="signin.html">Sign in</a></li>
@@ -76,11 +68,6 @@
             dropdown.classList.toggle("active");
         }
     </script>
-
-    
-
-
-
 
     <main>
         <h3>Admin page</h3>
@@ -110,7 +97,6 @@
 
         <div class="row">
             <div class="col-md-8">
-
                 <div class="card card-body">
 
                     <!-- Add User Form -->
@@ -135,7 +121,6 @@
                         </thead>
                         <tbody id="users-table"></tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -262,7 +247,6 @@
 
         <div class="row">
             <div class="col-md-8">
-
                 <div class="card card-body">
 
                     <!-- Add discountCode Form -->
@@ -286,29 +270,17 @@
                         </thead>
                         <tbody id="discountCodes-table"></tbody>
                     </table>
-
                 </div>
             </div>
         </div>
 
         <script>
-            /*var discountCodes = [
-                {id: 1, discountCodename: "save_25", percent: "25"},
-                {id: 2, discountCodename: "save_50", percent: "50"},
-            ];
-
-            // Load initial discountCodes
-            for (var i in discountCodes){
-                adddiscountCodeRow(discountCodes[i]);
-            }*/
-
             $(document).ready(function () {
                 fetch('http://localhost:3000/discountCodes')
                     .then(res => res.json())
                     .then(data => {
                         data.forEach(item => adddiscountCodeRow(item));
                     });
-
 
                 function adddiscountCodeRow(discountCode){
                     var row = `
@@ -348,13 +320,6 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(newdiscountCode)
                     }).then(() => location.reload());
-
-                    //adddiscountCodeRow(newdiscountCode);
-
-                    // Clear inputs
-                    //$('#discountCodename').val('');
-                    //$('#percent').val('');
-                    //$('.discountCode-form-wrapper').addClass('hidden');
                 });
 
                 // Make cells editable
@@ -375,8 +340,6 @@
                     $(`.discount-save-btn[data-id="${id}"]`).prop('disabled', false);
                 });
 
-
-
                 // Save updates
                 $(document).on('click', '.discount-save-btn', function () {
                     const id = $(this).data('id');
@@ -386,25 +349,15 @@
                         id: id
                     };
 
-                    
-
                     row.find('td.editable').each(function () {
-                        //var newValue = $(this).val();
-                        //$(this).parent().text(newValue);
-
                         const field = $(this).data('field');
 
                         let value;
 
                         if ($(this).find('input').length > 0) {
-                            //const value = $(this).find('input').val();
-                            //updated[field] = value;
-
                             value = $(this).find('input').val();
                             $(this).text(value);
                         } else {
-                            // otherwise use existing text
-                            //updated[field] = $(this).text();
                             value = $(this).text();
                         }
 
@@ -431,7 +384,6 @@
                 // Delete discountCode
                 $(document).on('click', '.discountCode-delete-btn', function () {
                     const id = $(this).data('id');
-                    //$(`.discountCode-row-${id}`).remove();
 
                     fetch(`http://localhost:3000/discountCodes/${id}`, {
                         method: 'DELETE'
@@ -440,224 +392,277 @@
                     });
                 });
             });
-
-
-
-            
-
         </script>
-
     </section>
 
-    
-
-    
-
-    <section id="sales-item-table">
-
-        <h3>Add Physical/Digital Games</h3>
-
-        <!--Search bar if you wish to implement it. Not needed-->
-        <div class="search-container">
-            <form role="search" id="form">
-                <input type="search" id="query" name="q" placeholder="Search...">
-            </form>
-        </div>
-
-        <style>
-            .hidden{
-                display:none;
-            }
-            .editable:hover{
-                cursor: pointer;
-                background-color: rgba(255,255,255,0.1);
-            }
-        </style>
-
+    <section id="game-admin-section">
+        <h3>Game Inventory Management</h3>
         <div class="row">
             <div class="col-md-12">
-
                 <div class="card card-body">
+                    <button class="btn btn-sm btn-primary" id="show-game-form">Add New Game</button>
 
-                    <!-- Add item Form -->
-                    <button class="btn btn-sm btn-primary" id="show-form">Add Games</button>
-
-                    <div class="form-wrapper hidden">
-                        <input class="form-control mb-2" type="text" id="itemName" placeholder="Item name">
-                        <input class="form-control mb-2" type="text" id="price" placeholder="Price">
-                        <input class="form-control mb-2" type="text" id="quantity" placeholder="Quantity">
-                        <input class="form-control mb-2" type="text" id="company" placeholder="Company">
-                        <input class="form-control mb-2" type="text" id="rating" placeholder="Rating">
-                        <input class="form-control mb-2" type="text" id="imageurl" placeholder="Image URL">
-                        <input class="form-control mb-2" type="text" id="isP" placeholder="Is Physical?">
-                        <button class="btn btn-sm btn-info" id="add-item">Add</button>
+                    <!-- Add Game Form -->
+                    <div class="game-form-wrapper hidden mt-3">
+                        <div class="row">
+                            <div class="col"><input class="form-control mb-2" type="text" id="g-id" placeholder="Game ID"></div>
+                            <div class="col"><input class="form-control mb-2" type="text" id="g-name" placeholder="Title"></div>
+                            <div class="col"><input class="form-control mb-2" type="text" id="g-dev" placeholder="Developer"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><input class="form-control mb-2" type="number" id="g-price" placeholder="Price"></div>
+                            <div class="col"><input class="form-control mb-2" type="number" id="g-stock" placeholder="Stock Quantity (for Physical)"></div>
+                            <div class="col">
+                                <select class="form-control mb-2" id="g-source">
+                                    <option value="Digital">Digital (Game JSON)</option>
+                                    <option value="Physical">Physical Only</option>
+                                    <option value="Both">Both (Digital & Physical)</option>
+                                </select>
+                            </div>
+                            <div class="col"><input class="form-control mb-2" type="text" id="g-rating" placeholder="Rating (0-100)"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><input class="form-control mb-2" type="text" id="g-summary" placeholder="Summary"></div>
+                            <div class="col"><input class="form-control mb-2" type="text" id="g-image" placeholder="Image URL"></div>
+                        </div>
+                        <button class="btn btn-sm btn-info" id="add-game">Save to Inventory</button>
                     </div>
 
-                    <!-- items Table -->
+
+                    <!-- Games Table (Updated to 8 Columns) -->
                     <table class="table table-dark mt-3">
                         <thead>
-                            <tr>
-                                <th>itemname</th>
-                                <th>price
-
-                                </th>
-                                <th>quantity</th>
-                                <th>company</th>
-                                <th>rating</th>
-                                <th>imageurl</th>
-                                <th>isPhysical?</th>
-                                <th>Actions</th>
-                            </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th> <!-- New -->
+                            <th>Title</th>
+                            <th>Summary</th> <!-- New -->
+                            <th>Developer</th>
+                            <th>Rating</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Source</th>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
-                        <tbody id="items-table"></tbody>
+                        <tbody id="games-table-body"></tbody>
                     </table>
-
                 </div>
             </div>
         </div>
+    </section>
 
-        <script>
 
-            $(document).ready(function (){
-                var items = [
-                    {id: 1, itemname: "Sanabi", price: "15$", quantity: "543", company: "WonderPotion", rating: "5.0", imageurl: "exampleURL", isP: "false"},
-                    {id: 2, itemname: "Outlast", price: "30$", quantity: "400", company: "Red barrels", rating: "4.0", imageurl: "exampleURL", isP: "true"},
-                ];
+    <script>
+            $(document).ready(function () {
+                const gamesTable = $('#games-table-body');
 
-                // Load initial items
-                for (var i in items){
-                    additemRow(items[i]);
-                }
-
-                /*fetch('http://localhost:3000/games')
-                    .then(res => res.json())
-                    .then(data => {
-                        data.forEach(item => additemRow(item));
-                    });*/
-
-                /*
-                fetch('http://localhost:3000/games')
-                    .then(res => res.json())
-                    .then(data => {
-                        data.forEach(item => {
-                            additemRow({
-                                id: item.id,
-                                itemname: item.name,
-                                price: item.price,
-                                quantity: "N/A",
-                                company: item.company,
-                                rating: item.rating,
-                                imageurl: item.imageurl,
-                                isP: "Digital"
-                            });
+                // 1. LOAD: Fetch aggregated data from server
+                function loadGames() {
+                    fetch('http://localhost:3000/games')
+                        .then(res => {
+                            if (!res.ok) throw new Error("Server is down");
+                            return res.json();
+                        })
+                        .then(data => {
+                            gamesTable.empty();
+                            data.forEach(game => addGameRow(game));
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            gamesTable.html('<tr><td colspan="8">Error loading games. Make sure node server.js is running.</td></tr>');
                         });
-                    });*/
-
-                function additemRow(item){
-                    var row = `
-                        <tr class="item-row-${item.id}">
-                            <td class="editable" data-field="itemname" data-id="${item.id}">${item.itemname}</td>
-                            <td class="editable" data-field="price" data-id="${item.id}">${item.price}</td>
-                            <td class="editable" data-field="quantity" data-id="${item.id}">${item.quantity}</td>
-                            <td class="editable" data-field="company" data-id="${item.id}">${item.company}</td>
-                            <td class="editable" data-field="rating" data-id="${item.id}">${item.rating}</td>
-                            <td class="editable" data-field="imageurl" data-id="${item.id}">${item.imageurl}</td>
-                            <td class="editable" data-field="isP" data-id="${item.id}">${item.isP}</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">Delete</button>
-                                <button class="btn btn-sm btn-info save-btn" data-id="${item.id}" disabled>Save</button>
-                            </td>
-                        </tr>
-                    `;
-                    $('#items-table').append(row);
                 }
 
-                // Show form
-                $('#show-form').on('click', function(){
-                    $('.form-wrapper').toggleClass('hidden');
+                // 2. RENDER: Build the row with logic for Stock and Source
+                function addGameRow(game) {
+                    const stockClass = game.isDigitalOnly ? "non-editable text-muted" : "editable";
+
+                    // Ensure the image URL is usable; if empty, show a placeholder
+                    const displayImg = game.imageurl ? game.imageurl : "https://placeholder.com";
+
+                    const row = `
+        <tr class="game-row-${game.id}">
+            <td>${game.id}</td>
+            <td class="editable" data-field="imageurl" data-id="${game.id}">
+                <img src="${displayImg}" alt="cover" style="width: 50px; height: auto; border-radius: 4px;">
+                <div class="small text-muted d-none">${game.imageurl}</div>
+            </td>
+            <td class="editable" data-field="name" data-id="${game.id}">${game.name}</td>
+            <td class="editable" data-field="summary" data-id="${game.id}">${game.summary || ""}</td>
+            <td class="editable" data-field="company" data-id="${game.id}">${game.company}</td>
+            <td class="editable" data-field="rating" data-id="${game.id}">${game.rating}</td>
+            <td class="editable" data-field="price" data-id="${game.id}">${game.price}</td>
+            <td class="${stockClass}" data-field="stock" data-id="${game.id}">${game.stock}</td>
+            <td class="source-editable" data-field="source" data-id="${game.id}" data-val="${game.source}">
+                <span class="badge ${game.source === 'Both' ? 'bg-primary' : game.source === 'Digital' ? 'bg-info' : 'bg-warning'}">${game.source}</span>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-success save-btn" data-id="${game.id}" disabled>Save</button>
+                <button class="btn btn-sm btn-danger delete-btn" data-id="${game.id}">Delete</button>
+            </td>
+        </tr>`;
+                    gamesTable.append(row);
+                }
+
+                // Toggle form visibility
+                $('#show-game-form').on('click', function() {
+                    $('.game-form-wrapper').toggleClass('hidden');
                 });
 
-                // Add new item
-                $('#add-item').on('click', function(){
-                    var newitem = {
-                        id: Date.now(),
-                        itemname: $('#itemName').val(),
-                        price: $('#price').val(),
-                        quantity: $('#quantity').val(),
-                        company: $('#company').val(),
-                        rating: $('#rating').val(),
-                        imageurl: $('#imageurl').val(),
-                        isP: $('#isP').val()
+                // Submit new game
+                $('#add-game').on('click', function() {
+                    const newGame = {
+                        id: $('#g-id').val(),
+                        name: $('#g-name').val(),
+                        company: $('#g-dev').val(),
+                        price: $('#g-price').val(),
+                        stock: $('#g-stock').val(),
+                        rating: $('#g-rating').val(),
+                        source: $('#g-source').val(), // Captures the dropdown value
+                        summary: $('#g-summary').val(),
+                        imageurl: $('#g-image').val()
                     };
 
-                    if(!newitem.itemname || !newitem.price || !newitem.quantity || !newitem.company || !newitem.rating || !newitem.imageurl || !newitem.isP){
-                        alert("All fields required");
+                    // Basic validation
+                    if (!newGame.id || !newGame.name) {
+                        alert("Please enter at least an ID and Title.");
                         return;
                     }
 
-                    additemRow(newitem);
-
-                    // Clear inputs
-                    $('#itemName').val('');
-                    $('#pri').val('');
-                    $('#quantity').val('');
-                    $('#company').val('');
-                    $('#rating').val('');
-                    $('#imageurl').val('');
-                    $('#isP').val('');
-                    $('.form-wrapper').addClass('hidden');
+                    fetch('http://localhost:3000/games', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newGame)
+                    })
+                        .then(res => res.json())
+                        .then(() => {
+                            alert("Game added to " + newGame.source + " records!");
+                            loadGames(); // Refresh the table automatically
+                            $('.game-form-wrapper').addClass('hidden'); // Hide form
+                            $('.game-form-wrapper input').val(''); // Clear inputs
+                        })
+                        .catch(err => alert("Error adding game: " + err));
                 });
 
-                // Make cells editable
-                $(document).on('click', '.editable', function(){
-                    // Prevent replacing if already editing
+                $(document).on('click', '.editable', function () {
                     if ($(this).find('input').length > 0) return;
 
-                    var value = $(this).text();
-                    var id = $(this).data('id');
-                    var field = $(this).data('field');
+                    const field = $(this).data('field');
+                    let val;
 
-                    $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
+                    if (field === 'imageurl') {
+                        // Pull the URL from the hidden div or the img src
+                        val = $(this).find('img').attr('src');
+                        if (val.includes('placeholder.com')) val = ""; // Don't edit the placeholder URL
+                    } else {
+                        val = $(this).text();
+                    }
+
+                    $(this).html(`<input class="form-control form-control-sm edit-input" value="${val}">`);
+                    $(this).find('input').focus();
                 });
 
-                // Enable save button on edit
-                $(document).on('keyup', '.edit-input', function(){
-                    var id = $(this).data('id');
+                // 3. EDIT: Turn cell into input (only for cells with .editable class)
+                $(document).on('click', '.source-editable', function () {
+                    if ($(this).find('select').length > 0) return;
+                    const currentVal = $(this).data('val');
+                    const select = `
+        <select class="form-control form-control-sm source-select">
+            <option value="Digital" ${currentVal === 'Digital' ? 'selected' : ''}>Digital</option>
+            <option value="Physical" ${currentVal === 'Physical' ? 'selected' : ''}>Physical</option>
+            <option value="Both" ${currentVal === 'Both' ? 'selected' : ''}>Both</option>
+        </select>`;
+                    $(this).html(select);
+
+                    // Enable save button immediately on change
+                    const id = $(this).data('id');
                     $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
                 });
 
-                // Save updates
-                $(document).on('click', '.save-btn', function(){
-                    var id = $(this).data('id');
-                    var row = $(`.item-row-${id}`);
+                $(document).on('change', '.source-select', function () {
+                    const newSource = $(this).val();
+                    const row = $(this).closest('tr');
+                    const stockCell = row.find('td[data-field="stock"]');
 
-                    row.find('.edit-input').each(function(){
-                        var newValue = $(this).val();
-                        $(this).parent().text(newValue);
+                    if (newSource === 'Physical' || newSource === 'Both') {
+                        if (stockCell.text().trim() === '--') {
+                            stockCell.text('0')
+                                .removeClass('non-editable text-muted')
+                                .addClass('editable');
+                        }
+                    } else {
+                        stockCell.text('--')
+                            .removeClass('editable')
+                            .addClass('non-editable text-muted');
+                    }
+
+                    const id = row.find('.save-btn').data('id');
+                    $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
+                });
+
+                // 4. ENABLE SAVE: Detect changes
+                $(document).on('keyup', '.edit-input', function () {
+                    const id = $(this).closest('tr').find('.save-btn').data('id');
+                    $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
+                });
+
+                // 5. SAVE: Send PUT request
+                $(document).on('click', '.save-btn', function () {
+                    const id = $(this).data('id');
+                    const row = $(`.game-row-${id}`);
+                    let updated = { id: id };
+
+                    // Collect data from all cells
+                    // Inside the save-btn loop where you collect data:
+                    row.find('td[data-field]').each(function () {
+                        const field = $(this).data('field');
+                        let val;
+
+                        if (field === 'source') {
+                            val = $(this).find('select').val() || $(this).data('val');
+                        } else if (field === 'imageurl') {
+                            val = $(this).find('input').length > 0 ? $(this).find('input').val() : $(this).find('img').attr('src');
+                        } else {
+                            val = $(this).find('input').length > 0 ? $(this).find('input').val() : $(this).text().trim();
+                        }
+
+                        // Prepare data for server
+                        if (field === 'stock') {
+                            updated[field] = (val === '--') ? 0 : Number(val);
+                        } else if (field === 'price' || field === 'rating') {
+                            updated[field] = Number(val);
+                        } else {
+                            updated[field] = val;
+                        }
                     });
 
-                    $(this).prop('disabled', true);
-
-                    // visual feedback
-                    row.css('opacity', '0.5');
-                    setTimeout(() => row.css('opacity', '1'), 1000);
+                    fetch(`http://localhost:3000/games/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updated)
+                    })
+                        .then(res => {
+                            if (res.ok) {
+                                $(this).prop('disabled', true);
+                                console.log(`Game ${id} updated.`);
+                            }
+                        })
+                        .catch(err => alert("Update failed: " + err));
                 });
 
-                // Delete item
-                $(document).on('click', '.delete-btn', function(){
-                    var id = $(this).data('id');
-                    $(`.item-row-${id}`).remove();
+                // 6. DELETE
+                $(document).on('click', '.delete-btn', function () {
+                    const id = $(this).data('id');
+                    if (confirm("Permanently delete this game from all records?")) {
+                        fetch(`http://localhost:3000/games/${id}`, { method: 'DELETE' })
+                            .then(() => $(`.game-row-${id}`).remove());
+                    }
                 });
+
+                loadGames();
             });
-
-
-            
-
         </script>
-
-        
-
-    </section>
 
     <section id="sales-merch-table">
 
@@ -682,7 +687,6 @@
 
         <div class="row">
             <div class="col-md-12">
-
                 <div class="card card-body">
 
                     <!-- Add merch Form -->
@@ -710,14 +714,12 @@
                                 <th>Imageurl</th>
                                 <th>Rating</th>
                                 <th> Price
-
                                 </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="merchs-table"></tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -743,8 +745,6 @@
                             <td class="editable" data-field="imageUrl" data-id="${item.id}">${item.imageUrl}</td>
                             <td class="editable" data-field="rating" data-id="${item.id}">${item.rating}</td>
                             <td class="editable" data-field="price" data-id="${item.id}">${item.price}</td>
-                            
-                            
                             <td>
                                 <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">Delete</button>
                                 <button class="btn btn-sm btn-info save-btn" data-id="${item.id}" disabled>Save</button>
@@ -763,7 +763,6 @@
                 $('#add-merch').click(function () {
 
                     const newItem = {
-                        //id: Date.now().toString(),
                         id: $('#merchId').val(),
                         name: $('#merchName').val(),
                         companyName: $('#merchCompany').val(),
@@ -814,19 +813,12 @@
 
                     row.find('td.editable').each(function () {
                         const field = $(this).data('field');
-                        //const value = $(this).val();
-
                         let value;
 
                         if ($(this).find('input').length > 0) {
-                            //const value = $(this).find('input').val();
-                            //updated[field] = value;
-
                             value = $(this).find('input').val();
                             $(this).text(value);
                         } else {
-                            // otherwise use existing text
-                            //updated[field] = $(this).text();
                             value = $(this).text();
                         }
 
@@ -838,8 +830,6 @@
                             updated[field] = value;
                         }
 
-                        //updated[field] = value;
-                        //$(this).parent().text(value);
                     });
 
                     fetch(`http://localhost:3000/merchandise/${id}`, {
@@ -866,36 +856,8 @@
                 });
 
             });
-
-            </script>
-
-        
+        </script>
 
     </section>
-
-
-
-   
-
-
-
-
-    
-
-    
-    
-
-
-
-
-    
-
-
-
-
-
-
-
-
 
 </body>
