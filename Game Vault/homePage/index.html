@@ -11,8 +11,6 @@
 </head>
 
 <body>
-    <!--<h1>Game Vault</h1>-->
-
     <nav class="navbar">
         <ul class="sidebar">
             <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
@@ -23,7 +21,6 @@
                 <a href="#" onclick="toggleSidebarDropdown(event)">
                     Categories
                 </a>
-
                 <ul class="sidebar-dropdown-content">
                     <li class="#"><a href="../games/physical.html">Physical</a></li>
                     <li class="#"><a href="../games/digital.html">Digital</a></li>
@@ -71,17 +68,14 @@
     </script>
 
     <script type="module">
-        // Using "./" assuming homePage.js is in the same folder as this HTML
         import { loadAndDisplayFeaturedGames, loadAndDisplayFeaturedMerchandise } from './homePage.js';
-        // Using "../" as you specified cart is in a different directory
         import { cartButtonGameCircle, cartButtonMerchCircle } from '../cart/cartButton.js';
 
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Fire off both data fetches
+            // Pull in the random featured items on load
             loadAndDisplayFeaturedGames();
             loadAndDisplayFeaturedMerchandise();
 
-            // 2. Single Event Listener for the whole page
             document.addEventListener('click', (event) => {
                 const btn = event.target.closest('.cart');
                 const card = event.target.closest('.pro');
@@ -91,7 +85,7 @@
                     event.preventDefault();
                     event.stopPropagation();
 
-                    // Check if this button is inside the merch section or game section
+                    // Direct to the right cart logic based on the parent container
                     const isMerch = btn.closest('#merchandise-productContainer');
 
                     if (isMerch) {
@@ -108,7 +102,7 @@
                     const isMerch = card.closest('#merchandise-productContainer');
 
                     if (id) {
-                        // Redirect based on section
+                        // Send user to the specific game or merch detail page
                         const targetPage = isMerch ? 'merchProduct.html' : 'gameProduct.html';
                         window.location.href = `../products/${targetPage}?id=${id}`;
                     }
@@ -117,6 +111,7 @@
         });
     </script>
 
+    <!-- Main promotion area -->
     <section id="hero">
         <h4>Trade in offer</h4>
         <h2>Super value deals</h2>
@@ -125,8 +120,7 @@
         <button>Shop now</button>
     </section>
 
-    
-    <!-- Newly Added: Dynamic Container linked with tempDB-->
+    <!-- Populated dynamically by loadAndDisplayFeaturedGames -->
     <section class="product1 section-p1">
         <h2>Featured Products</h2>
         <p>New games in store</p>
@@ -134,8 +128,7 @@
         </div>
     </section>
 
-    
-    <!-- Newly Added: Dynamic Container linked with tempDB-->
+    <!-- Populated dynamically by loadAndDisplayFeaturedMerchandise -->
     <section class="product1 section-p1">
         <h2>Merchandise Products</h2>
         <p>Trending merch in store</p>
@@ -155,13 +148,14 @@
             font-family: 'Courier New', Courier, monospace;
         }
 
+        /* Teal accents for game titles */
         .product1 .pro .des h5 {
             padding-top: 7px;
             color: lightseagreen;
             font-size: 14px;
         }
 
-        /* Hero Section Retro Pattern */
+        /* Hero Section with dark overlay for readability */
         #hero {
             background-image: linear-gradient(rgba(10, 14, 18, 0.7), rgba(10, 14, 18, 0.85)),
             url('../img/hero2.png');
@@ -176,6 +170,7 @@
             border-bottom: 3px solid #d4a017;
         }
 
+        /* Large shadowed red title */
         #hero h1 {
             font-size: 4rem;
             color: #e63946;
@@ -188,10 +183,9 @@
             text-transform: uppercase;
         }
 
-        /* Product Cards */
+        /* Translucent cards with thick offset shadows */
         .pro {
             background: rgba(255, 255, 255, 0.05) !important;
-            /* Using the teal and mustard for borders */
             border: 2px solid #5da399 !important;
             backdrop-filter: blur(10px);
             border-radius: 10px;
@@ -200,12 +194,14 @@
             padding: 15px;
         }
 
+        /* Gold glow when hovering over products */
         .pro:hover {
             box-shadow: 0px 0px 20px rgba(212, 160, 23, 0.4);
             border-color: #d4a017 !important;
             transform: translateY(-5px);
         }
 
+        /* Simple button press animation */
         button:active {
             box-shadow: 0 0px 0 #8b1e2a;
             transform: translateY(4px);
@@ -213,6 +209,23 @@
 
         button:hover {
             background-color: #d4a017;
+        }
+
+        .stock-container {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+
+        .stock-label {
+            color: #007c85 !important;
+        }
+
+        /* Bright cyan stock number with a neon glow */
+        .stock-value {
+            color: #00e1ff !important;
+            text-shadow: 0 0 5px rgba(0, 225, 255, 0.75) !important;
         }
 
     </style>
