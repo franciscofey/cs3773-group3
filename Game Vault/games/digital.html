@@ -34,7 +34,7 @@
     <li><a href="../homePage/index.html">Home</a></li>
     <div class="search-container">
       <form role="search" id="form">
-        <input type="search" id="query" name="q" placeholder="Search...">
+        <input type="text" id="search-input" placeholder="Search...">
       </form>
     </div>
     <li class="hideOnMobile">
@@ -79,72 +79,95 @@
   import { loadAndDisplayGames } from './game.js';
   import { cartButtonGameCircle } from '../cart/cartButton.js';
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // Initial load of games
-    loadAndDisplayGames();
+  async function init() {
+    // Get games on the screen first
+    await loadAndDisplayGames();
 
+    const searchInput = document.getElementById('search-input');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        const allCards = document.querySelectorAll('.pro');
+
+        // Filter cards based on name or summary text
+        allCards.forEach(card => {
+          const name = card.querySelector('h5')?.innerText.toLowerCase() || "";
+          const summary = card.getAttribute('data-summary') || "";
+
+          if (name.includes(searchTerm) || summary.includes(searchTerm)) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
+
+    // Catch clicks on the grid
     document.addEventListener('click', (event) => {
       const btn = event.target.closest('.cart');
       const card = event.target.closest('.pro');
 
+      // Handle "Add to Cart" icon clicks
       if (btn) {
-        // IMPORTANT: Stops the browser from going to product page
         event.preventDefault();
         event.stopPropagation();
-
-        console.log("Cart button detected!"); //Test
         cartButtonGameCircle(event);
-        return; // Keeps it from switching pages
+        return;
       }
 
+      // Send user to detail page if they click the card itself
       if (card) {
-        // Grab the ID we just added to the .pro div
         const gameId = card.getAttribute('data-id');
-
         if (gameId) {
           window.location.href = `../products/gameProduct.html?id=${gameId}`;
         }
       }
     });
 
-    // Listen for changes on the sort dropdown
+    // Refresh the list when the sort dropdown changes
     const sortSelect = document.getElementById('sort-by');
     if (sortSelect) {
-      sortSelect.addEventListener('change', () => {
-        loadAndDisplayGames();
-      });
+      sortSelect.addEventListener('change', loadAndDisplayGames);
     }
   });
 </script>
-<!-- End of game.js script (Let me know if you have questions -Lauren) -->
 
+<!-- Main landing header for digital games -->
 <section id="digital-page-header">
   <div class="header-content">
-  <h2>Digital Games</h2>
+    <h2>Digital Games</h2>
     <div class="discount-badge">
-  <p>Save more with discount codes up to ?% off!</p>
+      <p>Save more with discount codes up to ?% off!</p>
     </div>
-  <div class="single-pro-details">
-    <select id="sort-by">
-      <option value="default">Sort By</option>
-      <option value="title-az">Title: A-Z</option>
-      <option value="title-za">Title: Z-A</option>
-      <option value="price-low">Price: Low to High</option>
-      <option value="price-high">Price: High to Low</option>
-      <option value="rating-high">Rating</option>
-    </select>
-  </div>
+    <div class="single-pro-details">
+      <!-- Sorting options for the game grid -->
+      <select id="sort-by">
+        <option value="default">Sort By</option>
+        <option value="title-az">Title: A-Z</option>
+        <option value="title-za">Title: Z-A</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="quantity-low">Quantity: Low to High</option>
+        <option value="quantity-high">Quantity: High to Low</option>
+        <option value="rating-high">Rating</option>
+      </select>
+    </div>
   </div>
 </section>
 
-<!-- This section loads in the games -->
+<!-- Target container for dynamic game cards -->
 <section id="product1" class="section-p1 product1">
   <div id="game-container" class="pro-container">
-    <!-- Continues section/script in game.js -->
   </div>
 </section>
-<!-- End of game section (Let me know if you have questions -Lauren) -->
 
+<!-- Basic page navigation -->
 <section id="pagination" class="section-p1">
   <a href="#">1</a>
   <a href="#">2</a>
@@ -152,32 +175,32 @@
 </section>
 
 <style>
+  /* Hide elements without removing from DOM */
+  .hidden-card { display: none !important; }
+
+  /* Cyberpunk color palette */
   :root {
     --neon-blue: #00d2ff;
     --neon-pink: #ff00ff;
-    --deep-bg: #0b0e1a; /* Darker, slightly blue-tinted black from the image */
+    --deep-bg: #0b0e1a;
   }
 
   body {
-    /* Mirrored the controller's gradient: Blue on left, Pink on right */
-    background:
-            radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.15) 0%, transparent 40%),
-            radial-gradient(circle at 80% 30%, rgba(255, 0, 255, 0.15) 0%, transparent 40%),
-            linear-gradient(180deg, #161b33 0%, var(--deep-bg) 100%);
+    background: radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255, 0, 255, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #161b33 0%, var(--deep-bg) 100%);
     background-attachment: fixed;
     color: #e2e8f0;
     font-family: 'Courier New', Courier, monospace;
     margin: 0;
   }
 
+  /* Header background and blur effects */
   #digital-page-header {
-    background-image: linear-gradient(rgba(11, 14, 26, 0.6)),
-    url("../img/digital-header.png");
+    background-image: linear-gradient(rgba(11, 14, 26, 0.6)), url("../img/digital-header.png");
     backdrop-filter: blur(10px);
     border-bottom: 2px solid var(--neon-blue);
-    box-shadow:
-            -10px 0 30px rgba(0, 210, 255, 0.2),
-            10px 0 30px rgba(255, 0, 255, 0.2);
+    box-shadow: -10px 0 30px rgba(0, 210, 255, 0.2), 10px 0 30px rgba(255, 0, 255, 0.2);
     height: 35vh;
     background-position: center 1px;
     width: 100%;
@@ -188,6 +211,7 @@
     flex-direction: column;
   }
 
+  /* Retro-styled dropdown */
   #digital-page-header .single-pro-details select {
     color: #00f0ff !important;
     background: rgba(46, 2, 73, 0.4);
@@ -197,7 +221,6 @@
     padding: 8px 15px;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-    /* Glow effect */
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
     text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
     cursor: pointer;
@@ -211,9 +234,9 @@
     color: #ff00ff !important;
   }
 
+  /* Glowing title with gradient text */
   #digital-page-header h2 {
     font-family: 'Press Start 2P', cursive;
-    /* Gradient text */
     background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -224,6 +247,7 @@
     letter-spacing: 2px;
   }
 
+  /* Individual game card styling */
   .pro {
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid rgba(0, 210, 255, 0.3) !important;
@@ -234,7 +258,7 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  /* The glow effect on cards */
+  /* Hover animation and glow for cards */
   .pro:hover {
     transform: scale(1.05);
     background: rgba(255, 255, 255, 0.07) !important;
@@ -248,7 +272,7 @@
     font-size: 14px;
   }
 
-  /* Pricing color */
+  /* Neon badge for discounts */
   .discount-badge p span {
     color: var(--neon-blue) !important;
     text-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
@@ -271,6 +295,7 @@
     margin: 10px 0;
   }
 
+  /* Angular clipped sort button */
   #sort-by {
     font-family: 'Press Start 2P', cursive;
     background: transparent;
@@ -286,6 +311,21 @@
     background: var(--neon-blue);
     color: var(--deep-bg);
     box-shadow: 0 0 20px var(--neon-blue);
+  }
+
+  /* Stock status indicators */
+  .stock-container {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    margin: 8px 0;
+    font-weight: bold;
+  }
+
+  .stock-label { color: #007c85 !important; }
+
+  .stock-value {
+    color: #00e1ff !important;
+    text-shadow: 0 0 5px rgba(0, 225, 255, 0.75) !important;
   }
 </style>
 
