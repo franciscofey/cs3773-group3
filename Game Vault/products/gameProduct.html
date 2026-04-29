@@ -21,7 +21,6 @@
                 <a href="#" onclick="toggleSidebarDropdown(event)">
                     Categories
                 </a>
-
                 <ul class="sidebar-dropdown-content">
                     <li class="#"><a href="../games/physical.html">Physical</a></li>
                     <li class="#"><a href="../games/digital.html">Digital</a></li>
@@ -31,11 +30,6 @@
         </ul>
         <ul class="mainbar">
             <li><a href="../index.html">Home</a></li>
-            <div class="search-container">
-                <form role="search" id="form">
-                    <input type="search" id="query" name="q" placeholder="Search...">
-                </form>
-            </div>
             <li class="hideOnMobile">
                 <div class="dropdown">
                     <a href="#" class="nav-link">
@@ -47,7 +41,6 @@
                     <li class="#"><a href="../merchandise/merchandise.html">Merchandise</a></li>
                 </ul>
                 </div>
-                
             </li>
             <li class="hideOnMobile"><a href="../aboutus.html">AboutUs</a></li>
             <li class="hideOnMobile"><a href="../signin.html">Sign in</a></li>
@@ -75,18 +68,20 @@
     </script>
 
     <!-- This script calls the load/display function in the gameProduct.js file -->
+    <!-- This script calls the load/display function in the gameProduct.js file -->
     <script type="module">
         import { loadAndDisplayProduct } from './gameProduct.js';
         import { cartButtonGame } from '../cart/cartButton.js';
 
         document.addEventListener('DOMContentLoaded', () => {
-            // This function will inject the HTML
+            // Fetch and inject the specific game details
             loadAndDisplayProduct();
 
+            // Listen for the "Add to Cart" click on this page
             document.addEventListener('click', (event) => {
                 const btn = event.target.closest('.add-to-cart-btn');
                 if (btn) {
-                    // IMPORTANT: Since it's likely a <button>, prevent default if needed
+                    // Stop form submission or page jumps
                     event.preventDefault();
                     cartButtonGame(event);
                 }
@@ -95,7 +90,7 @@
     </script>
     <!-- End of gameProduct.js script (Let me know if you have questions -Lauren) -->
 
-    <!-- This section loads in the Product -->
+    <!-- Main anchor for the game detail content -->
     <main id="product-container">
         <!-- Continues section/script in gameProduct.js -->
     </main>
@@ -120,6 +115,7 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* Main layout for the product detail view */
         .product-page-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -129,15 +125,15 @@
             padding: 20px;
         }
 
-        /* Media Section */
+        /* Big hero image with a soft green glow */
         .product-media img {
             width: 100%;
             border-radius: 20px;
-            border: 1px solid rgba(8, 129, 120, 0.3); /* Subtle green glow border */
+            border: 1px solid rgba(8, 129, 120, 0.3);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(8, 129, 120, 0.1);
         }
 
-        /* Content Section */
+        /* Tiny header text above the title */
         .breadcrumb {
             font-size: 11px;
             color: var(--primary);
@@ -168,11 +164,11 @@
         .price-tag {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary); /* Keeping the green price */
+            color: var(--primary);
             margin-bottom: 30px;
         }
 
-        /* Purchase Zone - The "Green Box" */
+        /* Dark purchase box that holds quantity and button */
         .purchase-zone {
             background: var(--bg-card);
             border: 1px solid rgba(8, 129, 120, 0.2);
@@ -203,6 +199,7 @@
             font-weight: bold;
         }
 
+        /* Large action button with lift effect on hover */
         .add-to-cart-btn {
             flex-grow: 1;
             background: var(--primary);
@@ -222,7 +219,7 @@
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
         }
 
-        /* Description and Meta */
+        /* Section for game summary and detailed text */
         .description-box h3 {
             font-size: 1.3rem;
             color: var(--primary);
@@ -232,6 +229,7 @@
             gap: 10px;
         }
 
+        /* Horizontal line next to the section title */
         .description-box h3::after {
             content: "";
             height: 1px;
@@ -245,6 +243,7 @@
             font-size: 1.05rem;
         }
 
+        /* Small footer tags for the product info */
         .meta-info {
             margin-top: 40px;
             display: flex;
@@ -261,16 +260,34 @@
             gap: 8px;
         }
 
-        /* Mobile Tweaks */
+        /* Stack elements on smaller screens */
         @media (max-width: 900px) {
             .product-page-container { grid-template-columns: 1fr; gap: 40px; }
             .game-title { font-size: 2.2rem; }
         }
+
+        .stock-container {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        /* Amber label to contrast the main green theme */
+        .stock-label {
+            color: #e0b000 !important;
+        }
+
+        /* Bright gold stock count with hard shadow */
+        .stock-value {
+            color: #ffcc00 !important;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .price-tag {
+            margin-bottom: 5px;
+        }
     </style>
-
-
-
-
 
 </body>
 </html>
