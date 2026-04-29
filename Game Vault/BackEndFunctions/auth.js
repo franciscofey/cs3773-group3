@@ -7,6 +7,7 @@ function getUsers() {
 }
 
 function saveUsers(users) {
+    console.log("save user");
     localStorage.setItem("gv_users", JSON.stringify(users));
 }
 
@@ -21,6 +22,12 @@ function saveSession(user) {
 
 function clearSession() {
     localStorage.removeItem("gv_session");
+}
+
+function getHomePath() {
+    return window.location.pathname.includes("/homePage/")
+        ? "index.html"
+        : "homePage/index.html";
 }
 
 
@@ -47,11 +54,18 @@ function validatePassword(password) {
  * @returns {{ success: boolean, message: string }}
  */
 function register(username, email, password) {
+    console.log("register in process");
     username = username.trim();
     email    = email.trim().toLowerCase();
 
-    if (!username || !email || !password) {
-        return { success: false, message: "All fields are required." };
+    if (!username) {
+        return { success: false, message: "Please enter your name." };
+    }
+    if (!email) {
+        return { success: false, message: "Please enter your email." };
+    }
+    if (!password) {
+        return { success: false, message: "Please enter your password." };
     }
     if (!validateEmail(email)) {
         return { success: false, message: "Invalid email address." };
@@ -91,8 +105,11 @@ function register(username, email, password) {
 function login(identifier, password) {
     identifier = identifier.trim().toLowerCase();
 
-    if (!identifier || !password) {
-        return { success: false, message: "Please enter your email/username and password." };
+    if (!identifier) {
+        return { success: false, message: "Missing email or username." };
+    }
+    if (!password) {
+        return { success: false, message: "Missing password." };
     }
 
     const users = getUsers();
@@ -100,8 +117,11 @@ function login(identifier, password) {
         u => u.email === identifier || u.username.toLowerCase() === identifier
     );
 
-    if (!user || user.password !== password) {
-        return { success: false, message: "Incorrect email/username or password." };
+    if (!user) {
+        return { success: false, message: "Invalid credentials." };
+    }
+    if (user.password !== password) {
+        return { success: false, message: "Password mismatch." };
     }
 
     saveSession(user);
@@ -111,7 +131,7 @@ function login(identifier, password) {
 /** Log out the current user. */
 function logout() {
     clearSession();
-    window.location.href = "index.html";
+    window.location.href = getHomePath();
 }
 
 /** Returns the current session user or null. */

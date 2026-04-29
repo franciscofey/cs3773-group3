@@ -50,7 +50,7 @@
         <div id="logged-in-view" style="display:none; text-align:center;">
             <h1 id="welcome-heading">Welcome!</h1>
             <p id="already-in">
-                You are signed in. <a href="index.html">Go to Home</a>
+                You are signed in. <a href="homePage/index.html">Go to Home</a>
             </p>
             <button id="logout-btn">Sign Out</button>
         </div>
@@ -88,8 +88,8 @@
                 </div>
 
                 <div class="btn-field">
-                    <button type="button" id="signupBtn"  onclick="handleSignup()">Sign Up</button>
-                    <button type="button" id="signinBtn"  onclick="handleSignin()" class="disable">Sign In</button>
+                    <button type="button" id="signupBtn">Sign Up</button>
+                    <button type="button" id="signinBtn" class="disable">Sign In</button>
                 </div>
             </form>
         </div>
@@ -108,6 +108,7 @@
     const alreadyIn    = document.getElementById("already-in");
     const welcomeH     = document.getElementById("welcome-heading");
     const logoutBtn    = document.getElementById("logout-btn");
+    const homePath     = "homePage/index.html";
 
     const user = currentUser();
     if (user) {
@@ -121,22 +122,40 @@
 
     let mode = "signup"; // "signup" | "signin"
 
-    signinBtn.addEventListener("click", () => {
+    function showSigninForm() {
         mode = "signin";
         nameField.style.maxHeight = "0";
         titleEl.textContent       = "Sign In";
         signupBtn.classList.add("disable");
         signinBtn.classList.remove("disable");
         clearMessages();
-    });
+    }
 
-    signupBtn.addEventListener("click", () => {
+    function showSignupForm() {
         mode = "signup";
         nameField.style.maxHeight = "60px";
         titleEl.textContent       = "Sign Up";
         signupBtn.classList.remove("disable");
         signinBtn.classList.add("disable");
         clearMessages();
+    }
+
+    signinBtn.addEventListener("click", () => {
+        if (mode !== "signin") {
+            showSigninForm();
+            return;
+        }
+
+        handleSignin();
+    });
+
+    signupBtn.addEventListener("click", () => {
+        if (mode !== "signup") {
+            showSignupForm();
+            return;
+        }
+
+        handleSignup();
     });
 
     function handleSignup() {
@@ -145,14 +164,29 @@
         const email    = document.getElementById("input-email").value;
         const password = document.getElementById("input-password").value;
 
+        if (!username.trim()) {
+            showError("Please enter your name.");
+            return;
+        }
+
+        if (!email.trim()) {
+            showError("Please enter your email.");
+            return;
+        }
+
+        if (!password) {
+            showError("Please enter your password.");
+            return;
+        }
+
         const result = register(username, email, password);
 
         if (result.success) {
             showSuccess(result.message);
             // Redirect to home after short delay
-            setTimeout(() => window.location.href = "index.html", 1200);
+            setTimeout(() => window.location.href = homePath, 1200);
         } else {
-            showError("auth-error", result.message);
+            showError(result.message);
         }
     }
 
@@ -161,13 +195,23 @@
         const identifier = document.getElementById("input-email").value;
         const password   = document.getElementById("input-password").value;
 
+        if (!identifier.trim()) {
+            showError("Please enter your email or username.");
+            return;
+        }
+
+        if (!password) {
+            showError("Please enter your password.");
+            return;
+        }
+
         const result = login(identifier, password);
 
         if (result.success) {
             showSuccess(result.message);
-            setTimeout(() => window.location.href = "index.html", 1200);
+            setTimeout(() => window.location.href = homePath, 1200);
         } else {
-            showError("auth-error", result.message);
+            showError(result.message);
         }
     }
 
@@ -178,10 +222,19 @@
     }
 
     function clearMessages() {
-        hideError("auth-error");
+        const e = document.getElementById("auth-error");
+        e.textContent   = "";
+        e.style.display = "none";
+
         const s = document.getElementById("auth-success");
         s.textContent   = "";
         s.style.display = "none";
+    }
+
+    function showError(msg) {
+        const el = document.getElementById("auth-error");
+        el.textContent  = msg;
+        el.style.display = "block";
     }
 </script>
 
