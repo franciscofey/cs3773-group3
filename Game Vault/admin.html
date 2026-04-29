@@ -269,6 +269,7 @@
                     <button class="btn btn-sm btn-primary" id="show-discountCode-form">Add Discount Code</button>
 
                     <div class="discountCode-form-wrapper hidden">
+                        <input class="form-control mb-2" type="text" id="discountCodeId" placeholder="Discount Code id">
                         <input class="form-control mb-2" type="text" id="discountCodename" placeholder="Discount Code">
                         <input class="form-control mb-2" type="number" id="percent" placeholder="Percent">
                         <button class="btn btn-sm btn-info" id="add-discountCode">Add</button>
@@ -278,6 +279,7 @@
                     <table class="table table-dark mt-3">
                         <thead>
                             <tr>
+                                <th>discountCodeId</th>
                                 <th>discountCodename</th>
                                 <th>Percent</th>
                             </tr>
@@ -290,7 +292,7 @@
         </div>
 
         <script>
-            var discountCodes = [
+            /*var discountCodes = [
                 {id: 1, discountCodename: "save_25", percent: "25"},
                 {id: 2, discountCodename: "save_50", percent: "50"},
             ];
@@ -298,88 +300,150 @@
             // Load initial discountCodes
             for (var i in discountCodes){
                 adddiscountCodeRow(discountCodes[i]);
-            }
+            }*/
 
-            function adddiscountCodeRow(discountCode){
-                var row = `
-                    <tr class="discountCode-row-${discountCode.id}">
-                        <td class="editable" data-field="discountCodename" data-id="${discountCode.id}">${discountCode.discountCodename}</td>
-                        <td class="editable" data-field="percent" data-id="${discountCode.id}">${discountCode.percent}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger discountCode-delete-btn" data-id="${discountCode.id}">Delete</button>
-                            <button class="btn btn-sm btn-info discount-save-btn" data-id="${discountCode.id}" disabled>Save</button>
-                        </td>
-                    </tr>
-                `;
-                $('#discountCodes-table').append(row);
-            }
+            $(document).ready(function () {
+                fetch('http://localhost:3000/discountCodes')
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(item => adddiscountCodeRow(item));
+                    });
 
-            // Show form
-            $('#show-discountCode-form').on('click', function(){
-                $('.discountCode-form-wrapper').toggleClass('hidden');
-            });
 
-            // Add new discountCode
-            $('#add-discountCode').on('click', function(){
-                var newdiscountCode = {
-                    id: Date.now(),
-                    discountCodename: $('#discountCodename').val(),
-                    percent: $('#percent').val(),
-                };
-
-                if(!newdiscountCode.discountCodename || !newdiscountCode.percent){
-                    alert("All fields required");
-                    return;
+                function adddiscountCodeRow(discountCode){
+                    var row = `
+                        <tr class="discountCode-row-${discountCode.id}">
+                            <td class="editable" data-field="id" data-id="${discountCode.id}">${discountCode.id}</td>
+                            <td class="editable" data-field="code" data-id="${discountCode.id}">${discountCode.code}</td>
+                            <td class="editable" data-field="percent" data-id="${discountCode.id}">${discountCode.percent}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger discountCode-delete-btn" data-id="${discountCode.id}">Delete</button>
+                                <button class="btn btn-sm btn-info discount-save-btn" data-id="${discountCode.id}" disabled>Save</button>
+                            </td>
+                        </tr>
+                    `;
+                    $('#discountCodes-table').append(row);
                 }
 
-                adddiscountCodeRow(newdiscountCode);
-
-                // Clear inputs
-                $('#discountCodename').val('');
-                $('#percent').val('');
-                $('.discountCode-form-wrapper').addClass('hidden');
-            });
-
-            // Make cells editable
-            $(document).on('click', '.editable', function(){
-                // Prevent replacing if already editing
-                if ($(this).find('input').length > 0) return;
-
-                var value = $(this).text();
-                var id = $(this).data('id');
-                var field = $(this).data('field');
-
-                $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
-            });
-
-            // Enable save button on edit
-            $(document).on('keyup', '.edit-input', function(){
-                var id = $(this).data('id');
-                $(`.discount-save-btn[data-id="${id}"]`).prop('disabled', false);
-            });
-
-            // Save updates
-            $(document).on('click', '.discount-save-btn', function(){
-                var id = $(this).data('id');
-                var row = $(`.discountCode-row-${id}`);
-
-                row.find('.edit-input').each(function(){
-                    var newValue = $(this).val();
-                    $(this).parent().text(newValue);
+                // Show form
+                $('#show-discountCode-form').click(function () {
+                    $('.discountCode-form-wrapper').toggleClass('hidden');
                 });
 
-                $(this).prop('disabled', true);
+                // Add new discountCode
+                $('#add-discountCode').click(function () {
+                    const newdiscountCode = {
+                        id: Number($('#discountCodeId').val()),
+                        code: $('#discountCodename').val(),
+                        percent: Number($('#percent').val()),
+                    };
 
-                // visual feedback
-                row.css('opacity', '0.5');
-                setTimeout(() => row.css('opacity', '1'), 1000);
+                    if(!newdiscountCode.code || !newdiscountCode.percent){
+                        alert("All fields required");
+                        return;
+                    }
+
+                    fetch('http://localhost:3000/discountCodes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newdiscountCode)
+                    }).then(() => location.reload());
+
+                    //adddiscountCodeRow(newdiscountCode);
+
+                    // Clear inputs
+                    //$('#discountCodename').val('');
+                    //$('#percent').val('');
+                    //$('.discountCode-form-wrapper').addClass('hidden');
+                });
+
+                // Make cells editable
+                $(document).on('click', '.editable', function () {
+                    // Prevent replacing if already editing
+                    if ($(this).find('input').length > 0) return;
+
+                    const value = $(this).text();
+                    const id = $(this).data('id');
+                    const field = $(this).data('field');
+
+                    $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
+                });
+
+                // Enable save button on edit
+                $(document).on('keyup', '.edit-input', function(){
+                    const id = $(this).data('id');
+                    $(`.discount-save-btn[data-id="${id}"]`).prop('disabled', false);
+                });
+
+
+
+                // Save updates
+                $(document).on('click', '.discount-save-btn', function () {
+                    const id = $(this).data('id');
+                    const row = $(`.discountCode-row-${id}`);
+
+                    let updated = {
+                        id: id
+                    };
+
+                    
+
+                    row.find('td.editable').each(function () {
+                        //var newValue = $(this).val();
+                        //$(this).parent().text(newValue);
+
+                        const field = $(this).data('field');
+
+                        let value;
+
+                        if ($(this).find('input').length > 0) {
+                            //const value = $(this).find('input').val();
+                            //updated[field] = value;
+
+                            value = $(this).find('input').val();
+                            $(this).text(value);
+                        } else {
+                            // otherwise use existing text
+                            //updated[field] = $(this).text();
+                            value = $(this).text();
+                        }
+
+                        if (field === "percent" || field === "id"){
+                            updated[field] = Number(value);
+                        } else {
+                            updated[field] = value;
+                        }
+                    });
+
+                    fetch(`http://localhost:3000/discountCodes/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updated)
+                    });
+
+                    $(this).prop('disabled', true);
+
+                    // visual feedback
+                    row.css('opacity', '0.5');
+                    setTimeout(() => row.css('opacity', '1'), 1000);
+                });
+
+                // Delete discountCode
+                $(document).on('click', '.discountCode-delete-btn', function () {
+                    const id = $(this).data('id');
+                    //$(`.discountCode-row-${id}`).remove();
+
+                    fetch(`http://localhost:3000/discountCodes/${id}`, {
+                        method: 'DELETE'
+                    }).then(() => {
+                        $(`.discountCode-row-${id}`).remove();
+                    });
+                });
             });
 
-            // Delete discountCode
-            $(document).on('click', '.discountCode-delete-btn', function(){
-                var id = $(this).data('id');
-                $(`.discountCode-row-${id}`).remove();
-            });
+
+
+            
 
         </script>
 
@@ -453,111 +517,141 @@
         </div>
 
         <script>
-            var items = [
-                {id: 1, itemname: "Sanabi", price: "15$", quantity: "543", company: "WonderPotion", rating: "5.0", imageurl: "exampleURL", isP: "false"},
-                {id: 2, itemname: "Outlast", price: "30$", quantity: "400", company: "Red barrels", rating: "4.0", imageurl: "exampleURL", isP: "true"},
-            ];
 
-            // Load initial items
-            for (var i in items){
-                additemRow(items[i]);
-            }
+            $(document).ready(function (){
+                var items = [
+                    {id: 1, itemname: "Sanabi", price: "15$", quantity: "543", company: "WonderPotion", rating: "5.0", imageurl: "exampleURL", isP: "false"},
+                    {id: 2, itemname: "Outlast", price: "30$", quantity: "400", company: "Red barrels", rating: "4.0", imageurl: "exampleURL", isP: "true"},
+                ];
 
-            function additemRow(item){
-                var row = `
-                    <tr class="item-row-${item.id}">
-                        <td class="editable" data-field="itemname" data-id="${item.id}">${item.itemname}</td>
-                        <td class="editable" data-field="price" data-id="${item.id}">${item.price}</td>
-                        <td class="editable" data-field="quantity" data-id="${item.id}">${item.quantity}</td>
-                        <td class="editable" data-field="company" data-id="${item.id}">${item.company}</td>
-                        <td class="editable" data-field="rating" data-id="${item.id}">${item.rating}</td>
-                        <td class="editable" data-field="imageurl" data-id="${item.id}">${item.imageurl}</td>
-                        <td class="editable" data-field="isP" data-id="${item.id}">${item.isP}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">Delete</button>
-                            <button class="btn btn-sm btn-info save-btn" data-id="${item.id}" disabled>Save</button>
-                        </td>
-                    </tr>
-                `;
-                $('#items-table').append(row);
-            }
-
-            // Show form
-            $('#show-form').on('click', function(){
-                $('.form-wrapper').toggleClass('hidden');
-            });
-
-            // Add new item
-            $('#add-item').on('click', function(){
-                var newitem = {
-                    id: Date.now(),
-                    itemname: $('#itemName').val(),
-                    price: $('#price').val(),
-                    quantity: $('#quantity').val(),
-                    company: $('#company').val(),
-                    rating: $('#rating').val(),
-                    imageurl: $('#imageurl').val(),
-                    isP: $('#isP').val()
-                };
-
-                if(!newitem.itemname || !newitem.price || !newitem.quantity || !newitem.company || !newitem.rating || !newitem.imageurl || !newitem.isP){
-                    alert("All fields required");
-                    return;
+                // Load initial items
+                for (var i in items){
+                    additemRow(items[i]);
                 }
 
-                additemRow(newitem);
+                /*fetch('http://localhost:3000/games')
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(item => additemRow(item));
+                    });*/
 
-                // Clear inputs
-                $('#itemName').val('');
-                $('#pri').val('');
-                $('#quantity').val('');
-                $('#company').val('');
-                $('#rating').val('');
-                $('#imageurl').val('');
-                $('#isP').val('');
-                $('.form-wrapper').addClass('hidden');
-            });
+                /*
+                fetch('http://localhost:3000/games')
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(item => {
+                            additemRow({
+                                id: item.id,
+                                itemname: item.name,
+                                price: item.price,
+                                quantity: "N/A",
+                                company: item.company,
+                                rating: item.rating,
+                                imageurl: item.imageurl,
+                                isP: "Digital"
+                            });
+                        });
+                    });*/
 
-            // Make cells editable
-            $(document).on('click', '.editable', function(){
-                // Prevent replacing if already editing
-                if ($(this).find('input').length > 0) return;
+                function additemRow(item){
+                    var row = `
+                        <tr class="item-row-${item.id}">
+                            <td class="editable" data-field="itemname" data-id="${item.id}">${item.itemname}</td>
+                            <td class="editable" data-field="price" data-id="${item.id}">${item.price}</td>
+                            <td class="editable" data-field="quantity" data-id="${item.id}">${item.quantity}</td>
+                            <td class="editable" data-field="company" data-id="${item.id}">${item.company}</td>
+                            <td class="editable" data-field="rating" data-id="${item.id}">${item.rating}</td>
+                            <td class="editable" data-field="imageurl" data-id="${item.id}">${item.imageurl}</td>
+                            <td class="editable" data-field="isP" data-id="${item.id}">${item.isP}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger delete-btn" data-id="${item.id}">Delete</button>
+                                <button class="btn btn-sm btn-info save-btn" data-id="${item.id}" disabled>Save</button>
+                            </td>
+                        </tr>
+                    `;
+                    $('#items-table').append(row);
+                }
 
-                var value = $(this).text();
-                var id = $(this).data('id');
-                var field = $(this).data('field');
-
-                $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
-            });
-
-            // Enable save button on edit
-            $(document).on('keyup', '.edit-input', function(){
-                var id = $(this).data('id');
-                $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
-            });
-
-            // Save updates
-            $(document).on('click', '.save-btn', function(){
-                var id = $(this).data('id');
-                var row = $(`.item-row-${id}`);
-
-                row.find('.edit-input').each(function(){
-                    var newValue = $(this).val();
-                    $(this).parent().text(newValue);
+                // Show form
+                $('#show-form').on('click', function(){
+                    $('.form-wrapper').toggleClass('hidden');
                 });
 
-                $(this).prop('disabled', true);
+                // Add new item
+                $('#add-item').on('click', function(){
+                    var newitem = {
+                        id: Date.now(),
+                        itemname: $('#itemName').val(),
+                        price: $('#price').val(),
+                        quantity: $('#quantity').val(),
+                        company: $('#company').val(),
+                        rating: $('#rating').val(),
+                        imageurl: $('#imageurl').val(),
+                        isP: $('#isP').val()
+                    };
 
-                // visual feedback
-                row.css('opacity', '0.5');
-                setTimeout(() => row.css('opacity', '1'), 1000);
+                    if(!newitem.itemname || !newitem.price || !newitem.quantity || !newitem.company || !newitem.rating || !newitem.imageurl || !newitem.isP){
+                        alert("All fields required");
+                        return;
+                    }
+
+                    additemRow(newitem);
+
+                    // Clear inputs
+                    $('#itemName').val('');
+                    $('#pri').val('');
+                    $('#quantity').val('');
+                    $('#company').val('');
+                    $('#rating').val('');
+                    $('#imageurl').val('');
+                    $('#isP').val('');
+                    $('.form-wrapper').addClass('hidden');
+                });
+
+                // Make cells editable
+                $(document).on('click', '.editable', function(){
+                    // Prevent replacing if already editing
+                    if ($(this).find('input').length > 0) return;
+
+                    var value = $(this).text();
+                    var id = $(this).data('id');
+                    var field = $(this).data('field');
+
+                    $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
+                });
+
+                // Enable save button on edit
+                $(document).on('keyup', '.edit-input', function(){
+                    var id = $(this).data('id');
+                    $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
+                });
+
+                // Save updates
+                $(document).on('click', '.save-btn', function(){
+                    var id = $(this).data('id');
+                    var row = $(`.item-row-${id}`);
+
+                    row.find('.edit-input').each(function(){
+                        var newValue = $(this).val();
+                        $(this).parent().text(newValue);
+                    });
+
+                    $(this).prop('disabled', true);
+
+                    // visual feedback
+                    row.css('opacity', '0.5');
+                    setTimeout(() => row.css('opacity', '1'), 1000);
+                });
+
+                // Delete item
+                $(document).on('click', '.delete-btn', function(){
+                    var id = $(this).data('id');
+                    $(`.item-row-${id}`).remove();
+                });
             });
 
-            // Delete item
-            $(document).on('click', '.delete-btn', function(){
-                var id = $(this).data('id');
-                $(`.item-row-${id}`).remove();
-            });
+
+            
 
         </script>
 
@@ -680,7 +774,7 @@
                     };
 
                     // Validation
-                    if (!newItem.name || !newItem.price || !newItem.companyName) {
+                    if (!newItem.id || !newItem.name || !newItem.companyName || !newItem.associatedGame || !newItem.imageUrl || !newItem.rating || !newItem.price) {
                         alert("Required fields missing");
                         return;
                     }
