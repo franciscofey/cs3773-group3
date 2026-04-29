@@ -33,7 +33,7 @@
             <li><a href="../homePage/index.html">Home</a></li>
             <div class="search-container">
                 <form role="search" id="form">
-                    <input type="search" id="query" name="q" placeholder="Search...">
+                    <input type="text" id="search-input" placeholder="Search...">
                 </form>
             </div>
             <li class="hideOnMobile">
@@ -78,65 +78,93 @@
         import { loadAndDisplayMerchandise } from './merch.js';
         import { cartButtonMerchCircle } from '../cart/cartButton.js';
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initial load of merchandise
-            loadAndDisplayMerchandise();
+        async function init() {
+            // Wait for the merchandise to hit the screen
+            await loadAndDisplayMerchandise();
 
+            // Filter items based on the search box
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase().trim();
+                    const allCards = document.querySelectorAll('.pro');
+
+                    allCards.forEach(card => {
+                        const name = card.querySelector('h5')?.innerText.toLowerCase() || "";
+                        const description = card.getAttribute('data-description') || "";
+                        const associatedGame = card.getAttribute('data-game') || "";
+
+                        // Check if the term matches title, description, or game tags
+                        if (name.includes(searchTerm) ||
+                            description.includes(searchTerm) ||
+                            associatedGame.includes(searchTerm)) {
+                            card.style.display = "";
+                        } else {
+                            card.style.display = "none";
+                        }
+                    });
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+
+            // Handle interactions for the entire merchandise grid
             document.addEventListener('click', (event) => {
                 const btn = event.target.closest('.cart');
                 const card = event.target.closest('.pro');
 
+                // Fire off the merch-specific cart logic
                 if (btn) {
-                    // IMPORTANT: Stops the browser from going to product page
                     event.preventDefault();
                     event.stopPropagation();
-
-                    console.log("Cart button detected!"); //Test
                     cartButtonMerchCircle(event);
-                    return; // Keeps it from switching pages
+                    return;
                 }
 
+                // Head to the detail page if the card is clicked
                 if (card) {
-                    // Grab the ID we just added to the .pro div
                     const merchId = card.getAttribute('data-id');
-
                     if (merchId) {
                         window.location.href = `../products/merchProduct.html?id=${merchId}`;
                     }
                 }
-
-                // Listen for changes on the sort dropdown
-                const sortSelect = document.getElementById('sort-by');
-                if (sortSelect) {
-                    sortSelect.addEventListener('change', () => {
-                        loadAndDisplayMerchandise();
-                    });
-                }
             });
+
+            // Re-display the list whenever sorting is changed
+            const sortSelect = document.getElementById('sort-by');
+            if (sortSelect) {
+                sortSelect.addEventListener('change', loadAndDisplayMerchandise);
+            }
         });
     </script>
+
     <!-- End of merch.js script (Let me know if you have questions -Lauren) -->
 
     <section id="merch-page-header">
         <div class="header-content">
-        <h2>Merchandise</h2>
+            <h2>Merchandise</h2>
             <div class="discount-badge">
-        <p>Save more with discount codes up to <span>?%</span> off!</p>
+                <p>Save more with discount codes up to <span>?%</span> off!</p>
             </div>
-        <div class="single-pro-details">
-            <select id="sort-by">
-                <option value="default">Sort By</option>
-                <option value="title-az">Title: A-Z</option>
-                <option value="title-za">Title: Z-A</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating-high">Rating</option>
-            </select>
+            <div class="single-pro-details">
+                <!-- Dropdown to re-order the merch list -->
+                <select id="sort-by">
+                    <option value="default">Sort By</option>
+                    <option value="title-az">Title: A-Z</option>
+                    <option value="title-za">Title: Z-A</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="quantity-low">Quantity: Low to High</option>
+                    <option value="quantity-high">Quantity: High to Low</option>
+                    <option value="rating-high">Rating</option>
+                </select>
+            </div>
         </div>
-            </div>
     </section>
 
-    <!-- This section loads in the Merchandise -->
+    <!-- Main grid for merchandise cards -->
     <section id="product1" class="section-p1 product1">
         <div id="merch-container" class="pro-container">
             <!-- Continues section/script in merch.js -->
@@ -151,6 +179,7 @@
     </section>
 
     <style>
+        /* Header with deep blue gradient and metal border */
         #merch-page-header {
             background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(30, 58, 138, 0.9)),
             url("../img/merch-header.png");
@@ -171,12 +200,14 @@
             color: lightgrey !important;
         }
 
+        /* Light blue game titles */
         .product1 .pro .des h5 {
             padding-top: 7px;
             color: #60a5fa;
             font-size: 14px;
         }
 
+        /* Neon blue title with deep offset shadows */
         #merch-page-header h2 {
             font-family: 'Press Start 2P', cursive;
             color: #60a5fa;
@@ -198,7 +229,7 @@
             text-decoration: line-through;
         }
 
-        /* Retro Select Menu - Deep Blue Metal */
+        /* Industrial blue select menu */
         #sort-by {
             font-family: 'Press Start 2P', cursive;
             font-size: 1rem;
@@ -211,6 +242,7 @@
             box-shadow: 4px 4px 0px #000;
         }
 
+        /* Dark cards with heavy blue glow */
         .pro {
             background: rgba(15, 23, 42, 0.4) !important;
             border: 2px solid #60a5fa !important;
@@ -227,6 +259,7 @@
             font-size: 0.9rem;
         }
 
+        /* Brighten and lift card on hover */
         .pro:hover {
             box-shadow: 0 0 60px 12px rgba(96, 165, 250, 0.4);
             background: rgba(255, 255, 255, 0.18) !important;
@@ -250,6 +283,7 @@
             color: #60a5fa;
         }
 
+        /* Radial blue background gradient */
         body {
             background: radial-gradient(circle at center, #2b50c0 0%, #1e3a8a 40%, #0f172a 90%);
             background-attachment: fixed;
@@ -259,6 +293,8 @@
             color: #e0e0e0;
             font-family: 'Courier New', Courier, monospace;
         }
+
+        /* Slanted price sticker badge */
         .discount-badge p {
             background: #60a5fa;
             color: #0f172a !important;
@@ -271,7 +307,24 @@
             box-shadow: 5px 5px 0px rgba(0,0,0,0.4);
             margin: 10px 0;
         }
-        
+
+        .stock-container {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            margin: 8px 0;
+            font-weight: bold;
+        }
+
+        .stock-label {
+            color: #007c85 !important;
+        }
+
+        /* Glowing cyan stock count */
+        .stock-value {
+            color: #00e1ff !important;
+            text-shadow: 0 0 5px rgba(0, 225, 255, 0.75) !important;
+        }
+
     </style>
 
 </body>
