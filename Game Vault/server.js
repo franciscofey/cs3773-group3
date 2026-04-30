@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 const ORDERS_FILE = './cart/orders.json';
 const MERCH_FILE = './merchandise/merchandise.json';
 const DISCOUNT_FILE = './cart/discountCodes.json';
+const USERS_FILE = './user.json';
 
 const GAMES_FILE = './games/games.json';
 const PHYSICAL_GAMES_FILE = './physical/physicalGames.json';
@@ -64,6 +65,40 @@ app.post('/api/save-order', (req, res) => {
         console.error("Write error:", err);
         res.status(500).json({ error: "Failed to save data" });
     }
+});
+
+// --- users ENDPOINTS ---
+app.get('/users', (req, res) => {
+    try {
+        const data = JSON.parse(fs.readFileSync(USERS_FILE));
+        res.json(data);
+    } catch (err) { res.status(500).json({ error: "Read error" }); }
+});
+
+app.post('/users', (req, res) => {
+    const data = JSON.parse(fs.readFileSync(USERS_FILE));
+    data.push(req.body);
+    fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2));
+    res.json({ message: "Added" });
+});
+
+app.put('/users/:id', (req, res) => {
+    let data = JSON.parse(fs.readFileSync(USERS_FILE));
+    data = data.map(item => {
+        if (item.id == req.params.id) {
+            return { ...item, ...req.body };
+        }
+        return item;
+    });
+    fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2));
+    res.json({ message: "Updated" });
+});
+
+app.delete('/users/:id', (req, res) => {
+    let data = JSON.parse(fs.readFileSync(USERS_FILE));
+    data = data.filter(item => item.id != req.params.id);
+    fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2));
+    res.json({ message: "Deleted" });
 });
 
 // --- MERCHANDISE ENDPOINTS ---

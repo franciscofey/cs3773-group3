@@ -103,9 +103,11 @@
                     <button class="btn btn-sm btn-primary" id="show-user-form">Add User</button>
 
                     <div class="user-form-wrapper hidden">
+                        <input class="form-control mb-2" type="text" id="userId" placeholder="User ID">
                         <input class="form-control mb-2" type="text" id="username" placeholder="Username">
                         <input class="form-control mb-2" type="email" id="email" placeholder="Email">
                         <input class="form-control mb-2" type="text" id="password" placeholder="Password">
+                        <input class="form-control mb-2" type="text" id="role" placeholder="role">
                         <button class="btn btn-sm btn-info" id="add-user">Add</button>
                     </div>
 
@@ -113,9 +115,11 @@
                     <table class="table table-dark mt-3">
                         <thead>
                             <tr>
+                                <th>User ID</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Password</th>
+                                <th>Role</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -126,99 +130,138 @@
         </div>
 
         <script>
-            var users = [
-                {id: 1, username: "john_doe", email: "john@email.com", password: "1234"},
-                {id: 2, username: "jane_smith", email: "jane@email.com", password: "abcd"},
-            ];
 
-            // Load initial users
-            for (var i in users){
-                addUserRow(users[i]);
-            }
+            $(document).ready(function () {
+                
 
-            function addUserRow(user){
-                var row = `
-                    <tr class="user-row-${user.id}">
-                        <td class="editable" data-field="username" data-id="${user.id}">${user.username}</td>
-                        <td class="editable" data-field="email" data-id="${user.id}">${user.email}</td>
-                        <td class="editable" data-field="password" data-id="${user.id}">${user.password}</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger user-delete-btn" data-id="${user.id}">Delete</button>
-                            <button class="btn btn-sm btn-info save-btn" data-id="${user.id}" disabled>Save</button>
-                        </td>
-                    </tr>
-                `;
-                $('#users-table').append(row);
-            }
+                // Load data
+                fetch('http://localhost:3000/users')
+                    .then(res => res.json())
+                    .then(data => {
+                        data.forEach(item => addUserRow(item));
+                    });
 
-            // Show form
-            $('#show-user-form').on('click', function(){
-                $('.user-form-wrapper').toggleClass('hidden');
-            });
-
-            // Add new user
-            $('#add-user').on('click', function(){
-                var newUser = {
-                    id: Date.now(),
-                    username: $('#username').val(),
-                    email: $('#email').val(),
-                    password: $('#password').val()
-                };
-
-                if(!newUser.username || !newUser.email || !newUser.password){
-                    alert("All fields required");
-                    return;
+                function addUserRow(user){
+                    const row = `
+                        <tr class="user-row-${user.id}">
+                            <td class="editable" data-field="id" data-id="${user.id}">${user.id}</td>
+                            <td class="editable" data-field="username" data-id="${user.id}">${user.username}</td>
+                            <td class="editable" data-field="email" data-id="${user.id}">${user.email}</td>
+                            <td class="editable" data-field="password" data-id="${user.id}">${user.password}</td>
+                            <td class="editable" data-field="role" data-id="${user.id}">${user.role}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger user-delete-btn" data-id="${user.id}">Delete</button>
+                                <button class="btn btn-sm btn-info user-save-btn" data-id="${user.id}" disabled>Save</button>
+                            </td>
+                        </tr>
+                    `;
+                    $('#users-table').append(row);
                 }
 
-                addUserRow(newUser);
-
-                // Clear inputs
-                $('#username').val('');
-                $('#email').val('');
-                $('#password').val('');
-                $('.user-form-wrapper').addClass('hidden');
-            });
-
-            // Make cells editable
-            $(document).on('click', '.editable', function(){
-                // Prevent replacing if already editing
-                if ($(this).find('input').length > 0) return;
-
-                var value = $(this).text();
-                var id = $(this).data('id');
-                var field = $(this).data('field');
-
-                $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
-            });
-
-            // Enable save button on edit
-            $(document).on('keyup', '.edit-input', function(){
-                var id = $(this).data('id');
-                $(`.save-btn[data-id="${id}"]`).prop('disabled', false);
-            });
-
-            // Save updates
-            $(document).on('click', '.save-btn', function(){
-                var id = $(this).data('id');
-                var row = $(`.user-row-${id}`);
-
-                row.find('.edit-input').each(function(){
-                    var newValue = $(this).val();
-                    $(this).parent().text(newValue);
+                // Show form
+                $('#show-user-form').click(function(){
+                    $('.user-form-wrapper').toggleClass('hidden');
                 });
 
-                $(this).prop('disabled', true);
+                // Add new user
+                $('#add-user').click(function(){
+                    const newUser = {
+                        id: Number($('#userId').val()),
+                        username: $('#username').val(),
+                        email: $('#email').val(),
+                        password: $('#password').val(),
+                        role: $('#role').val()
+                    };
 
-                // visual feedback
-                row.css('opacity', '0.5');
-                setTimeout(() => row.css('opacity', '1'), 1000);
+                    
+                    //Field validation
+                    if(!newUser.id|| !newUser.username || !newUser.email || !newUser.password || !newUser.role){
+                        alert("All fields required");
+                        return;
+                    }
+
+                    fetch('http://localhost:3000/users', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(newUser)
+                    }).then(() => location.reload());
+                });
+
+                // Make cells editable
+                $(document).on('click', '.editable', function(){
+                    // Prevent replacing if already editing
+                    if ($(this).find('input').length > 0) return;
+
+                    const value = $(this).text();
+                    const id = $(this).data('id');
+                    const field = $(this).data('field');
+
+                    $(this).html(`<input class="form-control edit-input" data-id="${id}" data-field="${field}" value="${value}">`);
+                });
+
+                // Enable save button on edit
+                $(document).on('keyup', '.edit-input', function () {
+                    const id = $(this).data('id');
+                    $(`.user-save-btn[data-id="${id}"]`).prop('disabled', false);
+                });
+
+                // Save updates
+                $(document).on('click', '.user-save-btn', function () {
+                    const id = $(this).data('id');
+                    const row = $(`.user-row-${id}`);
+
+                    let updated = {
+                        id: id
+                    };
+
+                    row.find('td.editable').each(function () {
+                        const field = $(this).data('field');
+                        //const value = $(this).val();
+
+                        let value;
+
+                        if ($(this).find('input').length > 0) {
+                            value = $(this).find('input').val();
+                            $(this).text(value);
+                        } else {
+                            value = $(this).text();
+                        }
+
+                        if (field === "id"){
+                            updated[field] = Number(value);
+                        } else {
+                            updated[field] = value;
+                        }
+
+
+                        //$(this).parent().text(newValue);
+                    });
+
+                    fetch(`http://localhost:3000/users/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updated)
+                    });
+
+                    $(this).prop('disabled', true);
+
+                    // visual feedback
+                    row.css('opacity', '0.5');
+                    setTimeout(() => row.css('opacity', '1'), 1000);
+                });
+
+                // Delete user
+                $(document).on('click', '.user-delete-btn', function(){
+                    const id = $(this).data('id');
+                    fetch(`http://localhost:3000/users/${id}`, {
+                        method: 'DELETE'
+                    }).then(() => {
+                        $(`.user-row-${id}`).remove();
+                    });
+                });
             });
 
-            // Delete user
-            $(document).on('click', '.user-delete-btn', function(){
-                var id = $(this).data('id');
-                $(`.user-row-${id}`).remove();
-            });
+            
 
         </script>
 
