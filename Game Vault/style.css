@@ -672,11 +672,11 @@ form{
 }
 
 /*physical/digital games*/
-#sales-item-table h3{
+#game-admin-section h3{
     padding-top: 50px;
 }
 
-#sales-item-table .card{
+#game-admin-section .card{
     max-height: 600px; /*controls how large each table can be*/
     overflow-y: auto;
     border: 1px solid #ccc;
