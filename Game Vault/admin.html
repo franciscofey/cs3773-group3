@@ -81,7 +81,7 @@
         <!--Search bar if you wish to implement it. Not needed-->
         <div class="search-container">
             <form role="search" id="form">
-                <input type="search" id="query" name="q" placeholder="Search...">
+                <input type="search" id="user-query" placeholder="Search...">
             </form>
         </div>
 
@@ -259,6 +259,21 @@
                         $(`.user-row-${id}`).remove();
                     });
                 });
+
+                // SEARCH
+                $('#user-query').on('keyup', function () {
+
+                    const value = $(this).val().toLowerCase();
+
+                    $('#users-table tr').filter(function () {
+
+                        $(this).toggle(
+                            $(this).text().toLowerCase().indexOf(value) > -1
+                        );
+
+                    });
+
+                });
             });
 
             
@@ -274,7 +289,7 @@
         <!--Search bar if you wish to implement it. Not needed-->
         <div class="search-container">
             <form role="search" id="form">
-                <input type="search" id="query" name="q" placeholder="Search...">
+                <input type="search" id="disc-query" name="q" placeholder="Search...">
             </form>
         </div>
 
@@ -434,12 +449,34 @@
                         $(`.discountCode-row-${id}`).remove();
                     });
                 });
+
+                // SEARCH
+                $('#disc-query').on('keyup', function () {
+
+                    const value = $(this).val().toLowerCase();
+
+                    $('#discountCodes-table tr').filter(function () {
+
+                        $(this).toggle(
+                            $(this).text().toLowerCase().indexOf(value) > -1
+                        );
+
+                    });
+
+                });
             });
         </script>
     </section>
 
     <section id="game-admin-section">
         <h3>Game Inventory Management</h3>
+
+        <div class="search-container">
+            <form role="search" id="form">
+                <input type="search" id="games-query" name="q" placeholder="Search...">
+            </form>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-body">
@@ -701,6 +738,21 @@
                 });
 
                 loadGames();
+
+                // SEARCH
+                $('#games-query').on('keyup', function () {
+
+                    const value = $(this).val().toLowerCase();
+
+                    $('#games-table-body tr').filter(function () {
+
+                        $(this).toggle(
+                            $(this).text().toLowerCase().indexOf(value) > -1
+                        );
+
+                    });
+
+                });
             });
         </script>
 
@@ -711,7 +763,7 @@
         <!--Search bar if you wish to implement it. Not needed-->
         <div class="search-container">
             <form role="search" id="form">
-                <input type="search" id="query" name="q" placeholder="Search...">
+                <input type="search" id="merch-query" placeholder="Search merch...">
             </form>
         </div>
 
@@ -893,6 +945,21 @@
                     }).then(() => {
                         $(`.merch-row-${id}`).remove();
                     });
+                });
+
+                // SEARCH
+                $('#merch-query').on('keyup', function () {
+
+                    const value = $(this).val().toLowerCase();
+
+                    $('#merchs-table tr').filter(function () {
+
+                        $(this).toggle(
+                            $(this).text().toLowerCase().indexOf(value) > -1
+                        );
+
+                    });
+
                 });
 
             });
