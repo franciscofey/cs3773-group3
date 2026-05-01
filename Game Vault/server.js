@@ -13,6 +13,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.static(__dirname));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/homePage/index.html');
+});
+
 const ORDERS_FILE = './cart/orders.json';
 const MERCH_FILE = './merchandise/merchandise.json';
 const DISCOUNT_FILE = './cart/discountCodes.json';
@@ -64,6 +70,29 @@ app.post('/api/save-order', (req, res) => {
     } catch (err) {
         console.error("Write error:", err);
         res.status(500).json({ error: "Failed to save data" });
+    }
+});
+
+app.get('/api/orders/:userId/:orderId', (req, res) => {
+    const { userId, orderId } = req.params;
+
+    try {
+        if (!fs.existsSync(ORDERS_FILE)) {
+            return res.json({ order_id: orderId, items: [] });
+        }
+
+        const db = JSON.parse(fs.readFileSync(ORDERS_FILE, 'utf8'));
+        const userOrders = db.users?.[userId]?.orders || [];
+        const order = userOrders.find(o => o.order_id === orderId);
+
+        if (!order) {
+            return res.json({ order_id: orderId, items: [] });
+        }
+
+        res.json(order);
+    } catch (err) {
+        console.error("Error loading order:", err);
+        res.status(500).json({ error: "Failed to load order" });
     }
 });
 

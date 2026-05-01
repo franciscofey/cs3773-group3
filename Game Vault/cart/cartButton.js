@@ -1,6 +1,33 @@
 /**
  * Grid view: Add game via cart icon.
  */
+function getCurrentUserId() {
+    const sessionUser = JSON.parse(localStorage.getItem("gv_session"));
+    return sessionUser?.id || "guest_user";
+}
+
+function saveItemToLocalCart(product) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingItem = cart.find(item => item.id === product.id && item.type === product.type);
+
+    if (existingItem) {
+        existingItem.quantity += product.quantity || 1;
+    } else {
+        cart.push({
+            id: product.id,
+            title: product.name || product.title,
+            name: product.name || product.title,
+            price: Number(product.price) || 0,
+            quantity: product.quantity || 1,
+            imageurl: product.imageurl || product.image || "",
+            type: product.type || product.source || "product"
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
 export async function cartButtonGameCircle(event) {
     const btn = event.target.closest('.cart');
     if (!btn) return;
@@ -26,7 +53,7 @@ export async function cartButtonGameCircle(event) {
         quantity: 1
     };
 
-    const userId = "user_123";
+    const userId = getCurrentUserId();
     const orderId = localStorage.getItem('activeOrderId');
 
     try {
@@ -38,6 +65,10 @@ export async function cartButtonGameCircle(event) {
 
         if (response.ok) {
             const result = await response.json();
+            saveItemToLocalCart({
+                ...gameData,
+                type: "physical"
+            });
 
             // Lower stock display
             currentStock -= 1;
@@ -69,7 +100,7 @@ export async function cartButtonDigitalCircle(event) {
         quantity: 1
     };
 
-    const userId = "user_123";
+    const userId = getCurrentUserId();
     const orderId = localStorage.getItem('activeOrderId');
 
     try {
@@ -81,6 +112,10 @@ export async function cartButtonDigitalCircle(event) {
 
         if (response.ok) {
             const result = await response.json();
+            saveItemToLocalCart({
+                ...gameData,
+                type: "digital"
+            });
 
             // Link future adds to this order
             if (result.orderId) localStorage.setItem('activeOrderId', result.orderId);
@@ -114,7 +149,7 @@ export async function cartButtonGame(event) {
         quantity: quantityToBuy
     };
 
-    const userId = "user_123";
+    const userId = getCurrentUserId();
     const orderId = localStorage.getItem('activeOrderId');
 
     try {
@@ -126,6 +161,10 @@ export async function cartButtonGame(event) {
 
         if (response.ok) {
             const result = await response.json();
+            saveItemToLocalCart({
+                ...gameData,
+                type: "physical"
+            });
 
             // Deduct total quantity from display
             stockSpan.innerText = (currentStock - quantityToBuy) === 0 ? "OUT OF STOCK" : (currentStock - quantityToBuy);
@@ -154,7 +193,7 @@ export async function cartButtonDigitalGame(event) {
         quantity: quantityToBuy
     };
 
-    const userId = "user_123";
+    const userId = getCurrentUserId();
     const orderId = localStorage.getItem('activeOrderId');
 
     try {
@@ -166,6 +205,10 @@ export async function cartButtonDigitalGame(event) {
 
         if (response.ok) {
             const result = await response.json();
+            saveItemToLocalCart({
+                ...gameData,
+                type: "digital"
+            });
 
             if (result.orderId) localStorage.setItem('activeOrderId', result.orderId);
             alert(`Added ${gameData.name} to your order!`);
@@ -198,7 +241,7 @@ export async function cartButtonMerchCircle(event) {
         quantity: 1
     };
 
-    const userId = "user_123";
+    const userId = getCurrentUserId();
     const orderId = localStorage.getItem('activeOrderId');
 
     try {
@@ -210,6 +253,11 @@ export async function cartButtonMerchCircle(event) {
 
         if (response.ok) {
             const result = await response.json();
+            saveItemToLocalCart({
+                    ...merchData,
+                    type: "merch"
+                });
+
             currentStock -= 1;
             stockSpan.innerText = currentStock === 0 ? "OUT OF STOCK" : currentStock;
 
@@ -244,7 +292,7 @@ export async function cartButtonMerch(event) {
         quantity: quantityToBuy
     };
 
-    const userId = "user_123";
+    const userId = getCurrentUserId();
     const orderId = localStorage.getItem('activeOrderId');
 
     try {
@@ -256,6 +304,12 @@ export async function cartButtonMerch(event) {
 
         if (response.ok) {
             const result = await response.json();
+            saveItemToLocalCart({
+                ...merchData,
+                type: "merch"
+            });
+
+
             stockSpan.innerText = (currentStock - quantityToBuy) === 0 ? "OUT OF STOCK" : (currentStock - quantityToBuy);
 
             // Persist order session

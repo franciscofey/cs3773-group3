@@ -11,7 +11,7 @@ export async function loadAndDisplayProduct() {
 
     try {
         // Pull all necessary data from the JSON files
-        const [gamesRes, pricesRes, quantityRes] = await Promise.all([
+        const [gamesRes, pricesRes] = await Promise.all([
             fetch('../games/games.json'),
             fetch('../games/gamePrices.json'),
         ]);
